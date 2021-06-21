@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Parameters>
+    <!--
+    Parameter     :  Project
+    Description   :  The scenario used by the simulation.
+    Values        :  should be scenario/*** where *** is a folder name in the scenario sub-folder.
+    Remark        :  Make sure that the scenario is present in the scenario sub-folder.
+    -->
+    <Project>scenario/schematic-100x100</Project>
+
+    <!--
+    Parameter     :  Modeller
+    Description   :  The name of the modeller.
+    Values        :  Any text.
+    Remark        :  This value is organizational metadata and is not used technically.
+    -->
+    <Modeller>ts</Modeller>
+
+    <!--
+    Parameter     :  SimID
+    Description   :  Unique identifier of a simulation run.
+    Values        :  Any characters that are valid in file system identifiers.
+    Remark        :  Running a simulation with the same name as an existing simulation run results in an error.
+    Best practice :  Change this parameter with every simulation run. When doing test runs, indicate the test character
+                     of clearly in the identifier. If conducting a run from the experiment table, register it there and
+                     use the naming scheme <experiment id>-<n> where n is the number of the run.
+    -->
+    <SimID>X3Soil-Test</SimID>
+
+    <!--
+    Parameter     :  NumberMC
+    Description   :  The number of Monte Carlo runs.
+    Values        :  Any positive integer.
+    Remark        :  MC runs are conducted (partly) in parallel according to the NumberParallelProcesses parameter.
+    Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long running simulations,
+                     30 for small simulations and 10 for anything in between.
+    -->
+    <NumberMC>1</NumberMC>
+
+    <!--
+    Parameter     :  ParallelProcesses
+    Description   :  The number of Monte Carlo runs that are conducted simultaneously.
+    Values        :  Any positive integer.
+    Remark        :  This parameter should be modified according to the available hardware resources.
+    Best practice :  To best use the available hardware, apply this rule of thumb:
+                     min(NumberMC, NumberParallelProcesses) <= available processors.
+    -->
+    <ParallelProcesses>1</ParallelProcesses>
+
+    <!--
+    Parameter     :  Substance
+    Description   :  Used to name the substance that is applied during all applications.
+    Values        :  Any text.
+    Remark        :  The name itself is mostly a meta-datum but also used to distinguish different substances if
+                     multi-substance experiments are implemented in a future version.
+    -->
+    <Substance>Lindane</Substance>
+
+    <!--
+    Parameter     :  DT50
+    Description   :  The soil DT50 of the substance in days.
+    Values        :  Positive numbers.
+    -->
+    <DT50>148</DT50>
+
+    <!--
+    Parameter     :  KocSoil
+    Description   :  The soil KOC of the substance.
+    Values        :  Positive numbers.
+    -->
+    <KocSoil>477</KocSoil>
+
+    <!--
+    Parameter     :  FreundlichExponent
+    Description   :  The Freundlich exponent of the substance.
+    Values        :  Positive numbers.
+    -->
+    <FreundlichExponent>0.957</FreundlichExponent>
+
+    <!--
+    Parameter     :  ApplicationRate
+    Description   :  The application rate in g/ha.
+    Values        :  Any positive number (or zero).
+    Remark        :  The application rate applies to all applications within application sequences.
+    -->
+    <ApplicationRate>2400</ApplicationRate>
+
+    <!--
+    Parameter     :  ApplicationWindow
+    Description   :  The time windows within which applications take place.
+    Values        :  format: MM-DD to MM-DD[, MM-DD to MM-DD[, ...]]
+    Remark        :  For each target field, year and application within an application sequence, a random date within
+                     the specified time window is selected. Example values:
+                     04-15 to 04-15 : All fields are applied on 15th of April every year
+                     04-07 to 04-21 : All fields are applied each year on a random date (per field and year) between 7th
+                                      and 21st of April
+                     04-07 to 04-21, 05-02 to 05-16 : All fields are applied twice each year; on a random date (per
+                                                      field and year) between 7th and 21st of April and on a random date
+                                                      (per field and year) between 2nd and 16th of May.
+    -->
+    <ApplicationWindows>03-01 to 03-01</ApplicationWindows>
+
+    <!--
+    Parameter     :  SimulateRunOffExposure
+    Description   :  Controls whether run-off exposure is simulated or not.
+    Values        :  "true" or "false.
+    Remark        :  At least one of SimulateRunOffExposure and SimulateSprayDriftExposure should be true.
+    -->
+    <SimulateRunOffExposure>true</SimulateRunOffExposure>
+
+    <!--
+    Parameter     :  SimulateSprayDriftExposure
+    Description   :  Controls whether spray-drift exposure is simulated or not.
+    Values        :  "true" or "false.
+    Remark        :  At least one of SimulateRunOffExposure and SimulateSprayDriftExposure should be true.
+    -->
+    <SimulateSprayDriftExposure>true</SimulateSprayDriftExposure>
+
+    <!--
+    Parameter     :  SprayDriftModel
+    Description   :  The spray-drift model to use during spray-drift simulation.
+    Values        :  "XSprayDrift" or "90thRautmann".
+    -->
+    <SprayDriftModel>XSprayDrift</SprayDriftModel>
+
+    <!--
+    Parameter     :  DriftReduction
+    Description   :  The effect of drift-reducing nozzles to spay-drift deposition; the fraction filtered out.
+    Values        :  A number between 0 and 1.
+    Remark        :  Zero means no effect = full spray-drift deposition, 1 means full filtering = no deposition at all.
+    -->
+    <DriftReduction>0</DriftReduction>
+
+    <!--
+    Parameter     :  InCropBuffer
+    Description   :  A in-crop buffer not applied in meters.
+    Values        :  Zero or a positive number.
+    Remark        :  The in-crop buffer is geometrically applied to the field and might result in very small fields not
+                     being applied at all.
+    -->
+    <InCropBuffer>0</InCropBuffer>
+
+    <!--
+    Parameter     :  InFieldMargin
+    Description   :  The in-field margin for all fields in the landscape over the entire simulation.
+    Values        :  Zero or a positive number.
+    Remark        :  Maybe parameterizable at finer scales in future versions.
+    -->
+    <InFieldMargin>0</InFieldMargin>
+
+    <!--
+    Parameter     :  VegetationDriftFiltering
+    Description   :  Controls whether simple drift filtering by vegetation is considered in the spray-drift module.
+    Values        :  "true" or "false"
+    -->
+    <VegetationDriftFiltering>false</VegetationDriftFiltering>
+
+    <!--
+    Parameter     :  Weather
+    Description   :  Weather is from files in the the data directory that are named using the scheme "weather_XXX.csv"
+                     where XXX are the valid values for the weather parameter.
+    Values        :  Available weather files (see description).
+    Remark        :  Make sure that the weather parameter fits a weather file offered by the scenario.
+    -->
+    <Weather>mars-97100</Weather>
+
+    <!--
+    Parameter     :  WindDirection
+    Description   :  The direction from where the wind blows in degrees.
+    Values        :  A number between 0 and 359 or -1 for random wind directions.
+    Remark        :  The wind direction is specified for the entire region and simulation but may be parameterizable at
+                     a finer scale in future versions. If set to "-1", the wind is randomly selected for each
+                     application individually.
+    -->
+    <WindDirection>-1</WindDirection>
+
+    <!--
+    Parameter     :  ReportingThreshold
+    Description   :  The lowest number that is reported by the exposure modules.
+    Values        :  Positive numbers.
+    Remark        :  Should be sufficiently small, e.g., ApplicationRate / 1000, ApplicationRate / 2500, ..., or 0.
+    -->
+    <ReportingThreshold>1</ReportingThreshold>
+
+    <!--
+    Parameter     :  RandomSeed
+    Description   :  An seed with which the random number generator is initialized.
+    Values        :  Any integer number. 0 means no predefined seed.
+    Remark        :  Only set another value than 0 here if you need repeatable simulation runs, e.g., for debugging.
+    -->
+    <RandomSeed>0</RandomSeed>
+
+    <!--
+    Parameter     :  RunOffTempDir
+    Description   :  The temporary directory for RunOff-Simulations.
+    Values        :  Any short (!) file path, preferably < 20 characters.
+    Remark        :  Make sure that the path exists, otherwise the simulation might fail.
+    -->
+    <RunOffTempDir>C:\Temp</RunOffTempDir>
+</Parameters>

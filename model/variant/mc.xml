@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MCRun>
+  <Observers>
+    <Observer module="observer" class="ConsoleObserver"/>
+    <Observer module="AnalysisObserver" class="AnalysisObserver">
+      <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_MC.R</Script>
+      <Data>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\store</Data>
+      <Output_Folder>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\analysis</Output_Folder>
+      <Dataset>DepositionToPecSoil/PecSoil</Dataset>
+      <Distance>LULC/analysis_distance_groups</Distance>
+      <Extent>LULC/Extent</Extent>
+      <Crs>LULC/Crs</Crs>
+      <Habitats>LULC/habitat_lulc_types</Habitats>
+      <Lulc>LULC/lulc_raster</Lulc>
+      <RLibPath>./R-3.5.1/library</RLibPath>
+      <RunOff>RunOff/Exposure</RunOff>
+      <SprayDrift>SprayDrift/Exposure</SprayDrift>
+    </Observer>
+    <Observer module="observer" class="LogFileObserver">
+      <LogFile>$(_EXP_BASE_DIR_)\$(SimID)\log\mc_$(_MC_NAME_).log</LogFile>
+    </Observer>
+  </Observers>
+  <Store module="stores" class="X3dfStore">
+    <File_Path>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\store</File_Path>
+    <Observer>
+      <ObserverReference/>
+    </Observer>
+  </Store>
+ <Composition>
+    <Weather module="components" class="CsvReader">
+      <FilePath>$(:weather_$$(Weather))</FilePath>
+    </Weather>
+    <LULC module="components" class="Lulc">
+      <BaseLandscapeGeometries>$(:LandscapeScenario)</BaseLandscapeGeometries>
+    </LULC>
+    <PPM module="components" class="PpmCalendar">
+      <SimulationStart type="date">2006-01-01</SimulationStart>
+      <SimulationEnd type="date">2015-12-31</SimulationEnd>
+      <ApplicationWindows>$(ApplicationWindows)</ApplicationWindows>
+      <Fields>
+        <FromOutput component="LULC" output="FeatureIds"/>
+      </Fields>
+      <Lulc>
+        <FromOutput component="LULC" output="LulcTypeIds"/>
+      </Lulc>
+      <TargetLulcType>
+        <FromOutput component="LULC" output="target_lulc_type"/>
+      </TargetLulcType>
+      <ApplicationRate type="float" unit="g/ha">$(ApplicationRate)</ApplicationRate>
+      <TechnologyDriftReduction type="float" unit="1">$(DriftReduction)</TechnologyDriftReduction>
+      <InCropBuffer type="float" unit="m">$(InCropBuffer)</InCropBuffer>
+      <InFieldMargin type="float" unit="m">$(InFieldMargin)</InFieldMargin>
+      <FieldGeometries>
+        <FromOutput component="LULC" output="Geometries"/>
+      </FieldGeometries>
+      <MinimumAppliedArea type="float" unit="m²">10</MinimumAppliedArea>
+      <RandomSeed type="int">$(RandomSeed)</RandomSeed>
+      <ProbabilityFieldApplied type="float" unit="1">1</ProbabilityFieldApplied>
+    </PPM>
+    <SprayDrift module="XSprayDrift" class="SprayDrift" enabled="$(SimulateSprayDriftExposure)">
+      <ProcessingPath>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\sd</ProcessingPath>
+      <SimulationStart type="date">2006-01-01</SimulationStart>
+      <SimulationEnd type="date">2015-12-31</SimulationEnd>
+      <Geometries>
+        <FromOutput component="LULC" output="Geometries"/>
+      </Geometries>
+      <GeometryCrs>
+        <FromOutput component="LULC" output="Crs"/>
+      </GeometryCrs>
+      <Extent>
+        <FromOutput component="LULC" output="Extent"/>
+      </Extent>
+      <HabitatLulcTypes>
+        <FromOutput component="LULC" output="habitat_lulc_types"/>
+      </HabitatLulcTypes>
+      <FieldDistanceSD type="float" unit="m">0</FieldDistanceSD>
+      <EPDistanceSD type="float" unit="m">0</EPDistanceSD>
+      <ReportingThreshold type="float" unit="g/ha">$(ReportingThreshold)</ReportingThreshold>
+      <ApplySimpleDriftFiltering type="bool">$(VegetationDriftFiltering)</ApplySimpleDriftFiltering>
+      <LulcTypes>
+        <FromOutput component="LULC" output="LulcTypeIds"/>
+      </LulcTypes>
+      <WindDirection type="int" unit="deg">$(WindDirection)</WindDirection>
+      <SprayDriftModel>$(SprayDriftModel)</SprayDriftModel>
+      <SourceExposure unit="g/ha">NA</SourceExposure>
+      <RautmannClass>arable</RautmannClass>
+      <AppliedFields>
+        <FromOutput component="PPM" output="AppliedFields"/>
+      </AppliedFields>
+      <ApplicationDates>
+        <FromOutput component="PPM" output="ApplicationDates"/>
+      </ApplicationDates>
+      <ApplicationRates>
+        <FromOutput component="PPM" output="ApplicationRates"/>
+      </ApplicationRates>
+      <TechnologyDriftReductions>
+        <FromOutput component="PPM" output="TechnologyDriftReductions"/>
+      </TechnologyDriftReductions>
+      <AppliedAreas>
+        <FromOutput component="PPM" output="AppliedAreas"/>
+      </AppliedAreas>
+      <SpatialOutputScale>1sqm</SpatialOutputScale>
+      <RandomSeed type="int">$(RandomSeed)</RandomSeed>
+      <MinimumDistanceToField type="float" unit="m">0</MinimumDistanceToField>
+      <FilteringLulcTypes type="list[int]"/>
+      <FilteringMinWidth type="float" unit="m">999</FilteringMinWidth>
+      <FilteringFraction type="float" unit="1">0</FilteringFraction>
+      <AgDriftBoomHeight>NA</AgDriftBoomHeight>
+      <AgDriftDropletSize>NA</AgDriftDropletSize>
+      <AgDriftQuantile type="float" unit="1">0</AgDriftQuantile>
+    </SprayDrift>
+    <RunOff module="RunOffPrzm" class="RunOffPrzm" enabled="$(SimulateRunOffExposure)">
+      <ProcessingPath>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\runoff</ProcessingPath>
+      <Model_AdsorptionMethod>2</Model_AdsorptionMethod>
+      <Model_SoilTemperatureSimulation>2</Model_SoilTemperatureSimulation>
+      <SubstanceName>$(Substance)</SubstanceName>
+      <Substance_PlantUptakeFactor>0</Substance_PlantUptakeFactor>
+      <Substance_PesticideDissipationRateOfFoliage>10</Substance_PesticideDissipationRateOfFoliage>
+      <Substance_FoliarWashOffCoefficient>0.5</Substance_FoliarWashOffCoefficient>
+      <Substance_HenryConstant>0.03</Substance_HenryConstant>
+      <Substance_VapourPressure>0.0001</Substance_VapourPressure>
+      <Substance_MolecularWeight>304</Substance_MolecularWeight>
+      <Substance_WaterSolubility>60</Substance_WaterSolubility>
+      <Substance_TemperatureAtWhichMeasured>293</Substance_TemperatureAtWhichMeasured>
+      <Substance_FreundlichExponent>$(FreundlichExponent)</Substance_FreundlichExponent>
+      <Substance_ReferenceMoistureForDT50Soil>100</Substance_ReferenceMoistureForDT50Soil>
+      <Substance_SoilDT50>$(DT50)</Substance_SoilDT50>
+      <Substance_KocSoil>$(KocSoil)</Substance_KocSoil>
+      <SprayApplication_PrzmApplicationMethod>2</SprayApplication_PrzmApplicationMethod>
+      <SprayApplication_IncorporationDepth>5</SprayApplication_IncorporationDepth>
+      <Options_StartDate type="date">2006-01-01</Options_StartDate>
+      <Options_EndDate type="date">2015-12-31</Options_EndDate>
+      <Options_TemporaryOutputPath>$(RunOffTempDir)\$(_MC_NAME_)</Options_TemporaryOutputPath>
+      <Options_DeleteTemporaryGrids>1</Options_DeleteTemporaryGrids>
+      <Options_TimeoutSecPrzm>100</Options_TimeoutSecPrzm>
+      <Options_ReportingThreshold>$(ReportingThreshold)</Options_ReportingThreshold>
+      <Options_DeleteAllInterimResults>1</Options_DeleteAllInterimResults>
+      <Options_ShowExtendedErrorInformation>1</Options_ShowExtendedErrorInformation>
+      <Weather_Precipitation>
+        <FromOutput component="Weather" output="PRECIPITATION"/>
+        <Extension module="extend" class="CoordinateTransform">
+          <Transformation_type>date</Transformation_type>
+          <Offset>1975-01-01</Offset>
+        </Extension>
+      </Weather_Precipitation>
+      <Weather_ET0>
+        <FromOutput component="Weather" output="ET0"/>
+        <Extension module="extend" class="CoordinateTransform">
+          <Transformation_type>date</Transformation_type>
+          <Offset>1975-01-01</Offset>
+        </Extension>
+      </Weather_ET0>
+      <Weather_Temperature>
+        <FromOutput component="Weather" output="TEMPERATURE_AVG"/>
+        <Extension module="extend" class="CoordinateTransform">
+          <Transformation_type>date</Transformation_type>
+          <Offset>1975-01-01</Offset>
+        </Extension>
+      </Weather_Temperature>
+      <Weather_WindSpeed>
+        <FromOutput component="Weather" output="WINDSPEED"/>
+        <Extension module="extend" class="CoordinateTransform">
+          <Transformation_type>date</Transformation_type>
+          <Offset>1975-01-01</Offset>
+        </Extension>
+      </Weather_WindSpeed>
+      <Weather_SolarRadiation>
+        <FromOutput component="Weather" output="RADIATION"/>
+        <Extension module="extend" class="CoordinateTransform">
+          <Transformation_type>date</Transformation_type>
+          <Offset>1975-01-01</Offset>
+        </Extension>
+      </Weather_SolarRadiation>
+      <Fields_Slope>3</Fields_Slope>
+      <Fields_SoilHorizonThicknesses type="list[int]">30 30 40</Fields_SoilHorizonThicknesses>
+      <Fields_SoilHorizonBulkDensities type="list[float]">1.35 1.45 1.48</Fields_SoilHorizonBulkDensities>
+      <Fields_SoilHorizonOrganicMaterialContents type="list[float]">1.2 0.3 0.1</Fields_SoilHorizonOrganicMaterialContents>
+      <Fields_SoilHorizonSandFractions type="list[int]">5 6 5</Fields_SoilHorizonSandFractions>
+      <Fields_SoilHorizonSiltFractions type="list[int]">82 83 84</Fields_SoilHorizonSiltFractions>
+      <Fields_Geometries>
+        <FromOutput component="LULC" output="Geometries"/>
+      </Fields_Geometries>
+      <Fields_Ids>
+        <FromOutput component="LULC" output="FeatureIds"/>
+      </Fields_Ids>
+      <Fields_Crs>
+        <FromOutput component="LULC" output="Crs"/>
+      </Fields_Crs>
+      <Fields_Extent>
+        <FromOutput component="LULC" output="Extent"/>
+      </Fields_Extent>
+      <Fields_FlowGrid>
+        <FromOutput component="LULC" output="flow_grid"/>
+      </Fields_FlowGrid>
+      <Fields_InFieldMargin type="float">$(InFieldMargin)</Fields_InFieldMargin>
+      <Ppm_AppliedFields>
+        <FromOutput component="PPM" output="AppliedFields"/>
+      </Ppm_AppliedFields>
+      <Ppm_ApplicationDates>
+        <FromOutput component="PPM" output="ApplicationDates"/>
+      </Ppm_ApplicationDates>
+      <Ppm_ApplicationRates>
+        <FromOutput component="PPM" output="ApplicationRates"/>
+      </Ppm_ApplicationRates>
+      <Ppm_AppliedAreas>
+        <FromOutput component="PPM" output="AppliedAreas"/>
+      </Ppm_AppliedAreas>
+      <Options_MethodOfRunoffGeneration>1</Options_MethodOfRunoffGeneration>
+      <Options_UsePreSimulatedPrzmResults>1</Options_UsePreSimulatedPrzmResults>
+      <Options_UseOnePrzmModelPerGridCell>0</Options_UseOnePrzmModelPerGridCell>
+      <Options_UseVfsMod>0</Options_UseVfsMod>
+      <CropParameters_VfsModLookupTable>$(:VfsMod_lookup_table)</CropParameters_VfsModLookupTable>
+    </RunOff>
+    <Efate module="components" class="Efate">
+      <SprayDriftExposure>
+        <FromOutput component="SprayDrift" output="Exposure" enabled="$(SimulateSprayDriftExposure)"/>
+      </SprayDriftExposure>
+      <RunOffExposure>
+        <FromOutput component="RunOff" output="Exposure" enabled="$(SimulateRunOffExposure)"/>
+      </RunOffExposure>
+      <SoilDT50 type="float">$(DT50)</SoilDT50>
+    </Efate>
+    <DepositionToPecSoil module="components" class="DepositionToPecSoil">
+      <Deposition>
+        <FromOutput component="Efate" output="Pec"/>
+      </Deposition>
+      <SoilBulkDensity type="float">1.5</SoilBulkDensity>
+      <Depth type="float">5</Depth>
+    </DepositionToPecSoil>
+  </Composition>
+</MCRun>
