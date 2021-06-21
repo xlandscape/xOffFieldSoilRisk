@@ -1,3 +1,6 @@
 [submodule "model/core"]
 	path = model/core
 	url = https://gitlab.bayer.com/aqrisk-landscape/landscapemodel-core.git
+[submodule "scenario/schematic-100x100"]
+	path = scenario/schematic-100x100
+	url = https://gitlab.bayer.com/aqrisk-landscape/scenario-schematic-100x100.git
