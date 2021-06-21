@@ -1,0 +1,3 @@
+[submodule "model/core"]
+	path = model/core
+	url = https://gitlab.bayer.com/aqrisk-landscape/landscapemodel-core.git
