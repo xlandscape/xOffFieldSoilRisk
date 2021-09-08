@@ -26,7 +26,7 @@ The R scripts are intended for the use within the XOffFieldSoilRisk Landscape Mo
 stand-alone R scripts in any context.
 
 ### Prerequisites
-To use the R scripts within the XOffFieldSoilRisk, make sure that the model is setup according to the Landscape Model
+To use the R scripts within the XOffFieldSoilRisk, make sure that the model is set up according to the Landscape Model
 `README` and that an `AnalysisObserver` is included in the model (see the `REDAME` of the `AnalysisObserver`).
 
 ### Installation
@@ -39,22 +39,23 @@ Both scripts are called with a set of named and unnamed parameters that are eith
 arguments or automatically if configured as Landscape Model observers.
 
 ### `RiskAnalysis_MC.R`
-This script performs analysis on a Monte Carlo run base. It first aggregates spatio-temporal values from an X3df file
+This script performs analysis on a Monte Carlo run base. It first aggregates spatio-temporal values from a X3df file
 into temporal percentiles ranging from 0 to 100 in one percent steps per spatial unit (one square-meter cells). For 
 some of these temporal percentiles, namely the 50th, 75th, 90th, 95th and 100th, a map is plotted and saved to the
 output folder. For further analysis, habitat types are considered individually and combined, and habitats are considered
-entirely and within the following distance classes to the nearest field edge only: 0m to 5m, 0m to 10m, 0m to 20m, 0m to
-50m, 0m to 100m and 2m to 5m. For each combination of considered habitat type and distance class and for each temporal
-percentile i one percent steps, percentiles from the 0th to the 100th are calculated in one percent steps. The resulting
-table of spatio-temporally aggregated values per statistical population is written to the output folder. From this raw
-percentile table, all values relating to the 0th, 1st, 5th, 10th, 25th, 50th, 75th, 90th, 95th, 99th and 100th spatial
-percentiles and to the 50th, 75th, 90th, 95th and 100th percentile are extracted and written to another percentile
-table in the output folder for a more concise overview. For the same percentile combinations (and per combination of
-habitat type and distance class), a raster plot and a contour plot are written into the output folder, once showing the
-entire percentile range from 0 to 100 percent and once only for the range of percentiles where values larger than zero
-occur. If an according parameter is specified, the script does also prepare an animation showing the spatial 
-distribution of values over time. Finally, a co-occurrence of spray-drift and run-off analysis is conducted that outputs 
-the distribution of number of days between an spray-drift event (and, thus, an application) and the next run-off event.
+entirely and within the following distance classes to the nearest field edge only: 0 m to 5 m, 0 m to 10 m, 0 m to 
+20 m, 0 m to 50 m, 0 m to 100 m and 2 m to 5 m. For each combination of considered habitat type and distance class and
+for each temporal percentile in one-percent steps, percentiles from the 0th to the 100th are calculated in one-percent
+steps. The resulting table of spatio-temporally aggregated values per statistical population is written to the output 
+folder. From this raw percentile table, all values relating to the 0th, 1st, 5th, 10th, 25th, 50th, 75th, 90th, 95th, 
+99th and 100th spatial percentiles and to the 50th, 75th, 90th, 95th and 100th percentile are extracted and written to
+another percentile table in the output folder for a more concise overview. For the same percentile combinations (and
+per combination of habitat type and distance class), a raster plot and a contour plot are written into the output 
+folder, once showing the entire percentile range from 0 to 100 percent and once only for the range of percentiles where
+values larger than zero occur. If an according parameter is specified, the script does also prepare an animation
+showing the spatial distribution of values over time. Finally, a co-occurrence of spray-drift and run-off analysis is
+conducted that outputs the distribution of number of days between a spray-drift event (and, thus, an application) and
+the next run-off event.
 
 The following example shows how to run the script from the command lin with all arguments specified:
 ```cmd
@@ -70,11 +71,11 @@ An XOffFieldSoilRisk configuration for the observer could look like this:
     <Data>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\store</Data>
     <Output_Folder>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\analysis</Output_Folder>
     <Dataset>DepositionToPecSoil/PecSoil</Dataset>
-    <Distance>LULC/analysis_distance_groups</Distance>
-    <Extent>LULC/Extent</Extent>
-    <Crs>LULC/Crs</Crs>
-    <Habitats>LULC/habitat_lulc_types</Habitats>
-    <Lulc>LULC/lulc_raster</Lulc>
+    <Distance>LandscapeScenario/analysis_distance_groups</Distance>
+    <Extent>LandscapeScenario/Extent</Extent>
+    <Crs>LandscapeScenario/Crs</Crs>
+    <Habitats>LandscapeScenario/habitat_types</Habitats>
+    <Lulc>LandscapeScenario/land_use_raster</Lulc>
     <RLibPath>./R-3.5.1/library</RLibPath>
     <RunOff>RunOff/Exposure</RunOff>
     <SprayDrift>SprayDrift/Exposure</SprayDrift>
@@ -93,9 +94,10 @@ The parameters in detail are the following for the configuration (and the comman
   component.
 * `ffmpeg`: The path to the ffmpeg video encoder. This parameter is optional. if it is omitted, no animation is 
    generated.
-* `habitats`: The dataset with the habitat types. This is a list of LULC types that are considered habitats as output by 
-  the `base.Lulc` component and prepared by the scenario developer.
-* `lulc`: The dataset containing LULC types per cell. This is a two-dimensional matrix provided by the `base.Lulc` 
+* `habitats`: The dataset with the habitat types. This is a list of land-use / lnd-cover types that are considered 
+  habitats as output by the `base.Lulc` component and prepared by the scenario developer.
+* `lulc`: The dataset containing land-use / land-cover types per cell. This is a two-dimensional matrix provided by 
+  the `base.Lulc` 
   component and prepared by the scenario developer.
 * `rlibpath`: The path containing the required R packages. Can be used to load R packages from a specific path.
 * `runoff`: The dataset containing run-off exposure. This is a two-dimensional matrix as provided by the `RunOffPrzm` 
@@ -106,11 +108,11 @@ The parameters in detail are the following for the configuration (and the comman
   `base.Lulc` component.
 
 ### `RiskAnalysis_Experiment.R`
-This script performs analysis on a experiment base. First, it loads the raw percentiles of multiple Monte Carlo runs as
+This script performs analysis on an experiment base. First, it loads the raw percentiles of multiple Monte Carlo runs as
 they are output by the `RiskAnalysis_MC.R` script. For these percentiles, expectation values and 95%-confidence 
 intervals over Monte Carlo runs are then calculated and written to the output folder. Specific percentile combinations 
 (same as in the `RiskAnalysis_MC.R` script) are extracted from the raw data and output as an overview table. Finally,
-for the same combinations of temporal and spatial percentiles, boxplots showing the vales over Monte Carlo runs are
+for the same combinations of temporal and spatial percentiles, box-plots showing the vales over Monte Carlo runs are
 written to the output folder.
 
 The following example shows how to run the script from the command lin with all arguments specified:

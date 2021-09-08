@@ -14,7 +14,7 @@
             <Data>$(_EXP_BASE_DIR_)\$(SimID)\mcs</Data>
             <Output_Folder>$(_EXP_BASE_DIR_)\$(SimID)\analysis</Output_Folder>
             <DsName>PecSoil</DsName>
-            <RLibPath>./R-3.5.1/library</RLibPath>
+            <RLibPath>./R-4.1.1/library</RLibPath>
         </Observer>
         <Observer module="observer" class="LogFileObserver">
             <LogFile>$(_EXP_BASE_DIR_)\$(SimID)\log\experiment.log</LogFile>

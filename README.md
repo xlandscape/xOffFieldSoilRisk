@@ -13,12 +13,12 @@
 
 
 ## About the project
-XOffFieldSoil is a modular model that simulates processes at a landscape-scale and allows to assess potential effects of 
+XOffFieldSoil is a modular model that simulates processes at a landscape-scale and allows assessing potential effects of
 pesticide applications on off-field soil organisms. Its main features are:
 * A modular structure that couples existing expert models like XDrift (spray-drift model based on Rautmann drift 
-  values) and RunOffPrzm (PRZM-based implementation of spatial run-off distribution) and that allows to flexibly replace 
+  values) and RunOffPrzm (PRZM-based implementation of spatial run-off distribution) and that allows to flexibly replace
   or add further modules. 
-* An unified and consistent view on the environmental state of the simulated landscape that is shared among modules and
+* A unified and consistent view on the environmental state of the simulated landscape that is shared among modules and
   available to risk-assessment. 
 * Data semantics that explicitly express values and their physical units at different spatial and temporal scales plus 
   the ability of transient data transformations according to the requirements of used models.
@@ -36,13 +36,13 @@ XOffFieldSoil is composed of the following building blocks:
 * XDrift, a spray-drift model based on Rautmann drift values (
   [https://doi.org/10.1016/j.softx.2020.100610](https://doi.org/10.1016/j.softx.2020.100610)). See 
   `\model\variant\XSprayDrift\README` for further details.
-* An exemplary schematic landscape scenario consisting of a 100m x 100m habitat next to a 100m x 100m field. See 
+* An exemplary schematic landscape scenario consisting of a 100 m x 100 m habitat next to a 100 m x 100 m field. See 
   `\scenario\schematic-100x100\README` for further details.
 * Two R risk analysis scripts. See `\model\variant\RiskAnalysis\README` for further details.  
 
 
 ## Getting Started
-XOffFieldSoil is xcopy-deployable and is tested to run on a range of hardware.
+XOffFieldSoil is portable and is tested to run on a range of hardware.
 
 ### Prerequisites
 XOffFieldSoil requires a 64-bit Windows to run.
@@ -75,9 +75,9 @@ Contributions are welcome. Please contact the authors (see [Contact](#contact)).
 
 
 ## License
-XOffFieldSoil is distributed under the CC0 License. See the according `LICENSE` files for more information. WINPRZM 
+XOffFieldSoil is distributed under the CC0 License. See the according `LICENSE` files for more information. WinPRZM 
 that is used by the RunOffPrzm component is an established open access model widely used in regulatory science. Its 
-precise license conditions are not known and it is provided here with consent of the PRZM model development team 
+precise license conditions are not known, and it is provided here with consent of the PRZM model development team 
 of Waterborne Environmental Inc., Marty Williams, Amy Ritter, Gerco Hoogeweg, J Mark Cheplick as well as Gerald Reinken 
 (Bayer AG).
 
@@ -90,4 +90,4 @@ Sascha Bub - sascha.bub.ext@bayer.com
 ## Acknowledgements
 See `README`s of individual building blocks for acknowledgements of these parts. We thank the PRZM model development
 team of Waterborne Environmental Inc., Marty Williams, Amy Ritter, Gerco Hoogeweg, J Mark Cheplick as well as Gerald 
-Reinken (Bayer AG) for its consent to distribute WINPRZM together with XOffFieldSoil. 
+Reinken (Bayer AG) for its consent to distribute WinPRZM together with XOffFieldSoil. 
