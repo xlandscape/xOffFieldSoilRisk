@@ -247,7 +247,7 @@ contourplots <- function(
   cat("Contourplots\n")
   suppressMessages(pbsapply(1:nrow(analysis_scales), function(i) {
     dat <- data[lulc == analysis_scales[i, lulc] & distance == analysis_scales[i, distance] & value >= threshold]
-    p <- ggplot(dat, aes(s.percentile, t.percentile))
+    p <- ggplot(dat[value > 0], aes(s.percentile, t.percentile))
     if (type == "raster")
       p <- p + geom_raster(aes(fill = log10(value)))
     else if (type == "contour")
