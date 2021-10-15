@@ -1,6 +1,12 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [6] - 2021-10-15
+### Added
+### Changed
+- Usage of `_MODULE_DIR_` system macro in `README`
+### Fixed
+
 ## [5] - 2021-09-09
 ### Added
 ### Changed

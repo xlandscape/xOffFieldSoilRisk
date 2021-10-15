@@ -3,7 +3,7 @@
   <Observers>
     <Observer module="observer" class="ConsoleObserver"/>
     <Observer module="AnalysisObserver" class="AnalysisObserver">
-      <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_MC.R</Script>
+      <Script>$(_MODEL_DIR_)/variant/RiskAnalysis/RiskAnalysis_MC.R</Script>
       <Data>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\store</Data>
       <Output_Folder>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\analysis</Output_Folder>
       <Dataset>DepositionToPecSoil/PecSoil</Dataset>
@@ -146,35 +146,35 @@
       <Options_ShowExtendedErrorInformation type="bool">true</Options_ShowExtendedErrorInformation>
       <Weather_Precipitation>
         <FromOutput component="Weather" output="PRECIPITATION"/>
-        <Extension module="extend" class="CoordinateTransform">
+        <Extension module="extension" class="CoordinateTransform">
           <Transformation_type>date</Transformation_type>
           <Offset>1975-01-01</Offset>
         </Extension>
       </Weather_Precipitation>
       <Weather_ET0>
         <FromOutput component="Weather" output="ET0"/>
-        <Extension module="extend" class="CoordinateTransform">
+        <Extension module="extension" class="CoordinateTransform">
           <Transformation_type>date</Transformation_type>
           <Offset>1975-01-01</Offset>
         </Extension>
       </Weather_ET0>
       <Weather_Temperature>
         <FromOutput component="Weather" output="TEMPERATURE_AVG"/>
-        <Extension module="extend" class="CoordinateTransform">
+        <Extension module="extension" class="CoordinateTransform">
           <Transformation_type>date</Transformation_type>
           <Offset>1975-01-01</Offset>
         </Extension>
       </Weather_Temperature>
       <Weather_WindSpeed>
         <FromOutput component="Weather" output="WINDSPEED"/>
-        <Extension module="extend" class="CoordinateTransform">
+        <Extension module="extension" class="CoordinateTransform">
           <Transformation_type>date</Transformation_type>
           <Offset>1975-01-01</Offset>
         </Extension>
       </Weather_WindSpeed>
       <Weather_SolarRadiation>
         <FromOutput component="Weather" output="RADIATION"/>
-        <Extension module="extend" class="CoordinateTransform">
+        <Extension module="extension" class="CoordinateTransform">
           <Transformation_type>date</Transformation_type>
           <Offset>1975-01-01</Offset>
         </Extension>

@@ -1,6 +1,18 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.2.0] - 2021-10-15
+### Added
+### Changed
+- Updated Landscape Model core to version 1.9.1
+- Updated AnalysisObserver to version 2.1.3
+- Updated RiskAnalysis to version 6
+- Updated RunOffPrzm to version 2.0.11
+- Updated XSprayDrift to version 2.2.1
+- Usage of `_MODULE_DIR_` system macro in configuration
+### Fixed
+- Spelling errors in `template.xrun`
+
 ## [1.1.1] - 2021-09-09
 ### Added
 ### Changed

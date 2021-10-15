@@ -67,7 +67,7 @@ Rscript.exe --vanilla RiskAnalysis_MC.R --dataset=DepositionToPecSoil/PecSoil --
 An XOffFieldSoilRisk configuration for the observer could look like this:
 ```xml
 <Observer module="AnalysisObserver" class="AnalysisObserver">
-    <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_MC.R</Script>
+    <Script>$(_MODEL_DIR_)/variant/RiskAnalysis/RiskAnalysis_MC.R</Script>
     <Data>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\store</Data>
     <Output_Folder>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\analysis</Output_Folder>
     <Dataset>DepositionToPecSoil/PecSoil</Dataset>
@@ -124,7 +124,7 @@ C:\experiment\experiment C:\experiment\output
 An XOffFieldSoilRisk configuration for the observer could look like this:
 ```xml
 <Observer module="AnalysisObserver" class="AnalysisObserver">
-    <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_Experiment.R</Script>
+    <Script>$(_MODEL_DIR_)/variant/RiskAnalysis/RiskAnalysis_Experiment.R</Script>
     <Data>$(_EXP_BASE_DIR_)\$(SimID)\mcs</Data>
     <Output_Folder>$(_EXP_BASE_DIR_)\$(SimID)\analysis</Output_Folder>
     <DsName>PecSoil</DsName>
