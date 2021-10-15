@@ -32,7 +32,7 @@
     Description   :  The number of Monte Carlo runs.
     Values        :  Any positive integer.
     Remark        :  MC runs are conducted (partly) in parallel according to the NumberParallelProcesses parameter.
-    Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long running simulations,
+    Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long-running simulations,
                      30 for small simulations and 10 for anything in between.
     -->
     <NumberMC>1</NumberMC>
@@ -157,8 +157,8 @@
 
     <!--
     Parameter     :  Weather
-    Description   :  Weather is from files in the the data directory that are named using the scheme "weather_XXX.csv"
-                     where XXX are the valid values for the weather parameter.
+    Description   :  Weather is from files in the data directory that are named using the scheme "weather_XXX.csv"
+                     where `XXX` are the valid values for the weather parameter.
     Values        :  Available weather files (see description).
     Remark        :  Make sure that the weather parameter fits a weather file offered by the scenario.
     -->
