@@ -169,5 +169,4 @@ Sascha Bub - sascha.bub.ext@bayer.com
 * [matrixStats](https://cran.r-project.org/web/packages/matrxistats)
 * [openxlsx](https://cran.r-project.org/web/packages/openxlsx)
 * [optparse](https://cran.r-project.org/web/packages/optparse)
-* [R GDAL bindings](https://cran.r-project.org/web/packages/rgdal)
-* [raster](https://cran.r-project.org/web/packages/raster)
+* [terra](https://cran.r-project.org/web/packages/terra)

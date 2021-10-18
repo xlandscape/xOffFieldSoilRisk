@@ -9,7 +9,7 @@
       <Dataset>DepositionToPecSoil/PecSoil</Dataset>
       <Distance>LandscapeScenario/analysis_distance_groups</Distance>
       <Extent>LandscapeScenario/Extent</Extent>
-      <Crs>LandscapeScenario/Crs</Crs>
+      <EPSG>LandscapeScenario/EPSG</EPSG>
       <Habitats>LandscapeScenario/habitat_types</Habitats>
       <Lulc>LandscapeScenario/land_use_raster</Lulc>
       <RLibPath>./R-4.1.1/library</RLibPath>

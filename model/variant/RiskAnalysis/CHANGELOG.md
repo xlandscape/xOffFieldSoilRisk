@@ -1,6 +1,13 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [7] - 2021-10-18
+### Added
+### Changed
+- Replaced `raster` by `terra` package in `RiskAnalysis_MC.R`
+- Removed unneeded package imports in `RiskAnalysis_Experiment.R`
+### Fixed
+
 ## [6] - 2021-10-15
 ### Added
 ### Changed

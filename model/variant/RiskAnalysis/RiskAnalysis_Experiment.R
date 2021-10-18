@@ -1,14 +1,8 @@
 # Libraries
 library(data.table)
-library(directlabels)
-library(ggplot2)
-library(hdf5r)
-library(matrixStats)
 library(openxlsx)
 library(optparse)
 library(pbapply)
-library(raster, warn.conflicts = FALSE)
-library(rgdal)
 
 initialize_parameters <- function(inputs, args = NULL) {
   if (is.null(args)) {

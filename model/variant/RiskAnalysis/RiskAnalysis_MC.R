@@ -6,8 +6,7 @@ library(hdf5r)
 library(matrixStats)
 library(openxlsx)
 library(pbapply)
-library(raster, warn.conflicts = FALSE)
-library(rgdal)
+library(terra, warn.conflicts = FALSE)
 
 initialize_parameters <- function(inputs, args = NULL) {
   if (is.null(args)) {
@@ -40,7 +39,7 @@ initialize_parameters <- function(inputs, args = NULL) {
 define_scales <- function(...) {
   x <- list(...)
   s <- as.data.table(expand.grid(x, stringsAsFactors = FALSE))
-  r <- copy(s)
+  r <- data.table::copy(s)
   for (col in names(r)) {
     r[, (col) := as.character(get(col))]
     if (attr(x[[col]], "data.class") == class(character()))
@@ -141,37 +140,37 @@ temporal_aggregation <- function(x3df, dataset, t.quantiles = seq(0, 1, .01)) {
 risk_analysis_maps <- function(
   data, output, spatial_info, value_name = "Value", t.quantiles = c("50%", "75%", "90%", "95%", "100%")) {
   cat(paste0("Risk analysis maps max", value_name, "|t (x, MCrun)\n"))
-  r <- raster(
-    xmn = spatial_info$extent[1],
-    xmx = spatial_info$extent[2],
-    ymn = spatial_info$extent[3],
-    ymx = spatial_info$extent[4],
-    crs = spatial_info$crs,
+  r <- rast(
+    xmin = spatial_info$extent[1],
+    xmax = spatial_info$extent[2],
+    ymin = spatial_info$extent[3],
+    ymax = spatial_info$extent[4],
+    crs = paste("EPSG", spatial_info$epsg, sep = ":"),
     resolution = spatial_info$resolution
   )
   pbsapply(t.quantiles, function(qt) {
     val <- data[[qt]]
     length(val) <- ncell(r)
     r[] <- val
-    writeRaster(flip(r, "y"), file.path(output, paste0(value_name, " QT", qt, ".tif")))
+    writeRaster(flip(r, "vertical"), file.path(output, paste0(value_name, " QT", qt, ".tif")))
     TRUE
   })
 }
 
-get_spatial_info <- function(x3df, extent, crs, resolution = 1) {
+get_spatial_info <- function(x3df, extent, epsg, resolution = 1) {
   hdf5 <- h5file(paste0(x3df, "/arr.dat"), "r")
   ext <- hdf5[[extent]][]
-  crs <- showP4(hdf5[[crs]][])
+  epsg <- hdf5[[epsg]][]
   res <- resolution
   h5close(hdf5)
-  list(extent = ext, crs = crs, resolution = res)
+  list(extent = ext, epsg = epsg, resolution = res)
 }
 
 prepare_spatial_analysis_scales <- function(x3df, data, scales = list(), t.quantiles = seq(0, 1, .01)) {
   cat("Preparing spatial analysis scales...\n")
   data_qt <- data[, paste0(t.quantiles * 100, "%"), with = FALSE]
   hdf5 <- h5file(paste0(x3df, "/arr.dat"), "r")
-  sapply(1:length(scales), function(i) data_qt[, names(scales)[i] := flip(raster(hdf5[[scales[[i]]]][]), "y")[]])
+  sapply(1:length(scales), function(i) data_qt[, names(scales)[i] := flip(rast(hdf5[[scales[[i]]]][]), "vertical")[]])
   h5close(hdf5)
   data_qt
 }
@@ -353,7 +352,7 @@ inputs <- list(
     ),
     make_option("--runoff", help = "The dataset containing run-off exposure"),
     make_option("--spraydrift", help = "The dataset containing spray-drift exposure"),
-    make_option("--crs", help = "The dataset containing the CRS")
+    make_option("--epsg", help = "The dataset containing the EPSG code of the CRS")
 ))
 
 # Initialize parameter list
@@ -364,7 +363,7 @@ value_name <- tail(strsplit(params$dataset, "/", TRUE)[[1]], 1)
 data_qt <- temporal_aggregation(params$x3df, params$dataset)
 
 # Risk analysis maps
-spatial_info <- get_spatial_info(params$x3df, params$extent, params$crs)
+spatial_info <- get_spatial_info(params$x3df, params$extent, params$epsg)
 result <- risk_analysis_maps(data_qt, params$output, spatial_info, value_name)
 
 # Prepare spatial analysis scales
