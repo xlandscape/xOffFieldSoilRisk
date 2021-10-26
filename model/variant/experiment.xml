@@ -8,7 +8,9 @@
         <ExperimentDir>$(_EXP_BASE_DIR_)\$(SimID)</ExperimentDir>
     </General>
     <Observers>
-        <Observer module="observer" class="ConsoleObserver"/>
+        <Observer module="observer" class="ConsoleObserver">
+            <show_messages_get_values_ok>false</show_messages_get_values_ok>
+        </Observer>
         <Observer module="AnalysisObserver" class="AnalysisObserver">
             <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_Experiment.R</Script>
             <Data>$(_EXP_BASE_DIR_)\$(SimID)\mcs</Data>
@@ -18,6 +20,7 @@
         </Observer>
         <Observer module="observer" class="LogFileObserver">
             <LogFile>$(_EXP_BASE_DIR_)\$(SimID)\log\experiment.log</LogFile>
+            <show_messages_get_values_ok>false</show_messages_get_values_ok>
         </Observer>
     </Observers>
     <Parts>

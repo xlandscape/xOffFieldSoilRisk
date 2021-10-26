@@ -114,16 +114,20 @@ temporal_aggregation <- function(x3df, dataset, t.quantiles = seq(0, 1, .01)) {
           apply(
             apply(
               dataset$read(
-                args = list(chunks[i, Var1]:chunks[i, Var3], chunks[i, Var2]:chunks[i, Var4], 1:dataset$dims[3]),
+                args = list(
+                  chunks[i, Var1]:(chunks[i, Var1] + chunks[i, Var3] - 1),
+                  chunks[i, Var2]:(chunks[i, Var2] + chunks[i, Var4] - 1),
+                  1:dataset$dims[3]
+                ),
                 drop = FALSE
               ),
-            c(1, 2),
-            function(x) quantile(x, t.quantiles)
-          ),
-          1,
-          function(x) x
+              c(1, 2),
+              function(x) quantile(x, t.quantiles)
+            ),
+            1,
+            function(x) x
+          )
         )
-      )
         q[
           ,
           cell := (rep(0:chunks[i, Var3 - Var1] + chunks[i, Var1], chunks[i, Var4 - Var2 + 1]) - 1) * dataset$dims[2] +

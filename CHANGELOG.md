@@ -1,6 +1,15 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.2.2] - 2021-10-26
+### Added
+- Added automatic documentation of variant
+### Changed
+- Updated Landscape Model core to version 1.9.7
+- Configured observers to be less verbose
+- Modified risk analysis sample scripts to work with newest AnalysisObserver version
+### Fixed
+
 ## [1.2.1] - 2021-10-18
 ### Added
 ### Changed
