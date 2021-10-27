@@ -1,6 +1,12 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.2.3] - 2021-10-27
+### Added
+### Changed
+### Fixed
+- Modified start.bat to work with updated runtime environment
+
 ## [1.2.2] - 2021-10-26
 ### Added
 - Added automatic documentation of variant
