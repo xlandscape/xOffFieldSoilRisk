@@ -110,29 +110,30 @@ temporal_aggregation <- function(x3df, dataset, t.quantiles = seq(0, 1, .01)) {
     pblapply(
       1:nrow(chunks),
       function(i) {
-        q <- as.data.table(
-          apply(
-            apply(
-              dataset$read(
-                args = list(
-                  chunks[i, Var1]:(chunks[i, Var1] + chunks[i, Var3] - 1),
-                  chunks[i, Var2]:(chunks[i, Var2] + chunks[i, Var4] - 1),
-                  1:dataset$dims[3]
-                ),
-                drop = FALSE
-              ),
-              c(1, 2),
-              function(x) quantile(x, t.quantiles)
+        q <- apply(
+          dataset$read(
+            args = list(
+              chunks[i, Var1]:(chunks[i, Var1] + chunks[i, Var3] - 1),
+              chunks[i, Var2]:(chunks[i, Var2] + chunks[i, Var4] - 1),
+              1:dataset$dims[3]
             ),
-            1,
-            function(x) x
-          )
+            drop = FALSE
+          ),
+          c(1, 2),
+          function(x) quantile(x, t.quantiles)
         )
-        q[
-          ,
-          cell := (rep(0:chunks[i, Var3 - Var1] + chunks[i, Var1], chunks[i, Var4 - Var2 + 1]) - 1) * dataset$dims[2] +
-            (rep(0:chunks[i, Var4 - Var2] + chunks[i, Var2], each = chunks[i, Var3 - Var1 + 1]) - 1)
-        ]
+        a <- array(dim = dim(q) + c(1, 0, 0))
+        rownames(a) <- c("cell", rownames(q))
+        a[-1,,] <- q
+        a[1,,] <- matrix(
+          rep(chunks[i, Var1]:chunks[i, Var1 + Var3 - 1] * dataset$dims[2], dim(a)[3]) +
+            rep(chunks[i, Var2]:(chunks[i, Var2 + Var4 - 1]), each = dim(a)[2]),
+          nrow = dim(a)[2],
+          ncol = dim(a)[3]
+        )
+        q <- as.data.table(apply(a, 1, function(x) x))
+        setkey(q, cell)
+        q
       }
     )
   )
