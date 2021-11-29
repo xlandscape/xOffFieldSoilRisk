@@ -35,17 +35,17 @@
   </Global>
  <Composition>
     <Weather module="components" class="MarsWeather">
-      <FilePath>$(:weather_$$(Weather))</FilePath>
-      <FirstDate type="date">$(SimulationStart)</FirstDate>
-      <LastDate type="date">$(SimulationEnd)</LastDate>
+      <FilePath scales="global">$(:weather_$$(Weather))</FilePath>
+      <FirstDate type="date" scales="global">$(SimulationStart)</FirstDate>
+      <LastDate type="date" scales="global">$(SimulationEnd)</LastDate>
     </Weather>
     <LandscapeScenario module="components" class="LandscapeScenario">
-      <BaseLandscapeGeometries>$(:LandscapeScenario)</BaseLandscapeGeometries>
+      <BaseLandscapeGeometries scales="global">$(:LandscapeScenario)</BaseLandscapeGeometries>
     </LandscapeScenario>
     <PPM module="components" class="PpmCalendar">
-      <SimulationStart type="date">$(SimulationStart)</SimulationStart>
-      <SimulationEnd type="date">$(SimulationEnd)</SimulationEnd>
-      <ApplicationWindows>$(ApplicationWindows)</ApplicationWindows>
+      <SimulationStart type="date" scales="global">$(SimulationStart)</SimulationStart>
+      <SimulationEnd type="date" scales="global">$(SimulationEnd)</SimulationEnd>
+      <ApplicationWindows scales="global">$(ApplicationWindows)</ApplicationWindows>
       <Fields>
         <FromOutput component="LandscapeScenario" output="FeatureIds"/>
       </Fields>
@@ -55,21 +55,21 @@
       <TargetLandUseLandCoverType>
         <FromOutput component="LandscapeScenario" output="target_type"/>
       </TargetLandUseLandCoverType>
-      <ApplicationRate type="float" unit="g/ha">$(ApplicationRate)</ApplicationRate>
-      <TechnologyDriftReduction type="float" unit="1">$(DriftReduction)</TechnologyDriftReduction>
-      <InCropBuffer type="float" unit="m">$(InCropBuffer)</InCropBuffer>
-      <InFieldMargin type="float" unit="m">$(InFieldMargin)</InFieldMargin>
+      <ApplicationRate type="float" unit="g/ha" scales="global">$(ApplicationRate)</ApplicationRate>
+      <TechnologyDriftReduction type="float" unit="1" scales="global">$(DriftReduction)</TechnologyDriftReduction>
+      <InCropBuffer type="float" unit="m" scales="global">$(InCropBuffer)</InCropBuffer>
+      <InFieldMargin type="float" unit="m" scales="global">$(InFieldMargin)</InFieldMargin>
       <FieldGeometries>
         <FromOutput component="LandscapeScenario" output="Geometries"/>
       </FieldGeometries>
-      <MinimumAppliedArea type="float" unit="m²">10</MinimumAppliedArea>
-      <RandomSeed type="int">$(RandomSeed)</RandomSeed>
-      <ProbabilityFieldApplied type="float" unit="1">1</ProbabilityFieldApplied>
+      <MinimumAppliedArea type="float" unit="m²" scales="global">10</MinimumAppliedArea>
+      <RandomSeed type="int" scales="global">$(RandomSeed)</RandomSeed>
+      <ProbabilityFieldApplied type="float" unit="1" scales="global">1</ProbabilityFieldApplied>
     </PPM>
     <SprayDrift module="XSprayDrift" class="SprayDrift" enabled="$(SimulateSprayDriftExposure)">
-      <ProcessingPath>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\sd</ProcessingPath>
-      <SimulationStart type="date">2006-01-01</SimulationStart>
-      <SimulationEnd type="date">2015-12-31</SimulationEnd>
+      <ProcessingPath scales="global">$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\sd</ProcessingPath>
+      <SimulationStart type="date" scales="global">2006-01-01</SimulationStart>
+      <SimulationEnd type="date" scales="global">2015-12-31</SimulationEnd>
       <Geometries>
         <FromOutput component="LandscapeScenario" output="Geometries"/>
       </Geometries>
@@ -82,17 +82,17 @@
       <HabitatTypes>
         <FromOutput component="LandscapeScenario" output="habitat_types"/>
       </HabitatTypes>
-      <FieldDistanceSD type="float" unit="m">0</FieldDistanceSD>
-      <EPDistanceSD type="float" unit="m">0</EPDistanceSD>
-      <ReportingThreshold type="float" unit="g/ha">$(ReportingThreshold)</ReportingThreshold>
-      <ApplySimpleDriftFiltering type="bool">$(VegetationDriftFiltering)</ApplySimpleDriftFiltering>
+      <FieldDistanceSD type="float" unit="m" scales="global">0</FieldDistanceSD>
+      <EPDistanceSD type="float" unit="m" scales="global">0</EPDistanceSD>
+      <ReportingThreshold type="float" unit="g/ha" scales="global">$(ReportingThreshold)</ReportingThreshold>
+      <ApplySimpleDriftFiltering type="bool" scales="global">$(VegetationDriftFiltering)</ApplySimpleDriftFiltering>
       <LandUseLandCoverTypes>
         <FromOutput component="LandscapeScenario" output="FeatureTypeIds"/>
       </LandUseLandCoverTypes>
-      <WindDirection type="int" unit="deg">$(WindDirection)</WindDirection>
-      <SprayDriftModel>$(SprayDriftModel)</SprayDriftModel>
-      <SourceExposure unit="g/ha">NA</SourceExposure>
-      <RautmannClass>arable</RautmannClass>
+      <WindDirection type="int" unit="deg" scales="global">$(WindDirection)</WindDirection>
+      <SprayDriftModel scales="global">$(SprayDriftModel)</SprayDriftModel>
+      <SourceExposure unit="g/ha" scales="global">NA</SourceExposure>
+      <RautmannClass scales="global">arable</RautmannClass>
       <AppliedFields>
         <FromOutput component="PPM" output="AppliedFields"/>
       </AppliedFields>
@@ -108,45 +108,57 @@
       <AppliedAreas>
         <FromOutput component="PPM" output="AppliedAreas"/>
       </AppliedAreas>
-      <SpatialOutputScale>1sqm</SpatialOutputScale>
-      <RandomSeed type="int">$(RandomSeed)</RandomSeed>
-      <MinimumDistanceToField type="float" unit="m">0</MinimumDistanceToField>
-      <FilteringTypes type="list[int]"/>
-      <FilteringMinWidth type="float" unit="m">999</FilteringMinWidth>
-      <FilteringFraction type="float" unit="1">0</FilteringFraction>
-      <AgDriftBoomHeight>NA</AgDriftBoomHeight>
-      <AgDriftDropletSize>NA</AgDriftDropletSize>
-      <AgDriftQuantile type="float" unit="1">0</AgDriftQuantile>
+      <SpatialOutputScale scales="global">1sqm</SpatialOutputScale>
+      <RandomSeed type="int" scales="global">$(RandomSeed)</RandomSeed>
+      <MinimumDistanceToField type="float" unit="m" scales="global">0</MinimumDistanceToField>
+      <FilteringTypes type="list[int]" scales="global"/>
+      <FilteringMinWidth type="float" unit="m" scales="global">999</FilteringMinWidth>
+      <FilteringFraction type="float" unit="1" scales="global">0</FilteringFraction>
+      <AgDriftBoomHeight scales="global">NA</AgDriftBoomHeight>
+      <AgDriftDropletSize scales="global">NA</AgDriftDropletSize>
+      <AgDriftQuantile type="float" unit="1" scales="global">0</AgDriftQuantile>
     </SprayDrift>
     <RunOffPrzm module="RunOffPrzm" class="RunOffPrzm" enabled="$(SimulateRunOffExposure)">
-      <ProcessingPath>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\runoff</ProcessingPath>
-      <Model_AdsorptionMethod>aged</Model_AdsorptionMethod>
-      <Model_SoilTemperatureSimulation type="bool">true</Model_SoilTemperatureSimulation>
-      <SubstanceName>$(Substance)</SubstanceName>
-      <Substance_PlantUptakeFactor type="float" unit="1/d">0</Substance_PlantUptakeFactor>
-      <Substance_PesticideDissipationRateOfFoliage type="float" unit="1/d">
+      <ProcessingPath scales="global">$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\runoff</ProcessingPath>
+      <Model_AdsorptionMethod scales="global">aged</Model_AdsorptionMethod>
+      <Model_SoilTemperatureSimulation type="bool" scales="global">true</Model_SoilTemperatureSimulation>
+      <SubstanceName scales="global">$(Substance)</SubstanceName>
+      <Substance_PlantUptakeFactor type="float" unit="1/d" scales="global">0</Substance_PlantUptakeFactor>
+      <Substance_PesticideDissipationRateOfFoliage type="float" unit="1/d" scales="global">
         10
       </Substance_PesticideDissipationRateOfFoliage>
-      <Substance_FoliarWashOffCoefficient type="float" unit="1/cm">0.5</Substance_FoliarWashOffCoefficient>
-      <Substance_HenryConstant type="float" unit="1">0.03</Substance_HenryConstant>
-      <Substance_VapourPressure type="float" unit="mPa">0.0001</Substance_VapourPressure>
-      <Substance_MolecularWeight type="float" unit="g/mol">304</Substance_MolecularWeight>
-      <Substance_WaterSolubility type="float" unit="mg/L">60</Substance_WaterSolubility>
-      <Substance_TemperatureAtWhichMeasured type="float" unit="K">293</Substance_TemperatureAtWhichMeasured>
-      <Substance_FreundlichExponent type="float" unit="1">$(FreundlichExponent)</Substance_FreundlichExponent>
-      <Substance_ReferenceMoistureForDT50Soil type="float" unit="%">100</Substance_ReferenceMoistureForDT50Soil>
-      <Substance_SoilDT50 type="float" unit="d">$(DT50)</Substance_SoilDT50>
-      <Substance_KocSoil type="float" unit="cm³/g">$(KocSoil)</Substance_KocSoil>
-      <SprayApplication_PrzmApplicationMethod>foliar</SprayApplication_PrzmApplicationMethod>
-      <SprayApplication_IncorporationDepth type="float" unit="cm">5</SprayApplication_IncorporationDepth>
-      <Options_StartDate type="date">2006-01-01</Options_StartDate>
-      <Options_EndDate type="date">2015-12-31</Options_EndDate>
-      <Options_TemporaryOutputPath>$(RunOffTempDir)\$(_MC_NAME_)</Options_TemporaryOutputPath>
-      <Options_DeleteTemporaryGrids type="bool">true</Options_DeleteTemporaryGrids>
-      <Options_TimeoutSecPrzm type="int" unit="s">100</Options_TimeoutSecPrzm>
-      <Options_ReportingThreshold type="float" unit="mg">$(ReportingThreshold)</Options_ReportingThreshold>
-      <Options_DeleteAllInterimResults type="bool">true</Options_DeleteAllInterimResults>
-      <Options_ShowExtendedErrorInformation type="bool">true</Options_ShowExtendedErrorInformation>
+      <Substance_FoliarWashOffCoefficient type="float" unit="1/cm" scales="global">
+        0.5
+      </Substance_FoliarWashOffCoefficient>
+      <Substance_HenryConstant type="float" unit="1" scales="global">0.03</Substance_HenryConstant>
+      <Substance_VapourPressure type="float" unit="mPa" scales="global">0.0001</Substance_VapourPressure>
+      <Substance_MolecularWeight type="float" unit="g/mol" scales="global">304</Substance_MolecularWeight>
+      <Substance_WaterSolubility type="float" unit="mg/L" scales="global">60</Substance_WaterSolubility>
+      <Substance_TemperatureAtWhichMeasured type="float" unit="K" scales="global">
+        293
+      </Substance_TemperatureAtWhichMeasured>
+      <Substance_FreundlichExponent type="float" unit="1" scales="global">
+        $(FreundlichExponent)
+      </Substance_FreundlichExponent>
+      <Substance_ReferenceMoistureForDT50Soil type="float" unit="%" scales="global">
+        100
+      </Substance_ReferenceMoistureForDT50Soil>
+      <Substance_SoilDT50 type="float" unit="d" scales="global">$(DT50)</Substance_SoilDT50>
+      <Substance_KocSoil type="float" unit="cm³/g" scales="global">$(KocSoil)</Substance_KocSoil>
+      <SprayApplication_PrzmApplicationMethod scales="global">foliar</SprayApplication_PrzmApplicationMethod>
+      <SprayApplication_IncorporationDepth type="float" unit="cm" scales="global">
+        5
+      </SprayApplication_IncorporationDepth>
+      <Options_StartDate type="date" scales="global">2006-01-01</Options_StartDate>
+      <Options_EndDate type="date" scales="global">2015-12-31</Options_EndDate>
+      <Options_TemporaryOutputPath scales="global">$(RunOffTempDir)\$(_MC_NAME_)</Options_TemporaryOutputPath>
+      <Options_DeleteTemporaryGrids type="bool" scales="global">true</Options_DeleteTemporaryGrids>
+      <Options_TimeoutSecPrzm type="int" unit="s" scales="global">100</Options_TimeoutSecPrzm>
+      <Options_ReportingThreshold type="float" unit="mg" scales="global">
+        $(ReportingThreshold)
+      </Options_ReportingThreshold>
+      <Options_DeleteAllInterimResults type="bool" scales="global">true</Options_DeleteAllInterimResults>
+      <Options_ShowExtendedErrorInformation type="bool" scales="global">true</Options_ShowExtendedErrorInformation>
       <Weather_Precipitation>
         <FromOutput component="Weather" output="PRECIPITATION"/>
         <Extension module="extension" class="CoordinateTransform">
@@ -182,7 +194,7 @@
           <Offset>1975-01-01</Offset>
         </Extension>
       </Weather_SolarRadiation>
-      <Fields_Slope type="float" unit="%">3</Fields_Slope>
+      <Fields_Slope type="float" unit="%" scales="global">3</Fields_Slope>
       <Fields_SoilHorizonThicknesses type="list[float]" scales="other/soil_horizon" unit="cm">
         30 30 40
       </Fields_SoilHorizonThicknesses>
@@ -213,7 +225,7 @@
       <Fields_FlowGrid>
         <FromOutput component="LandscapeScenario" output="flow_grid"/>
       </Fields_FlowGrid>
-      <Fields_InFieldMargin type="float" unit="m">$(InFieldMargin)</Fields_InFieldMargin>
+      <Fields_InFieldMargin type="float" unit="m" scales="global">$(InFieldMargin)</Fields_InFieldMargin>
       <Ppm_AppliedFields>
         <FromOutput component="PPM" output="AppliedFields"/>
       </Ppm_AppliedFields>
@@ -226,56 +238,73 @@
       <Ppm_AppliedAreas>
         <FromOutput component="PPM" output="AppliedAreas"/>
       </Ppm_AppliedAreas>
-      <Options_MethodOfRunoffGeneration>PRZM</Options_MethodOfRunoffGeneration>
-      <Options_UsePreSimulatedPrzmResults type="bool">true</Options_UsePreSimulatedPrzmResults>
-      <Options_UseOnePrzmModelPerGridCell type="bool">false</Options_UseOnePrzmModelPerGridCell>
-      <Options_UseVfsMod type="bool">false</Options_UseVfsMod>
-      <CropParameters_VfsModLookupTables type="list[str]" scales="other/crop">
+      <Options_MethodOfRunoffGeneration scales="global">PRZM</Options_MethodOfRunoffGeneration>
+      <Options_UsePreSimulatedPrzmResults type="bool" scales="global">true</Options_UsePreSimulatedPrzmResults>
+      <Options_UseOnePrzmModelPerGridCell type="bool" scales="global">false</Options_UseOnePrzmModelPerGridCell>
+      <Options_UseVfsMod type="bool" scales="global">false</Options_UseVfsMod>
+      <CropParameters_Crops type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
+        Cereals,Winter|OffCrop
+      </CropParameters_Crops>
+      <CropParameters_VfsModLookupTables
+              type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
         none|$(:VfsMod_lookup_table)
       </CropParameters_VfsModLookupTables>
-      <CropParameters_PanEvaporationFactors type="list[float]" scales="other/crop" unit="1">
+      <CropParameters_PanEvaporationFactors
+              type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
         0.84 0.84
       </CropParameters_PanEvaporationFactors>
-      <CropParameters_CanopyInterceptions type="list[float]" scales="other/crop" unit="cm">
+      <CropParameters_CanopyInterceptions
+              type="list[float]" scales="other/crop" unit="cm" element_names="RunOffPrzm/CropParameters_Crops">
         0.15 0.15
       </CropParameters_CanopyInterceptions>
-      <CropParameters_MaximumCoverages type="list[int]" scales="other/crop" unit="%">
+      <CropParameters_MaximumCoverages
+              type="list[int]" scales="other/crop" unit="%" element_names="RunOffPrzm/CropParameters_Crops">
         90 90
       </CropParameters_MaximumCoverages>
-      <CropParameters_MaximumHeights type="list[int]" scales="other/crop" unit="cm">
+      <CropParameters_MaximumHeights
+              type="list[int]" scales="other/crop" unit="cm" element_names="RunOffPrzm/CropParameters_Crops">
         110 110
       </CropParameters_MaximumHeights>
-      <CropParameters_MaximumRootingDepths type="list[int]" scales="other/crop" unit="cm">
+      <CropParameters_MaximumRootingDepths
+              type="list[int]" scales="other/crop" unit="cm" element_names="RunOffPrzm/CropParameters_Crops">
         130 130
       </CropParameters_MaximumRootingDepths>
-      <CropParameters_Fallows type="list[float]" scales="other/crop" unit="1">
+      <CropParameters_Fallows
+              type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
         0.9 0.9
       </CropParameters_Fallows>
-      <CropParameters_Cropping type="list[float]" scales="other/crop" unit="1">
+      <CropParameters_Cropping
+              type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
         0.2 0.2
       </CropParameters_Cropping>
-      <CropParameters_Residues type="list[float]" scales="other/crop" unit="1">
+      <CropParameters_Residues
+              type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
         0.4 0.4
       </CropParameters_Residues>
-      <CropParameters_EmergenceDates type="list[str]" scales="other/crop">
+      <CropParameters_EmergenceDates
+              type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
         12-11|12-11
       </CropParameters_EmergenceDates>
-      <CropParameters_MaturationDates type="list[str]" scales="other/crop">
+      <CropParameters_MaturationDates
+              type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
         10-06|10-06
       </CropParameters_MaturationDates>
-      <CropParameters_HarvestDates type="list[str]" scales="other/crop">
+      <CropParameters_HarvestDates
+              type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
         31-07|31-07
       </CropParameters_HarvestDates>
-      <CropParameters_FallowDates type="list[str]" scales="other/crop">
+      <CropParameters_FallowDates
+              type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
         01-11|01-11
       </CropParameters_FallowDates>
-      <CropParameters_WaterMitigations type="list[float]" scales="other/crop" unit="1">
+      <CropParameters_WaterMitigations
+              type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
         0 -0.086
       </CropParameters_WaterMitigations>
-      <CropParameters_SedimentMitigations type="list[float]" scales="other/crop" unit="1">
+      <CropParameters_SedimentMitigations
+              type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
         0 -0.153
       </CropParameters_SedimentMitigations>
-      <CropParameters_Crops type="list[str]" scales="other/crop">Cereals,Winter|OffCrop</CropParameters_Crops>
     </RunOffPrzm>
     <EnvironmentalFate module="components" class="EnvironmentalFate">
       <SprayDriftExposure>
@@ -284,14 +313,14 @@
       <RunOffExposure>
         <FromOutput component="RunOffPrzm" output="Exposure" enabled="$(SimulateRunOffExposure)"/>
       </RunOffExposure>
-      <SoilDT50 type="float" unit="d">$(DT50)</SoilDT50>
+      <SoilDT50 type="float" unit="d" scales="global">$(DT50)</SoilDT50>
     </EnvironmentalFate>
     <DepositionToPecSoil module="components" class="DepositionToPecSoil">
       <Deposition>
         <FromOutput component="EnvironmentalFate" output="Pec"/>
       </Deposition>
-      <SoilBulkDensity type="float">1.5</SoilBulkDensity>
-      <Depth type="float">5</Depth>
+      <SoilBulkDensity type="float" scales="global">1.5</SoilBulkDensity>
+      <Depth type="float" scales="global">5</Depth>
     </DepositionToPecSoil>
   </Composition>
 </MCRun>
