@@ -1,6 +1,14 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.2.4] - 2021-11-29
+### Added
+- Scales to global MC run inputs
+### Changed
+- Updated Landscape Model core to version 1.10.1
+- Updated XSprayDrift to version 2.3.2
+### Fixed
+
 ## [1.2.3] - 2021-10-27
 ### Added
 ### Changed
