@@ -1,6 +1,12 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [8] - 2021-12-06
+### Added
+### Changed
+- Reduced memory usage of `risk_analysis_percentiles` function
+### Fixed
+
 ## [7] - 2021-10-18
 ### Added
 ### Changed
