@@ -1,6 +1,12 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.2.6] - 2021-12-06
+### Added
+### Changed
+- Updated RiskAnalysis to version 8
+### Fixed
+
 ## [1.2.5] - 2021-12-02
 ### Added
 ### Changed
