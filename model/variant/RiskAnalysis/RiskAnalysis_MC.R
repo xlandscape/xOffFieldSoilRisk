@@ -189,14 +189,17 @@ get_values <- function(x3df, dataset) {
 
 risk_analysis_percentiles <- function(data, analysis_scales, value_name = "Value", s.quantiles = seq(0, 1, .01)) {
   cat(paste0("Risk analysis Xth%ile (max", value_name, "|t)|x (MCrun)\n"))
-  data_qt <- melt(data, setdiff(names(analysis_scales), "def"), variable.name = "t.percentile")
-  rbindlist(pblapply(1:nrow(analysis_scales), function(i) {
-    res <- data_qt[
-      eval(parse(text = analysis_scales[i, def])),
-      list(s.percentile = paste0(s.quantiles * 100, "%"), value = quantile(value, s.quantiles)),
-      t.percentile
-    ]
-    res[, names(analysis_scales) := as.list(analysis_scales[i])][, def := NULL]
+  rbindlist(pblapply(setdiff(names(data), names(analysis_scales)), function(perc) {
+    cols <- c(perc, setdiff(names(analysis_scales), "def"))
+    d <- data[, ..cols]
+    rbindlist(lapply(1:nrow(analysis_scales), function(i) {
+      res <- d[
+        eval(parse(text = analysis_scales[i, def])),
+        list(s.percentile = paste0(s.quantiles * 100, "%"), value = quantile(get(perc), s.quantiles))
+      ]
+      res[, t.percentile := perc]
+      res[, c(names(analysis_scales)) := as.list(analysis_scales[i])][, def := NULL]
+    }))
   }))
 }
 
