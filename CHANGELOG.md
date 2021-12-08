@@ -1,6 +1,17 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.2.7] - 2021-12-08
+### Added
+### Changed
+- Updated Landscape Model core to version 1.10.4
+- Updated AnalysisObserver to version 2.2.2
+- Updated XSprayDrift to version 2.3.4
+- Updated RiskAnalysis to version 9
+- Updated sample scenario oudebeek-beek7-tdi to version 2.3
+- Spell checking
+### Fixed
+
 ## [1.2.6] - 2021-12-06
 ### Added
 ### Changed
