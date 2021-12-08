@@ -80,7 +80,7 @@ contourplots <- function(
   cat("Contourplots\n")
   suppressMessages(pbsapply(1:nrow(analysisScales), function(i) {
     dat <- data[lulc == analysisScales[i, lulc] & distance == analysisScales[i, distance] & value >= threshold]
-    p <- ggplot(dat, aes(s.percentile, t.percentile))
+    p <- ggplot(dat, aes(s.percentile, t_percentile))
     if (type == "raster")
       p <- p + geom_raster(aes(fill = log10(value)))
     else if (type == "contour")
@@ -129,7 +129,7 @@ analyze_percentiles <- function(perc) {
       upper_conf = mean(value) + qnorm(.975) * sd(value) / sqrt(.N),
       lower_conf = mean(value) - qnorm(.975) * sd(value) / sqrt(.N)
     ),
-    list(distance, t.percentile, s.percentile)
+    list(distance, t_percentile, s.percentile)
   ]
 }
 
@@ -139,15 +139,15 @@ filter_percentiles <- function(t.perc = c(.5, .75, .9, 1), s.perc = c(0, .01, .0
   poi_s <- paste0(s.perc * 100, "%")
   data <- pblapply(poi_t, function(poit) {
     x_mean <- dcast(
-      percentiles[t.percentile == poit & `%in%`(s.percentile, poi_s)], distance ~ s.percentile, sum, value.var = "mean")
+      percentiles[t_percentile == poit & `%in%`(s.percentile, poi_s)], distance ~ s.percentile, sum, value.var = "mean")
     x_lower <- dcast(
-      percentiles[t.percentile == poit & `%in%`(s.percentile, poi_s)],
+      percentiles[t_percentile == poit & `%in%`(s.percentile, poi_s)],
       distance ~ s.percentile,
       sum,
       value.var = "lower_conf"
     )
     x_upper <- dcast(
-      percentiles[t.percentile == poit & `%in%`(s.percentile, poi_s)],
+      percentiles[t_percentile == poit & `%in%`(s.percentile, poi_s)],
       distance ~ s.percentile,
       sum,
       value.var = "upper_conf"
@@ -170,7 +170,7 @@ boxplots <- function(output, t.perc = c(.5, .75, .9, 1), s.perc = c(0, .01, .05,
   poi_s <- paste0(s.perc * 100, "%")
   pbsapply(poi_t, function(poit) {
     for (dist in unique(perc[, distance])) {
-      data <- perc[distance == dist & t.percentile == poit & `%in%`(s.percentile, poi_s)]
+      data <- perc[distance == dist & t_percentile == poit & `%in%`(s.percentile, poi_s)]
       png(
         file.path(
           output, paste0("QX(QT", sub("%", "", poit, fixed = TRUE), ")_", dist, ".png")), width = 1024, height = 1024)
@@ -234,7 +234,7 @@ write_to_xlsx(list(
     ),
     "",
     paste(
-      "The resulting values are given here, so that the columns distance, t.percentile and s.percentile idenmtify a",
+      "The resulting values are given here, so that the columns distance, t_percentile and s.percentile idenmtify a",
       "distinct combination of distance class and spatial and temporal percentiles. The columns mean, stddev,",
       "upper_conf and lower_conf then give the accoridng statistics for this combination."
     )

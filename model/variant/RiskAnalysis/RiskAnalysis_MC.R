@@ -191,13 +191,14 @@ risk_analysis_percentiles <- function(data, analysis_scales, value_name = "Value
   cat(paste0("Risk analysis Xth%ile (max", value_name, "|t)|x (MCrun)\n"))
   rbindlist(pblapply(setdiff(names(data), names(analysis_scales)), function(perc) {
     cols <- c(perc, setdiff(names(analysis_scales), "def"))
+    cols
     d <- data[, ..cols]
     rbindlist(lapply(1:nrow(analysis_scales), function(i) {
       res <- d[
         eval(parse(text = analysis_scales[i, def])),
         list(s.percentile = paste0(s.quantiles * 100, "%"), value = quantile(get(perc), s.quantiles))
       ]
-      res[, t.percentile := perc]
+      res[, t_percentile := perc]
       res[, c(names(analysis_scales)) := as.list(analysis_scales[i])][, def := NULL]
     }))
   }))
@@ -213,11 +214,11 @@ risk_analysis_table <- function(
   sq <- paste0(s.quantiles * 100, "%")
   tq <- paste0(t.quantiles * 100, "%")
   overview <- dcast(
-    data[`%in%`(s.percentile, sq) & `%in%`(t.percentile, tq)],
-    lulc + distance + t.percentile ~ s.percentile,
+    data[`%in%`(s.percentile, sq) & `%in%`(t_percentile, tq)],
+    lulc + distance + t_percentile ~ s.percentile,
     value.var = "value"
   )
-  setcolorder(overview, c("lulc", "distance", "t.percentile", sq))
+  setcolorder(overview, c("lulc", "distance", "t_percentile", sq))
   overview
 }
 
@@ -254,7 +255,7 @@ contourplots <- function(
   cat("Contourplots\n")
   suppressMessages(pbsapply(1:nrow(analysis_scales), function(i) {
     dat <- data[lulc == analysis_scales[i, lulc] & distance == analysis_scales[i, distance] & value >= threshold]
-    p <- ggplot(dat[value > 0], aes(s.percentile, t.percentile))
+    p <- ggplot(dat[value > 0], aes(s.percentile, t_percentile))
     if (type == "raster")
       p <- p + geom_raster(aes(fill = log10(value)))
     else if (type == "contour")
@@ -411,7 +412,7 @@ write_to_xlsx(list(
     ),
     "",
     paste(
-      "The resulting values are given here, so that the columns lulc, distance and t.percentile indicate a distinct",
+      "The resulting values are given here, so that the columns lulc, distance and t_percentile indicate a distinct",
       "combination of LULC type, distance class and temporal percentiles. In the remaining columns, for each",
       "considered spatial percentile, the aggreagted",
       value_name,
@@ -424,8 +425,8 @@ write_to_xlsx(list(
 # Contourplots
 data_contour <- data_qtqx[
   ,
-  c("t.percentile", "s.percentile") := list(
-    as.numeric(sub("%", "", t.percentile, TRUE)),
+  c("t_percentile", "s.percentile") := list(
+    as.numeric(sub("%", "", t_percentile, TRUE)),
     as.numeric(sub("%", "", s.percentile, TRUE))
   )
 ]
