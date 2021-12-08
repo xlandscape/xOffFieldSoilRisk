@@ -163,7 +163,7 @@ Sascha Bub - sascha.bub.ext@bayer.com
 * [Apply function progress bars](https://cran.r-project.org/web/packages/pbapply)
 * [data.table](https://cran.r-project.org/web/packages/data.table)
 * [Direct Labels](https://cran.r-project.org/web/packages/directlabels)
-* [FFmpeg](https://ffmpeg.org)
+* [FfMpeg](https://ffmpeg.org)
 * [ggplot2](https://cran.r-project.org/web/packages/ggplot2)
 * [h5](https://cran.r-project.org/web/packages/h5)
 * [matrixStats](https://cran.r-project.org/web/packages/matrxistats)
