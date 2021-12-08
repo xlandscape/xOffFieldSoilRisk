@@ -1,6 +1,12 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [9] - 2021-12-08
+### Added
+### Changed
+- Spell checking
+### Fixed
+
 ## [8] - 2021-12-06
 ### Added
 ### Changed
