@@ -1,6 +1,17 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.3.0] - 2021-12-30
+### Added
+### Changed
+- Updated Landscape Model core to version 1.12.0
+- Updated RunOffPrzm to version 2.0.13
+- Updated XSprayDrift to version 2.4.0
+- Updated RiskAnalysis to version 10
+- Enabled profiling by default
+- Starting Python in unbuffered mode
+### Fixed
+
 ## [1.2.7] - 2021-12-08
 ### Added
 ### Changed
