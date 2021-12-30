@@ -91,75 +91,81 @@ intervals <- function(lower, upper, add.na = NULL) {
   r
 }
 
-temporal_aggregation <- function(x3df, dataset, t.quantiles = seq(0, 1, .01)) {
+temporal_aggregation <- function(x3df, dataset, output, t.quantiles = seq(0, 1, .01), elements = 1e8) {
   cat("Preparing analysis...\n")
   hdf5 <- h5file(paste0(x3df, "/arr.dat"), "r")
   dataset <- hdf5[[dataset]]
+  x_chunk_size <- ceiling(sqrt(elements / dataset$dims[3] / dataset$chunk_dims[1]))
   chunks <- data.table(
-    expand.grid(seq(1, dataset$dims[1], dataset$chunk_dims[1]), seq(1, dataset$dims[2], dataset$chunk_dims[2])))
+    expand.grid(seq(1, dataset$dims[2], x_chunk_size), seq(1, dataset$dims[3], dataset$chunk_dims[3])))
   chunks[
     ,
     c("Var3", "Var4") := list(
-      ifelse(Var1 + dataset$chunk_dims[1] > dataset$dims[1], dataset$dims[1] - Var1 + 1, dataset$chunk_dims[1]),
-      ifelse(Var2 + dataset$chunk_dims[2] > dataset$dims[2], dataset$dims[2] - Var2 + 1, dataset$chunk_dims[2])
+      ifelse(Var1 + x_chunk_size > dataset$dims[2], dataset$dims[2] - Var1 + 1, x_chunk_size),
+      ifelse(Var2 + dataset$chunk_dims[3] > dataset$dims[3], dataset$dims[3] - Var2 + 1, dataset$chunk_dims[3])
     )
   ]
   chunks <- chunks[Var3 > 0 & Var4 > 0 & !(Var3 == 1 & Var4 == 1)]
+  percentile_hdf <- h5file(output, "w")
+  percentile_hdf$create_dataset(
+    "t", dtype = h5types$float,
+    dims = c(length(t.quantiles), dataset$dims[2], dataset$dims[3]),
+    chunk_dims = c(1, dataset$chunk_dims[2], dataset$chunk_dims[3])
+  )
+
   cat("Temporal aggregation\n")
-  data_qt <- rbindlist(
-    pblapply(
-      1:nrow(chunks),
-      function(i) {
-        q <- apply(
-          dataset$read(
-            args = list(
-              chunks[i, Var1]:(chunks[i, Var1] + chunks[i, Var3] - 1),
-              chunks[i, Var2]:(chunks[i, Var2] + chunks[i, Var4] - 1),
-              1:dataset$dims[3]
-            ),
-            drop = FALSE
+  pblapply(
+    1:nrow(chunks),
+    function(i) {
+      q <- apply(
+        dataset$read(
+          args = list(
+            1:dataset$dims[1],
+            chunks[i, Var1]:(chunks[i, Var1] + chunks[i, Var3] - 1),
+            chunks[i, Var2]:(chunks[i, Var2] + chunks[i, Var4] - 1)
           ),
-          c(1, 2),
-          function(x) quantile(x, t.quantiles)
-        )
-        a <- array(dim = dim(q) + c(1, 0, 0))
-        rownames(a) <- c("cell", rownames(q))
-        a[-1,,] <- q
-        a[1,,] <- matrix(
-          rep(chunks[i, Var1]:chunks[i, Var1 + Var3 - 1] * dataset$dims[2], dim(a)[3]) +
-            rep(chunks[i, Var2]:(chunks[i, Var2 + Var4 - 1]), each = dim(a)[2]),
-          nrow = dim(a)[2],
-          ncol = dim(a)[3]
-        )
-        q <- as.data.table(apply(a, 1, function(x) x))
-        setkey(q, cell)
+          drop = FALSE
+        ),
+        2:3,
+        function(x) quantile(x, t.quantiles)
+      )
+      percentile_hdf[["t"]]$write(
+        list(
+          1:length(t.quantiles),
+          chunks[i, Var1]:(chunks[i, Var1] + chunks[i, Var3] - 1),
+          chunks[i, Var2]:(chunks[i, Var2] + chunks[i, Var4] - 1)
+        ),
         q
-      }
-    )
+      )
+    }
   )
   h5close(hdf5)
-  setkey(data_qt, cell)
-  data_qt
+  h5attr(percentile_hdf[["t"]], "percentiles") <- paste0(t.quantiles * 100, "%")
+  percentile_hdf$flush()
+  percentile_hdf$close()
+  invisible(0)
 }
 
 risk_analysis_maps <- function(
   data, output, spatial_info, value_name = "Value", t.quantiles = c("50%", "75%", "90%", "95%", "100%")) {
   cat(paste0("Risk analysis maps max", value_name, "|t (x, MCrun)\n"))
+  hdf <- h5file(data)
+  perc <- h5attr(hdf[["t"]], "percentiles")
   r <- rast(
     xmin = spatial_info$extent[1],
-    xmax = spatial_info$extent[2],
+    xmax = spatial_info$extent[1] + hdf[["t"]]$dims[2] * spatial_info$resolution,
     ymin = spatial_info$extent[3],
-    ymax = spatial_info$extent[4],
+    ymax = spatial_info$extent[3] + hdf[["t"]]$dims[3] * spatial_info$resolution,
     crs = paste("EPSG", spatial_info$epsg, sep = ":"),
     resolution = spatial_info$resolution
   )
   pbsapply(t.quantiles, function(qt) {
-    val <- data[[qt]]
-    length(val) <- ncell(r)
-    r[] <- val
-    writeRaster(flip(r, "vertical"), file.path(output, paste0(value_name, " QT", qt, ".tif")))
+    i <- which(perc == qt)
+    values(r) <- hdf[["t"]][i,,]
+    writeRaster(r, file.path(output, paste0(value_name, " QT", qt, ".tif")))
     TRUE
   })
+  hdf$close()
 }
 
 get_spatial_info <- function(x3df, extent, epsg, resolution = 1) {
@@ -171,11 +177,10 @@ get_spatial_info <- function(x3df, extent, epsg, resolution = 1) {
   list(extent = ext, epsg = epsg, resolution = res)
 }
 
-prepare_spatial_analysis_scales <- function(x3df, data, scales = list(), t.quantiles = seq(0, 1, .01)) {
+prepare_spatial_analysis_scales <- function(x3df, scales = list()) {
   cat("Preparing spatial analysis scales...\n")
-  data_qt <- data[, paste0(t.quantiles * 100, "%"), with = FALSE]
   hdf5 <- h5file(paste0(x3df, "/arr.dat"), "r")
-  sapply(1:length(scales), function(i) data_qt[, names(scales)[i] := flip(rast(hdf5[[scales[[i]]]][]), "vertical")[]])
+  data_qt <- lapply(scales, function(scale) t(hdf5[[scale]][,]))
   h5close(hdf5)
   data_qt
 }
@@ -187,9 +192,8 @@ get_values <- function(x3df, dataset) {
   result
 }
 
-risk_analysis_percentiles <- function(data, analysis_scales, value_name = "Value", s.quantiles = seq(0, 1, .01)) {
-  cat(paste0("Risk analysis Xth%ile (max", value_name, "|t)|x (MCrun)\n"))
-  rbindlist(pblapply(setdiff(names(data), names(analysis_scales)), function(perc) {
+risk_analysis_percentiles <- function(data, analysis_scales, s.quantiles = seq(0, 1, .01)) {
+  rbindlist(lapply(setdiff(names(data), names(analysis_scales)), function(perc) {
     cols <- c(perc, setdiff(names(analysis_scales), "def"))
     cols
     d <- data[, ..cols]
@@ -322,8 +326,8 @@ coocurrence_spray_drift_run_off <- function(x3df, spraydrift, runoff) {
   cat("Cooccurence of spray-drift and run-off events\n")
   hdf5 <- h5file(paste0(x3df, "/arr.dat"), "r")
   dataset <- hdf5[[spraydrift]]
-  events <- rbindlist(pblapply(1:dataset$dims[3], function(t) {
-    data.table(t, spraydrift = any(hdf5[[spraydrift]][,,t] > 0), runoff = any(hdf5[[runoff]][,,t] > 0))
+  events <- rbindlist(pblapply(1:dataset$dims[1], function(t) {
+    data.table(t, spraydrift = any(hdf5[[spraydrift]][t,,] > 0), runoff = any(hdf5[[runoff]][t,,] > 0))
   }))
   days_run_off_after_spray_drift <- outer(events[runoff == TRUE, t], events[spraydrift == TRUE, t], "-")
   days_run_off_after_spray_drift[days_run_off_after_spray_drift < 0] <- Inf
@@ -361,31 +365,49 @@ inputs <- list(
     ),
     make_option("--runoff", help = "The dataset containing run-off exposure"),
     make_option("--spraydrift", help = "The dataset containing spray-drift exposure"),
-    make_option("--epsg", help = "The dataset containing the EPSG code of the CRS")
-))
+    make_option("--epsg", help = "The dataset containing the EPSG code of the CRS"),
+    make_option(
+      "--elements",
+      default = 1e8,
+      type = "integer",
+      help = "The target number of elements processed simultaneously [default %default]"
+    )
+  )
+)
 
 # Initialize parameter list
 params <- initialize_parameters(inputs)
 value_name <- tail(strsplit(params$dataset, "/", TRUE)[[1]], 1)
 
 # Temporal aggregation
-data_qt <- temporal_aggregation(params$x3df, params$dataset)
+percentile_hdf <- file.path(params$output, "percentiles.h5")
+temporal_aggregation(params$x3df, params$dataset, percentile_hdf, elements = params$elements)
 
 # Risk analysis maps
 spatial_info <- get_spatial_info(params$x3df, params$extent, params$epsg)
-result <- risk_analysis_maps(data_qt, params$output, spatial_info, value_name)
+result <- risk_analysis_maps(percentile_hdf, params$output, spatial_info, value_name)
 
 # Prepare spatial analysis scales
 habitats <- get_values(params$x3df, params$habitats)
-data_qt <- prepare_spatial_analysis_scales(
-  params$x3df, data_qt, list(lulc = params$lulc, distance = params$distance))[`%in%`(lulc, habitats)]
+data_qt <- prepare_spatial_analysis_scales(params$x3df, list(lulc = params$lulc, distance = params$distance))
 analysis_scales <- define_scales(
-  lulc = all_levels(data_qt, lulc, "all"),
+  lulc = all_levels(data.table(lulc = c(data_qt[["lulc"]])), lulc, "all"),
   distance = intervals(c(0, 0, 0, 0, 0, 2), c(5, 10, 20, 50, 100, 5), "any")
 )
 
 # Risk analysis percentiles
-data_qtqx <- risk_analysis_percentiles(data_qt, analysis_scales, value_name)
+cat(paste0("Risk analysis Xth%ile (max", value_name, "|t)|x (MCrun)\n"))
+hdf <- h5file(percentile_hdf)
+data_qtqx <- rbindlist(pblapply(1:hdf[["t"]]$dims[1], function(i) {
+  d <- data.table(
+    value = c(hdf[["t"]][i,,]),
+    lulc = c(data_qt[["lulc"]]),
+    distance = c(data_qt[["distance"]])
+  )[`%in%`(lulc, habitats)]
+  setnames(d, "value", h5attr(hdf[["t"]], "percentiles")[i])
+  d <- risk_analysis_percentiles(d, analysis_scales)
+}))
+hdf$close()
 saveRDS(data_qtqx, file.path(params$output, paste0(value_name, ".qtqx.raw.rds")))
 
 # Risk analysis table
