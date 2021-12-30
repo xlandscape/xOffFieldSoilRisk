@@ -9,14 +9,15 @@
       <Data>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\store</Data>
       <Output_Folder>$(_MCS_BASE_DIR_)\$(_MC_NAME_)\analysis</Output_Folder>
       <Dataset>DepositionToPecSoil/PecSoil</Dataset>
-      <Distance>LandscapeScenario/analysis_distance_groups</Distance>
+      <Distance>LandscapeScenario/analysis_distance_groups_values</Distance>
       <Extent>LandscapeScenario/Extent</Extent>
       <EPSG>LandscapeScenario/EPSG</EPSG>
       <Habitats>LandscapeScenario/habitat_types</Habitats>
-      <Lulc>LandscapeScenario/land_use_raster</Lulc>
+      <Lulc>LandscapeScenario/land_use_raster_values</Lulc>
       <RLibPath>./R-4.1.1/library</RLibPath>
       <RunOff>RunOffPrzm/Exposure</RunOff>
       <SprayDrift>SprayDrift/Exposure</SprayDrift>
+      <Elements>100000000</Elements>
     </Observer>
     <Observer module="observer" class="LogFileObserver">
       <LogFile>$(_EXP_BASE_DIR_)\$(SimID)\log\mc_$(_MC_NAME_).log</LogFile>
@@ -28,6 +29,7 @@
     <Observer>
       <ObserverReference/>
     </Observer>
+    <Initialization/>
   </Store>
   <Global>
     <SimulationStart>2006-01-01</SimulationStart>

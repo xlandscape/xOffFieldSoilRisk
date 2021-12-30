@@ -1,6 +1,12 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [10] - 2021-12-30
+### Added
+### Changed
+- Complete re-factory to reduce memory consumption for analysis of large scenarios
+### Fixed
+
 ## [9] - 2021-12-08
 ### Added
 ### Changed
