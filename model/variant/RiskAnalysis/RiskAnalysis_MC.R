@@ -325,16 +325,21 @@ animate <- function(rasters, output, ffmpeg) {
 coocurrence_spray_drift_run_off <- function(x3df, spraydrift, runoff) {
   cat("Cooccurence of spray-drift and run-off events\n")
   hdf5 <- h5file(paste0(x3df, "/arr.dat"), "r")
-  dataset <- hdf5[[spraydrift]]
-  events <- rbindlist(pblapply(1:dataset$dims[1], function(t) {
-    data.table(t, spraydrift = any(hdf5[[spraydrift]][t,,] > 0), runoff = any(hdf5[[runoff]][t,,] > 0))
-  }))
-  days_run_off_after_spray_drift <- outer(events[runoff == TRUE, t], events[spraydrift == TRUE, t], "-")
-  days_run_off_after_spray_drift[days_run_off_after_spray_drift < 0] <- Inf
-  quantiles <- quantile(colMins(days_run_off_after_spray_drift), seq(0, 1, .05))
-  result <- data.table(q = names(quantiles), days = quantiles)
-  h5close(hdf5)
-  result
+  if (existsGroup(hdf5, spraydrift) & existsGroup(hdf5, runoff)) {
+    dataset <- hdf5[[spraydrift]]
+    events <- rbindlist(pblapply(1:dataset$dims[1], function(t) {
+      data.table(t, spraydrift = any(hdf5[[spraydrift]][t,,] > 0), runoff = any(hdf5[[runoff]][t,,] > 0))
+    }))
+    days_run_off_after_spray_drift <- outer(events[runoff == TRUE, t], events[spraydrift == TRUE, t], "-")
+    days_run_off_after_spray_drift[days_run_off_after_spray_drift < 0] <- Inf
+    quantiles <- quantile(colMins(days_run_off_after_spray_drift), seq(0, 1, .05))
+    result <- data.table(q = names(quantiles), days = quantiles)
+    h5close(hdf5)
+    result
+  } else {
+    cat("...skipped as not both spray-drift and runoff exposure were simulated\n")
+    NULL
+  }
 }
 
 # Define script inputs
@@ -478,8 +483,8 @@ if (!is.null(params$ffmpeg)) {
 }
 
 # Cooccurence of spray-drift and run-off events
-if (!is.null(params$spraydrift) & !is.null(params$runoff)) {
-  result <- coocurrence_spray_drift_run_off(params$x3df, params$spraydrift, params$runoff)
+result <- coocurrence_spray_drift_run_off(params$x3df, params$spraydrift, params$runoff)
+if (!is.null(result)) {
   write_to_xlsx(list(
     info = c(
       "Workbook description",

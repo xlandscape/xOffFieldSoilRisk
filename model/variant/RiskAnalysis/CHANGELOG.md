@@ -1,6 +1,12 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [11] - 2021-12-30
+### Added
+### Changed
+### Fixed
+- Error when trying to analyze co-occurrence of spray-drift and runoff if not both were simulated
+
 ## [10] - 2021-12-30
 ### Added
 ### Changed
