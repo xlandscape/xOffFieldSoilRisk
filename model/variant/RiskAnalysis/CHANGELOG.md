@@ -1,6 +1,12 @@
 # CHANGELOG
 This list contains all additions, changes and fixes for the Risk Analysis R scripts.
 
+## [12] - 2022-01-04
+### Added
+### Changed
+### Fixed
+- Wrong percentile tables due to non-aligned geospatial data
+
 ## [11] - 2021-12-30
 ### Added
 ### Changed

@@ -406,8 +406,8 @@ hdf <- h5file(percentile_hdf)
 data_qtqx <- rbindlist(pblapply(1:hdf[["t"]]$dims[1], function(i) {
   d <- data.table(
     value = c(hdf[["t"]][i,,]),
-    lulc = c(data_qt[["lulc"]]),
-    distance = c(data_qt[["distance"]])
+    lulc = c(t(data_qt[["lulc"]])),
+    distance = c(t(data_qt[["distance"]]))
   )[`%in%`(lulc, habitats)]
   setnames(d, "value", h5attr(hdf[["t"]], "percentiles")[i])
   d <- risk_analysis_percentiles(d, analysis_scales)
