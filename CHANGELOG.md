@@ -1,6 +1,13 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.3.3] - 2022-01-05
+### Added
+### Changed
+- Updated Landscape Model core to version 1.12.3
+- Updated RunOffPrzm to version 2.1.0
+### Fixed
+
 ## [1.3.2] - 2022-01-04
 ### Added
 ### Changed
