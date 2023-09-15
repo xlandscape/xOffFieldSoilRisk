@@ -82,7 +82,7 @@ of Waterborne Environmental Inc., Marty Williams, Amy Ritter, Gerco Hoogeweg, J 
 
 ## Contact
 Thorsten Schad - thorsten.schad@bayer.com
-Sascha Bub - sascha.bub.ext@bayer.com
+Sascha Bub - sascha.bub@xlandscape.org
 
 
 ## Acknowledgements
