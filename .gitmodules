@@ -1,15 +1,15 @@
 [submodule "model/core"]
     path = model/core
-    url = https://github.com/xlandscape/LandscapeModel-Core.git
+    url = https://github.com/xlandscape/LandscapeModel-Core
 [submodule "scenario/schematic-100x100"]
     path = scenario/schematic-100x100
-    url = https://github.com/xlandscape/Scenario-Schematic100x100.git
+    url = https://github.com/xlandscape/Scenario-Schematic100x100
 [submodule "model/variant/AnalysisObserver"]
     path = model/variant/AnalysisObserver
-    url = https://github.com/xlandscape/Analysis-Observer.git
+    url = https://github.com/xlandscape/Analysis-Observer
 [submodule "model/variant/RunOffPrzm"]
     path = model/variant/RunOffPrzm
-    url = https://github.com/xlandscape/RunOffPrzm-Component.git
+    url = https://github.com/xlandscape/RunOffPrzm-Component
 [submodule "model/variant/XSprayDrift"]
     path = model/variant/XSprayDrift
     url = https://github.com/xlandscape/XSprayDrift-Component

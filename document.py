@@ -8,5 +8,5 @@ base.documentation.document_variant(
     os.path.join(root_folder, "..", "variant", "variant_readme_template.md"),
     os.path.join(root_folder, "..", "..", "README.md"),
     "xOffFieldSoilRisk",
-    "https://gitlab.bayer.com/aqrisk-landscape/xofffieldsoilrisk"
+    "https://github.com/xlandscape/xOffFieldSoilRisk"
 )

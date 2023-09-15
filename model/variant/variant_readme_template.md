@@ -53,7 +53,8 @@ $(installation_notes)
 
 ## Usage
 1. Open the `template.xrun` in any text editor and modify the parameters for the simulation to your needs. The 
-   `template.xrun` contains in-line documentation to assist you in deciding for valid parameter values.
+   `template.xrun` contains in-line documentation to assist you in deciding for valid parameter values. **Please check
+   especially that the parameter** `<RunOffTempDir>` **points to an existing directory**.
 2. Save the modified `template.xrun` under a different name in the same directory, using a `.xrun` extension.
 3. Drag and drop the saved parameterization file onto the `__start__.bat`.
 4. Check the console window occasionally for successful conclusion of the simulation or for errors. Logfiles can be
@@ -82,7 +83,7 @@ of Waterborne Environmental Inc., Marty Williams, Amy Ritter, Gerco Hoogeweg, J 
 
 ## Contact
 Thorsten Schad - thorsten.schad@bayer.com
-Sascha Bub - sascha.bub.ext@bayer.com
+Sascha Bub - sascha.bub@xlandscape.org
 
 
 ## Acknowledgements
