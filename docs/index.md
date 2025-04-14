@@ -1,49 +1,36 @@
-# Welcome to xBeeForage
+# Welcome to xOffFieldSoilRisk
 
-Welcome to the xBeeForage (xBF) documentation. This documentation provides an **introduction** and will walk new users through **how to get started** with the xBeeForage landscape model, including explanations for **sample scenarios** and their use with the [BEEHAVE model](https://beehave-model.net/).
+Welcome to the xOffFieldSoilRisk (xSR) documentation. This documentation provides an **introduction** and will walk new users through **how to get started** with the xOffFieldSoilRisk landscape model, including explanations for **sample scenarios** and their use.
+
+## Publication (Open Access)
+
+Please find an introduction to the topic here: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
 
 ## Background
 
-Today, scientific models make a great contribution to understanding and predicting the consequences of how we cultivate the landscapes we are living in. Based on present knowledge and together with data, models have become a key instrument in decision making.  
-An important field is the risk assessment and management of pesticides. In Europe (and other countries), this includes an assessment of pollinator risk, in particular, for the honey bee [EFSA Bee Guidance](https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2021.6607). The risk assessment includes the use of models (eg,  [BEEHAVE model](https://beehave-model.net/), [ApisRAM](https://www.efsa.europa.eu/en/supporting/pub/en-9293) which require landscape scenarios for their operation. Key information of such scenarios is the occurrence of pollinator forage, i.e., the occurrence of nectar and pollen. This is where xBF comes in.  
-xBeeForage is a landscape model to simulate bee forage occurrence (basically nectar and pollen) in cultivated landscapes in space and time. It's outcome can be directly used as input scenarios for bee (pollinator) models. It's modular and tiered design allows to basically use any land use/cover data together with forage information as input, depending on the model application purpose,  scales and certainty.  
-
-Beyond this specific purpose, the conceptual basis, approaches as well as the landscape model xBF can be employed in a range of related research and applied topics, eg,  
-
-- **landscape design and management, biodiversity enhancements**
-- **Holistic view to risk**, multiple stressors analysis, systems-based approach, [EFSA, Bee Guidance](https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2021.6607))  
-- Risk Assessment **Recovery Option** ([EFSA, Aquatic Guidance](https://www.efsa.europa.eu/en/efsajournal/pub/3290)) 
-- **Environmental Impact Reduction** (EIR), eg, *what if* analysis, assessment and documentation of real-world EIR by new plantprotection products and digital environmental safety solutions  
-- **Insect decline analysis**: habitat conditions    
-- **Monitoring** (design, insights, transfer of results to other regions and times)  
-- Solutions for **Integrated Pest Management**: improved integration of the use of chemicals and agricultural practices to reduce environmental impact, comparison of pest control options (eg, weed control)  
-- **Specific Protection Goals**: identification of driving factors of populations dynamics for targeted chemical risk assessment endpoints and schemes  
-- ***Ecosystem Services*** ([Millennium Ecosystem Assessment](https://www.millenniumassessment.org/en/index.aspx)): improvend quantitative insights into real-world *Ecosystem Services* for more explicit and transparent cost/benefit risk management. The work on the future of sustainable and regenerative agriculture **requires improved operational instruments** which allow to better understand real-world implications.  
+The authorization process of plant protection products (PPPs) includes comprehensive regulatory risk assessment (RA) for nontarget species, including soil organisms. The European Food Safety Authority (EFSA) has released a scientific opinion on [“addressing the state of the science on RA of PPPs for in-soil organisms” (EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690), in which spray-drift depositions and runoff are identified as the most relevant potential exposure routes of off-field soil organisms, whereby the term “off-field” refers to areas outside the agricultural field boundaries, that is, essentially to (semi-) natural areas present in cultivated landscapes. The EFSA PPR Panel (2017) outlined a first approach to estimate off-field soil exposure. The conservative character of the approach and the necessity for model and scenario development are indicated in EFSA PPR Panel (2017): “In the absence of appropriate off-field exposure scenarios… Since such models are not yet available for regulatory purposes at the European level, the simplifying assumption is made that the individual exposure routes can be assessed separately. Results of the different entry routes should then be summed, which is a conservative assumption because it neglects the different dynamic behavior of the processes.”  
+With this background, the aims for the present work are to develop a model approach to appropriately combine off-field soil exposure due to runoff and drift and to develop scenarios based on real-world conditions.  
   
 ## Intro
 
-xBeeForage is a landscape model to simulate **pollinator forage occurrence** (basically nectar and pollen) in cultivated landscapes in space and time, i.e. xBF operates spatiotemporally explicit. Its conceptual basis is [**generic**](#concepts), whereas initial bee forage parameterisations and scenarios focus on the **honey bee**.  
-xBF is based on the **modular landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape).
-  
-Forage supply in the landscape largely determines honey bee activity and so the development of honey bee hives as well as of wild bee colonies. Correspondingly, the spatial and temporal occurrences of forage are essential information to model bee colony development (eg, using [BEEHAVE model](https://beehave-model.net/) or [ApisRAM](https://www.efsa.europa.eu/en/supporting/pub/en-9293)). This in turn, builds the basis for modelling exposure and effects of honey bees due to contact to pesticides.  
-Bee forage is generally composed of nectar and pollen (as well as honeydew provided by insects mostly origin from trees). In cultivated landscapes, nectar and pollen are provided by a variety of crops, natural and semi-natural vegetation, with a correspondingly spatial and temporal variability of intensities and quality attributes (eg, sugar type, content, protein content, etc.).  
+xOffFieldSoilRisk is a landscape model to simulate 
 The entire process of modelling beeforage is of [modular design](#modular-design).  
 
 ## Concepts
 
 ### Framework Characteristics
 
-xBF can be seen as a ready-to-use model, eg, to generate scenarios for the [BEEHAVE model](https://beehave-model.net/), for regions of pre-prepared geoinformation (see [Scenarios](#scenarios)).  
-However, in order to enable its use for a range of purposes of modelling pollinator forage ([Background](#background)), for a range of foraging species and basically for any geographic region and scale, xBF was build to be open for any data inputs and sub-models. Eg, in case a bee forage modeller has data and models to simulate the occurrence of honeydew producers, this can be included in the xBF landscape model as a new component. So, besides its [modular](#modular-design) characteristic, you can also look at xBF from a **framework perspective**.
+xSR can be seen as a ready-to-use model, eg, to generate scenarios for the [BEEHAVE model](https://beehave-model.net/), for regions of pre-prepared geoinformation (see [Scenarios](#scenarios)).  
+However, in order to enable its use for a range of purposes of modelling pollinator forage ([Background](#background)), for a range of foraging species and basically for any geographic region and scale, xSR was build to be open for any data inputs and sub-models. Eg, in case a bee forage modeller has data and models to simulate the occurrence of honeydew producers, this can be included in the xSR landscape model as a new component. So, besides its [modular](#modular-design) characteristic, you can also look at xSR from a **framework perspective**.
 
 ### Modular Design
 
 Modelling the occurrence of bee forage in landscapes requires a **range of disciplines, information types and sub-models**. Nectar and pollen are produced by **flowering vegetation**, so vegetation type, plant species, their phenology and their specific nectar and pollen production (quantity, quality) is key data and information. Vegetation phenology depends on **environmental conditions**. Besides vegetation, bee forage does also occur as **honeydew**, which is produced by different insects (eg, Aphids probably the most well-known honeydew producers and often excrete large quantities, but also scale insects (Coccoidea), leafhoppers (Cicadellidae and others), Adelgids (Adelgidae), plant bugs (Heteroptera), whiteflies (Aleyrodidae), or mealybugs (Pseudococcidae)).  
-Accordingly, for modelling pollinator forage at landscape scales, **fundamental building blocks (elements, modules)** were identified and implemented as separate components in xBF. An illustration is shown in the figure below.  
+Accordingly, for modelling pollinator forage at landscape scales, **fundamental building blocks (elements, modules)** were identified and implemented as separate components in xSR. An illustration is shown in the figure below.  
 
-<img src="img/BeeForage modelling process with Beehave scenario.png" alt="xBeeForage modular design" width="1000"/>  
+<img src="img/BeeForage modelling process with Beehave scenario.png" alt="xOffFieldSoilRisk modular design" width="1000"/>  
 
-Distinct steps in bee forage modelling which define xBF components (building blocks/elements/modules).
+Distinct steps in bee forage modelling which define xSR components (building blocks/elements/modules).
 
 Key modules are:
 
@@ -54,25 +41,25 @@ Key modules are:
 
 A layered view to bee forage modelling adds to the illustration of the successive steps to deliver the ultimate bee forage information.  
 
-<img src="img/BeeFOrage-Vegetation-Data layering.png" alt="xBeeForage modular design" width="700"/>  
+<img src="img/BeeFOrage-Vegetation-Data layering.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
 
 Distinct data and information layers to derive bee forage (in space and time). (* *Sources* represent the occurrence of eg, honeydew producers)
 
 This modularity enables to basically use any type of data, information and sub-models which are approriate to a specific bee (pollinator) forage modelling purpose. Example data inputs and parameterisations are introduced in the [Scenario](#scenarios) section.
 
-#### xBeeForage Landscape Model
+#### xOffFieldSoilRisk Landscape Model
 
-The modular landscape model to for spatiotemporally explicit simulation of bee (pollinator) forage, xBeeForage (xBF), was built using the **landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to a landscape models, that operates spatiotemporally explicit.  
+The modular landscape model to for spatiotemporally explicit simulation of bee (pollinator) forage, xOffFieldSoilRisk (xSR), was built using the **landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to a landscape models, that operates spatiotemporally explicit.  
 The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
-Adding components adds functionality. For xBF, a version exists that comprises the use of pesticides (PPPs) and the environmental exposure (figure below). Again, each exposure route and process is represented by a specific component (which can be replaced to manage model complexity).  
+Adding components adds functionality. For xSR, a version exists that comprises the use of pesticides (PPPs) and the environmental exposure (figure below). Again, each exposure route and process is represented by a specific component (which can be replaced to manage model complexity).  
 
-<img src="img/xBF.png" alt="xBeeForage modular design" width="700"/>  
+<img src="img/xSR.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
 
-Composition of the xBeeForage landscape model (v0.9). Its components are introduced in subsections below.
+Composition of the xOffFieldSoilRisk landscape model (v0.9). Its components are introduced in subsections below.
 
-<img src="img/xBF & exposure and effects.png" alt="xBeeForage modular design" width="700"/>  
+<img src="img/xSR & exposure and effects.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
 
-Composition of the xBeeForage landscape model (v0.9) including components to model PPP use and environmental exposure.
+Composition of the xOffFieldSoilRisk landscape model (v0.9) including components to model PPP use and environmental exposure.
 
 #### BeeForage Component
 
@@ -82,11 +69,11 @@ The current version (v0.9) uses spatial data on vegetation types (units) and the
 1. Assigning nectar and pollen production intensity classes (0-4) to vegetation type (by time).  
 1. Assigning nectar and pollen production quantities to intensity classes.  
 
-<img src="img/Vegetation-Phenology illustration.png" alt="xBeeForage modular design" width="700"/>  
+<img src="img/Vegetation-Phenology illustration.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
 
 Lookup table to assign nectar and pollen production intensity classes (0-4) to vegetation type (by time).
 
-<img src="img/Nectar-Pollen quantification.png" alt="xBeeForage modular design" width="1000"/>  
+<img src="img/Nectar-Pollen quantification.png" alt="xOffFieldSoilRisk modular design" width="1000"/>  
 
 Lookup table to assign nectar and pollen production quantities to intensity classes.
 
@@ -124,19 +111,19 @@ xxx Depending on the purpose of bee (pollinator) forage modelling,
 1. contemporary data generation: high-resolution drone mapping
 1. field study: best possible landscape mapping, bee forage quantification and modelling
 
-### xBF Simulation xxx: move to 'get started'
+### xSR Simulation xxx: move to 'get started'
 
-On each time step (eg, day) and field in a simulation, xBF checks if there are products to apply. If so, exact application details are determined based on model parameterisation (eg, deterministic or by sampling from  from distributions given by the user) and executed.  
+On each time step (eg, day) and field in a simulation, xSR checks if there are products to apply. If so, exact application details are determined based on model parameterisation (eg, deterministic or by sampling from  from distributions given by the user) and executed.  
 
 
-## xBeeForage Landscape Model
+## xOffFieldSoilRisk Landscape Model
 
 ## Scenarios
 
 ## Application
 
 ## Acknowledgements
-The need and the development of the xBF landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
+The need and the development of the xSR landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
 
 <img src="img/Contributions.png" alt="Contributors and Roles" width="800"/> xxx
 
