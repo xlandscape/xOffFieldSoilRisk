@@ -4,19 +4,40 @@ Welcome to the xOffFieldSoilRisk (xSR) documentation. This documentation provide
 
 ## Publication (Open Access)
 
-Please find an introduction to the topic here: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
+An introduction to the topic is given in an open access publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
+The xOffFieldSoilRisk approach has been presented at different scientific conferences: xxx. (xxx include pdfs of the presentations.) 
 
 ## Background
 
-The authorization process of plant protection products (PPPs) includes comprehensive regulatory risk assessment (RA) for nontarget species, including soil organisms. The European Food Safety Authority (EFSA) has released a scientific opinion on [“addressing the state of the science on RA of PPPs for in-soil organisms” (EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690), in which spray-drift depositions and runoff are identified as the most relevant potential exposure routes of off-field soil organisms, whereby the term “off-field” refers to areas outside the agricultural field boundaries, that is, essentially to (semi-) natural areas present in cultivated landscapes. The EFSA PPR Panel (2017) outlined a first approach to estimate off-field soil exposure. The conservative character of the approach and the necessity for model and scenario development are indicated in EFSA PPR Panel (2017): “In the absence of appropriate off-field exposure scenarios… Since such models are not yet available for regulatory purposes at the European level, the simplifying assumption is made that the individual exposure routes can be assessed separately. Results of the different entry routes should then be summed, which is a conservative assumption because it neglects the different dynamic behavior of the processes.”  
-With this background, the aims for the present work are to develop a model approach to appropriately combine off-field soil exposure due to runoff and drift and to develop scenarios based on real-world conditions.  
-  
-## Intro
+The authorization process of plant protection products (PPPs) includes comprehensive regulatory risk assessment (RA) for nontarget species, including soil organisms. The European Food Safety Authority (EFSA) has released a scientific opinion on [“addressing the state of the science on RA of PPPs for in-soil organisms” (EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690), in which spray-drift depositions and runoff are identified as the most relevant potential exposure routes of off-field soil organisms, whereby the term “off-field” refers to areas outside the agricultural field boundaries, that is, essentially to (semi-) natural areas present in cultivated landscapes.  
 
-xOffFieldSoilRisk is a landscape model to simulate 
-The entire process of modelling beeforage is of [modular design](#modular-design).  
+<img src="img/off-field-soil definition.png" alt="Illustration of Off-Field-Soil definition" width="700"/>  
+
+Illustration of Off-Field-Soil definition  
+
+The EFSA PPR Panel (2017) outlined a first approach to estimate off-field soil exposure. The conservative character of the approach and the necessity for model and scenario development are indicated in EFSA PPR Panel (2017): “In the absence of appropriate off-field exposure scenarios… Since such models are not yet available for regulatory purposes at the European level, the simplifying assumption is made that the individual exposure routes can be assessed separately. Results of the different entry routes should then be summed, which is a conservative assumption because it neglects the different dynamic behavior of the processes.”  
+
+## Introduction
+
+With the background above, the aims for the present work are to **develop a model approach to appropriately combine off-field soil exposure due to runoff and drift** and to develop example **scenarios** based on real-world conditions.  
+xOffFieldSoilRisk is built on the basis of the [**xLandscape**](xLandscape/xLandscape-intro.md#xlandscape) **framework**. xLandscape provides a modular approach to develop landscape models which operate spatiotemporally explicit. xLandscape is open source.  
+In its initial version, xOffFieldSoil has been composed using exposure models which are established in the regulatory scientific exposure assessment of pesticides in Europe (eg, [FOCUSsw](https://esdac.jrc.ec.europa.eu/projects/focus-dg-sante)). However, these models are not open sources and come with limitations for their spatiotemporally explicit operation with a large number of local conditions as typical at landscape-level. Thus, future versions of xOffFieldSoilRisk are intended to consider exposure modules adapted for landscape-level application.  
 
 ## Concepts
+
+### Model Deliverables
+
+Essentially, xOffFieldSoilRisk model outcome is intended to directly address [Specific Protection Goals](https://www.efsa.europa.eu/en/efsajournal/pub/1821).    
+
+aggregation levels
+
+## xOffFieldSoilRisk Model
+
+ FIGURE 2 xOffFieldSoil model scheme. The model is composed of components (boxes in the central panel, e.g., xDrift; Bub et al., 2020). Components provide
+ major model functionality (e.g., spray‐drift or runoff exposure calculation) and are built by wrapping existing models (e.g., PRZM) or by developing new ones
+ (e.g., “RunoffFilter1”). The implementation of xOffFieldSoil is based on a generic modular landscape modeling framework (Schad, 2013). The light gray boxes
+ represent xOffFieldSoil components that were not used in the case study, although they do exist or are under development (full scheme in Supporting
+ Information: Figure S1, https://github.com/xlandscape/xOffFieldSoilRisk). Preparation and analysis panels contain tools, for example, for data preparation and risk analysis of model outcome (Supporting Information: Table S1) and operate closely with the framework, yet are not part of the core xOffFieldSoil model. PRZM, Pesticide Root Zone Model
 
 ### Framework Characteristics
 
@@ -28,7 +49,6 @@ However, in order to enable its use for a range of purposes of modelling pollina
 Modelling the occurrence of bee forage in landscapes requires a **range of disciplines, information types and sub-models**. Nectar and pollen are produced by **flowering vegetation**, so vegetation type, plant species, their phenology and their specific nectar and pollen production (quantity, quality) is key data and information. Vegetation phenology depends on **environmental conditions**. Besides vegetation, bee forage does also occur as **honeydew**, which is produced by different insects (eg, Aphids probably the most well-known honeydew producers and often excrete large quantities, but also scale insects (Coccoidea), leafhoppers (Cicadellidae and others), Adelgids (Adelgidae), plant bugs (Heteroptera), whiteflies (Aleyrodidae), or mealybugs (Pseudococcidae)).  
 Accordingly, for modelling pollinator forage at landscape scales, **fundamental building blocks (elements, modules)** were identified and implemented as separate components in xSR. An illustration is shown in the figure below.  
 
-<img src="img/BeeForage modelling process with Beehave scenario.png" alt="xOffFieldSoilRisk modular design" width="1000"/>  
 
 Distinct steps in bee forage modelling which define xSR components (building blocks/elements/modules).
 
@@ -41,13 +61,12 @@ Key modules are:
 
 A layered view to bee forage modelling adds to the illustration of the successive steps to deliver the ultimate bee forage information.  
 
-<img src="img/BeeFOrage-Vegetation-Data layering.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
-
 Distinct data and information layers to derive bee forage (in space and time). (* *Sources* represent the occurrence of eg, honeydew producers)
 
 This modularity enables to basically use any type of data, information and sub-models which are approriate to a specific bee (pollinator) forage modelling purpose. Example data inputs and parameterisations are introduced in the [Scenario](#scenarios) section.
 
-#### xOffFieldSoilRisk Landscape Model
+
+### xOffFieldSoilRisk Landscape Model
 
 The modular landscape model to for spatiotemporally explicit simulation of bee (pollinator) forage, xOffFieldSoilRisk (xSR), was built using the **landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to a landscape models, that operates spatiotemporally explicit.  
 The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
@@ -61,44 +80,7 @@ Composition of the xOffFieldSoilRisk landscape model (v0.9). Its components are 
 
 Composition of the xOffFieldSoilRisk landscape model (v0.9) including components to model PPP use and environmental exposure.
 
-#### BeeForage Component
-
-The BeeForage component models the occurrence of nectar and pollen in space and time. The outcome is stored in a multidimensional data store.  
-The current version (v0.9) uses spatial data on vegetation types (units) and their phenology as base input, together with information on nectar and pollen production by these vegetation types. The core functionality of the BeeForage component is to match (model) nectar and pollen production for each of these vegetation types. In the current version, this is done by a simple lookup tables (with a honey bee focus):  
-
-1. Assigning nectar and pollen production intensity classes (0-4) to vegetation type (by time).  
-1. Assigning nectar and pollen production quantities to intensity classes.  
-
-<img src="img/Vegetation-Phenology illustration.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
-
-Lookup table to assign nectar and pollen production intensity classes (0-4) to vegetation type (by time).
-
-<img src="img/Nectar-Pollen quantification.png" alt="xOffFieldSoilRisk modular design" width="1000"/>  
-
-Lookup table to assign nectar and pollen production quantities to intensity classes.
-
-Both lookup tables are based on literature and expert judgement (xxx).  
-
-This initial realisation of the BeeForage-Component can be enhanced and replaced by more sophisticated bee forage modelling, eg, using data-driven/AI or mechanistic models, together with corresponding geoinformation on the underlying vegetation.  
-The BeeForage-Component can also be extended to model the occurrence of honeydew, again, if corresponding models, knowledge and data are available (and fit to each other).  
-
-#### Vegetation
-
-In our representation of vegetation (and its phenology), instead of employing an of-the-shelf land use/cover (LULC) dataset, we compose bee forage-providing land use/land cover elements from different sources. This composition is driven by the study purpose and related requirements (eg, level of detail, precision, certainty, scales), data availability, and given ressources. Eg, 
-
-- a LULC base layer (eg, topographic geodata) is used to identify general LULC types (eg, arable, forest, orchards, grasslands, gardens, ruderal) and more bee forage specific types if possible (eg, apple, decidious woods, arable crop types)  
-- Specific bee forage providing crop types are identified from satellite imagery (eg, oil seed rape)  
-- Likewise, grassland characterisation can be done using satellite imagery based approaches (eg, hayfield, natural, intense sillage)  
-- Further bee forage relevant vegetation can be constructed from LULC base layers and literature (eg, riparian, wood margins)  
-- High-resolution landscape elements can be added from mapping (eg, hedges, groups of bee forage relevant trees, etc.) 
-
-The user defines PPP uses in a ***Crop Protection Calender***, including application technology, and mitigation measures for reducing exposure (risk). The approach of using a *Crop Protection Calender* is based on agricultural practice, where pest control measures for a crop are typically planned based on experiance, PPP availability and other factors. Crop protection plans are made eg, by official plant protection advisory services, farmers, or PPP producers. Besides reflecting ag practice, the approach of a CPC also addresses modelling practice in risk assessment which typically focus on a certain indication, conducted over long time periods. Beyond these established uses, alternative CPCs can be used to assess the environmental impact of alternative pest control options, or to design new pest control means against established ones, considered as baselines.  
-
-#### LULC
-
-Land use/cover data provides typically builds the spatial base information on 
-
-Vegetation mapping and modelling. [European Vegetation Archive (EVA)](https://euroveg.org/eva-database/)
+#### Runoff Component
 
 #### Environmental Data
 
@@ -123,14 +105,12 @@ On each time step (eg, day) and field in a simulation, xSR checks if there are p
 ## Application
 
 ## Acknowledgements
-The need and the development of the xSR landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
+The development of the xSR landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
 
 <img src="img/Contributions.png" alt="Contributors and Roles" width="800"/> xxx
 
 ## References
-EFSA Guidance  
-BioDT
 
-[EFSA Bee Guidance](https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2021.6607)  
-Pritsch
-Westrich Die Wildbienen Deutschlands
+EFSA Guidance  
+
+(EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690)
