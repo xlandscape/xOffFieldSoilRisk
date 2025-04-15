@@ -41,27 +41,18 @@ aggregation levels
 
 ### Framework Characteristics
 
-xSR can be seen as a ready-to-use model, eg, to generate scenarios for the [BEEHAVE model](https://beehave-model.net/), for regions of pre-prepared geoinformation (see [Scenarios](#scenarios)).  
-However, in order to enable its use for a range of purposes of modelling pollinator forage ([Background](#background)), for a range of foraging species and basically for any geographic region and scale, xSR was build to be open for any data inputs and sub-models. Eg, in case a bee forage modeller has data and models to simulate the occurrence of honeydew producers, this can be included in the xSR landscape model as a new component. So, besides its [modular](#modular-design) characteristic, you can also look at xSR from a **framework perspective**.
+xSR can be seen as a ready-to-use model to calculated exposure (and effects) of off-field-soil organisms for regions of pre-prepared geoinformation (see [Scenarios](#scenarios)).  
+However, in order to enable its use for a range of purposes of modelling xxx[modular](#modular-design) characteristic, you can also look at xSR from a **framework perspective**.
 
 ### Modular Design
 
-Modelling the occurrence of bee forage in landscapes requires a **range of disciplines, information types and sub-models**. Nectar and pollen are produced by **flowering vegetation**, so vegetation type, plant species, their phenology and their specific nectar and pollen production (quantity, quality) is key data and information. Vegetation phenology depends on **environmental conditions**. Besides vegetation, bee forage does also occur as **honeydew**, which is produced by different insects (eg, Aphids probably the most well-known honeydew producers and often excrete large quantities, but also scale insects (Coccoidea), leafhoppers (Cicadellidae and others), Adelgids (Adelgidae), plant bugs (Heteroptera), whiteflies (Aleyrodidae), or mealybugs (Pseudococcidae)).  
-Accordingly, for modelling pollinator forage at landscape scales, **fundamental building blocks (elements, modules)** were identified and implemented as separate components in xSR. An illustration is shown in the figure below.  
+Modelling the exposure (and effects) of off-field-soil organisms in landscapes requires a **range of disciplines, information types and sub-models**. xxx  
+Accordingly, **fundamental building blocks (elements, modules)** were identified and implemented as separate components in xSR. An illustration is shown in the figure below.  
 
-
-Distinct steps in bee forage modelling which define xSR components (building blocks/elements/modules).
 
 Key modules are:
 
-- **Land use/land cover** (LULC) information: an assembly of spatial data that represents essential LULC types that provide bee forage. The geodata layer is composed of any data that the modeller seems relevant and that can be acquired or generated at reasonable efforts, targeting the goals of the bee forage modelling work (study).
-- **Vegetation and its phenology** (incl. honeydew producers): the module to translate LULC types to vegetation types and their phenology.
-- **Bee forage modelling**: the module to generate beeforage(space, time, type).
-- Parser: technical preparation of raw outcome as needed by the scenario clients (eg, the [BEEHAVE model](https://beehave-model.net/)).
-
-A layered view to bee forage modelling adds to the illustration of the successive steps to deliver the ultimate bee forage information.  
-
-Distinct data and information layers to derive bee forage (in space and time). (* *Sources* represent the occurrence of eg, honeydew producers)
+- **Land use/land cover** (LULC) information: 
 
 This modularity enables to basically use any type of data, information and sub-models which are approriate to a specific bee (pollinator) forage modelling purpose. Example data inputs and parameterisations are introduced in the [Scenario](#scenarios) section.
 
@@ -72,11 +63,7 @@ The modular landscape model to for spatiotemporally explicit simulation of bee (
 The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
 Adding components adds functionality. For xSR, a version exists that comprises the use of pesticides (PPPs) and the environmental exposure (figure below). Again, each exposure route and process is represented by a specific component (which can be replaced to manage model complexity).  
 
-<img src="img/xSR.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
-
-Composition of the xOffFieldSoilRisk landscape model (v0.9). Its components are introduced in subsections below.
-
-<img src="img/xSR & exposure and effects.png" alt="xOffFieldSoilRisk modular design" width="700"/>  
+<img src="img/xOffFieldSoilRisk model.png" alt="xOffFieldSoilRisk" width="700"/>  
 
 Composition of the xOffFieldSoilRisk landscape model (v0.9) including components to model PPP use and environmental exposure.
 
@@ -97,9 +84,6 @@ xxx Depending on the purpose of bee (pollinator) forage modelling,
 
 On each time step (eg, day) and field in a simulation, xSR checks if there are products to apply. If so, exact application details are determined based on model parameterisation (eg, deterministic or by sampling from  from distributions given by the user) and executed.  
 
-
-## xOffFieldSoilRisk Landscape Model
-
 ## Scenarios
 
 ## Application
@@ -107,10 +91,19 @@ On each time step (eg, day) and field in a simulation, xSR checks if there are p
 ## Acknowledgements
 The development of the xSR landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
 
-<img src="img/Contributions.png" alt="Contributors and Roles" width="800"/> xxx
+| Role / Activity   | Person      |
+|-------|----------|
+| Idea and Initiative | Thorsten Schad (Bayer)  |
+| Demand discussion   | Gregor Ernst, Thomas Preuss, Thorsten Schad (all Bayer)  | 
+| Goals and Requirements   | Thorsten Schad, Sascha Bub (RPTU)  | 
+| Design   | Thorsten Schad, Sascha Bub  | 
+| Implementation   | xOffFieldSoilRisk model: Sascha Bub, Thorsten Schad. Runoff-Component: Joachim Kleinmann and Magnus Wang, accompanied by Sascha Bub and Thorsten Schad. Analysis: Sascha Bub, Claire Holmes (AAS), Thorsten Schad  | 
+| Testing   | Thorsten Schad, Theo Schad (Bayer Intern), Sascha Bub, Chris Holmes (AAS)  | 
+| Scenarios   | Thorsten Schad, Sascha Bub  | 
+| Publication   | see 'Author Contribution' in  [IEAM 4798](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798) and section [Publication](#publication-open-access) above| 
+
+xxx anyone missing?
 
 ## References
 
-EFSA Guidance  
-
-(EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690)
+[(EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690)
