@@ -13,3 +13,6 @@
 [submodule "model/variant/XSprayDrift"]
     path = model/variant/XSprayDrift
     url = https://github.com/xlandscape/XSprayDrift-Component
+[submodule "docs/xLandscape"]
+	path = docs/xLandscape
+	url = https://github.com/xlandscape/xLandscape-Documentation
