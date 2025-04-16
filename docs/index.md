@@ -1,4 +1,5 @@
 # Welcome to xOffFieldSoilRisk
+asdf jklö
 
 Welcome to the xOffFieldSoilRisk (xOSR) documentation. This documentation provides an **introduction** and will walk new users through **how to get started** with the xOffFieldSoilRisk landscape model, including explanations for **sample scenarios** and their use.
 
@@ -27,7 +28,7 @@ In its initial version, xOffFieldSoil has been composed using exposure models wh
 
 ### Model Outcome for Risk Assessments
 
-Essentially, **xOffFieldSoilRisk model outcome is intended to be directly used in off-field-soil RAs**. Correspondingly, raw spatiotemporally explicit model outcome needs to be
+Basically, **xOffFieldSoilRisk model outcome is intended to be directly used in off-field-soil RAs**. Correspondingly, raw spatiotemporally explicit model outcome needs to be 
 
 1. aggregated to ready-to-use exposure endpoints for established RA tiers, or
 1. directly fed into effect models (eg, TKTD, Folsomia, Earthworms, xxx).
