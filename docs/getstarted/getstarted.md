@@ -122,6 +122,10 @@ To start xBeeForage using the sample scenario, **drag *template.xrun* onto *__st
 !!! note  
     **SimIDs need to be unique**. xBeeForage will create a folder for each run using the SimID defined in *template.xrun*. The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this folder first.
 
+### xOSR Simulation
+
+On each time step (eg, day) and field in a simulation, xOSR checks if there are products to apply. If so, exact application details are determined based on model parameterisation (eg, deterministic or by sampling from  from distributions given by the user) and executed.  
+
 ## Viewing and analyzing the output
 
 ### HDFView  
