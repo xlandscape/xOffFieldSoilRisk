@@ -26,21 +26,13 @@ In its initial version, xOffFieldSoil has been composed using exposure models wh
 
 ## Concepts
 
-### Model Outcome for Risk Assessments
+### xOSR Outcome for Risk Assessments (v0.1)
 
-Basically, **xOffFieldSoilRisk model outcome is intended to be directly used in off-field-soil RAs**. Correspondingly, raw spatiotemporally explicit model outcome needs to be 
+Basically, **xOffFieldSoilRisk model outcome is intended to be directly used in off-field-soil RAs**. To this end, **exposure endpoints** need to be developed (defined) that fit into current RA schemes, in particular to lower-tier TER (Toxicity Exposure Ratio) and RQ (Risk Quotion) based approaches. This means that **raw spatiotemporally explicit model outcome needs to be aggregated into ready-to-use exposure values**. To keep this process transparent, we propose a stepwise approach, including visualisations, to enable an understanding of the level of conservatism of aggregated exposure values. Therefore, at the present pioneer stage, this process is implemented as **Jupyter Notebooks** (for examples, please see section [Publication](#publication-open-access)). The analysis steps can be executed manually (and adapted) using the Jupyter Notebooks, or can be conducted automatically at the end of an xOSR model run (as XOSR component).  
 
-1. aggregated to ready-to-use exposure endpoints for established RA tiers, or
-1. directly fed into effect models (eg, TKTD, Folsomia, Earthworms, xxx).
+A second option to use xOSR model output is to **link xOSR directly with effect models** (eg, TKTD, Folsomia, Eisenia, [Earthworms](https://doi.org/10.1002/ieam.4338)). These effect models will be implemented as components (moduls) in xOSR and will deliver RA endpoints at the level of defined SPGs ([Specific Protection Goals](https://www.efsa.europa.eu/en/efsajournal/pub/1821), [EFSA PPR Panel 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690)), eg, on species population level.  Although at scientific level the necessary bits and pieces are ready, the establishment of landscape-level SPG endpoints in regulatory RA and risk management studies seems to need further [development](#xosr-use-for-regulatory-researchdevelopment).  
 
-In its initial use, xOSR is intended (1)  
-stepwise aggregated  , understanding the oucome is important  
-Python code, implemented as Jupyter notebooks. 
-address [Specific Protection Goals](https://www.efsa.europa.eu/en/efsajournal/pub/1821).    
-
-aggregation levels
-
-### Model Use for Research&Development
+### xOSR Use for Regulatory Research&Development
 
 Even in the context regulatory risk assessment and risk management of pesticides, a range of research questions and implementation needs are open. context xxx more realism, holistic view to risk, risk mitigation and management
 Explicit landscape modelling using real-world data can significantly contribute to required developments.  
