@@ -1,5 +1,4 @@
 # Welcome to xOffFieldSoilRisk
-asdf jklö
 
 Welcome to the xOffFieldSoilRisk (xOSR) documentation. This documentation provides an **introduction** and will walk new users through **how to get started** with the xOffFieldSoilRisk landscape model, including explanations for **sample scenarios** and their use.
 
@@ -24,26 +23,38 @@ With the background above, the aims for the present work are to **develop a mode
 xOffFieldSoilRisk is built on the basis of the [**xLandscape**](xLandscape/xLandscape-intro.md#xlandscape) **framework**. xLandscape provides a modular approach to develop landscape models which operate spatiotemporally explicit. xLandscape is open source.  
 In its initial version, xOffFieldSoil has been composed using exposure models which are established in the regulatory scientific exposure assessment of pesticides in Europe (eg, [FOCUSsw](https://esdac.jrc.ec.europa.eu/projects/focus-dg-sante)). However, these models are not open sources and come with limitations for their spatiotemporally explicit operation with a large number of local conditions as typical at landscape-level. Thus, future versions of xOffFieldSoilRisk are intended to consider exposure modules adapted for landscape-level application.  
 
-## Concepts
+## Concepts (v0.1)
 
-### xOSR Outcome for Risk Assessments (v0.1)
+### xLandscape Framework 
+
+xOSR was built using the **modular landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to landscape models which operate spatiotemporally explicit. The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
+
+### xOSR Outcome for Risk Assessments
 
 Basically, **xOffFieldSoilRisk model outcome is intended to be directly used in off-field-soil RAs**. To this end, **exposure endpoints** need to be developed (defined) that fit into current RA schemes, in particular to lower-tier TER (Toxicity Exposure Ratio) and RQ (Risk Quotion) based approaches. This means that **raw spatiotemporally explicit model outcome needs to be aggregated into ready-to-use exposure values**. To keep this process transparent, we propose a stepwise approach, including visualisations, to enable an understanding of the level of conservatism of aggregated exposure values. Therefore, at the present pioneer stage, this process is implemented as **Jupyter Notebooks** (for examples, please see section [Publication](#publication-open-access)). The analysis steps can be executed manually (and adapted) using the Jupyter Notebooks, or can be conducted automatically at the end of an xOSR model run (as XOSR component).  
 
 A second option to use xOSR model output is to **link xOSR directly with effect models** (eg, TKTD, Folsomia, Eisenia, [Earthworms](https://doi.org/10.1002/ieam.4338)). These effect models will be implemented as components (moduls) in xOSR and will deliver RA endpoints at the level of defined SPGs ([Specific Protection Goals](https://www.efsa.europa.eu/en/efsajournal/pub/1821), [EFSA PPR Panel 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690)), eg, on species population level.  Although at scientific level the necessary bits and pieces are ready, the establishment of landscape-level SPG endpoints in regulatory RA and risk management studies seems to need further [development](#xosr-use-for-regulatory-researchdevelopment).  
 
-### xOSR Use for Regulatory Research&Development
+### xOSR Use for Regulatory Research & Development
 
-Even in the context regulatory risk assessment and risk management of pesticides, a range of research questions and implementation needs are open. context xxx more realism, holistic view to risk, risk mitigation and management
-Explicit landscape modelling using real-world data can significantly contribute to required developments.  
+More realistic RA and risk management, more holistic evaluation of pesticide risk, integrated pest assessment, integrated cost/benefit ecosystem service assessments, are currently intensely discussed topics with a need for tools and data. Among the already and more precisely defined topics for development is to build consistent lower tier approaches from reasonably realistic 'Reference Scenario' levels. The latter directly calls for landscape-level exposure and effect modelling on the basis of resonably realistic scenarios.  
+The conceptual developments and modular implementation of xOSR might contribute to these developments in the regulatory scientific community. 
 
-- Development of consistent lower tier approaches from a reasonably realistic 'Reference Scenario' level. 
+## Implementation 
 
+### xOffFieldSoilRisk Landscape Model
 
+The initial implementation of xOSR was guided by [EFSA 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690) and established approaches (models) in regulatory RA.  
+The figure below shows the components (modules) from which xOSR is built. Please find details in the open access publication ["A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms"](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).   
 
-## Implementation
+<img src="img/xOffFieldSoilRisk model.png" alt="xOffFieldSoilRisk" width="700"/>  
 
-### xOffFieldSoilRisk Model
+ FIGURE 2 xOffFieldSoil model scheme. The model is composed of components (boxes in the central panel, e.g., xDrift; Bub et al., 2020). Components provide major model functionality (e.g., spray‐drift or runoff exposure calculation) and are built by wrapping existing models (e.g., PRZM) or by developing new ones (e.g., “RunoffFilter1”). The implementation of xOffFieldSoil is based on a generic modular landscape modeling framework (Schad, 2013). The light gray boxes represent xOffFieldSoil components that were not used in the case study, although they do exist or are under development (full scheme in Supporting Information: Figure S1, https://github.com/xlandscape/xOffFieldSoilRisk). Preparation and analysis panels contain tools, for example, for data preparation and risk analysis of model outcome (Supporting Information: Table S1) and operate closely with the framework, yet are not part of the core xOffFieldSoil model. PRZM, Pesticide Root Zone Model.  
+
+ xxx each exposure route and process is represented by a specific component (which can be replaced to manage model complexity). 
+
+### Scenarios
+
 
  FIGURE 2 xOffFieldSoil model scheme. The model is composed of components (boxes in the central panel, e.g., xDrift; Bub et al., 2020). Components provide
  major model functionality (e.g., spray‐drift or runoff exposure calculation) and are built by wrapping existing models (e.g., PRZM) or by developing new ones
@@ -51,9 +62,9 @@ Explicit landscape modelling using real-world data can significantly contribute 
  represent xOffFieldSoil components that were not used in the case study, although they do exist or are under development (full scheme in Supporting
  Information: Figure S1, https://github.com/xlandscape/xOffFieldSoilRisk). Preparation and analysis panels contain tools, for example, for data preparation and risk analysis of model outcome (Supporting Information: Table S1) and operate closely with the framework, yet are not part of the core xOffFieldSoil model. PRZM, Pesticide Root Zone Model
 
-### Framework Characteristics
+### xOSR Framework Characteristics
 
-xOSR can be seen as a ready-to-use model to calculated exposure (and effects) of off-field-soil organisms for regions of pre-prepared geoinformation (see [Scenarios](#scenarios)).  
+xOSR basically is a ready-to-use model to calculated exposure (and effects) of off-field-soil organisms for regions of pre-prepared geoinformation (see [Scenarios](#scenarios)).  
 However, in order to enable its use for a range of purposes of modelling xxx[modular](#modular-design) characteristic, you can also look at xOSR from a **framework perspective**.
 
 ### Modular Design
@@ -68,20 +79,6 @@ Key modules are:
 
 This modularity enables to basically use any type of data, information and sub-models which are approriate to a specific bee (pollinator) forage modelling purpose. Example data inputs and parameterisations are introduced in the [Scenario](#scenarios) section.
 
-
-### xOffFieldSoilRisk Landscape Model
-
-The modular landscape model to for spatiotemporally explicit simulation of bee (pollinator) forage, xOffFieldSoilRisk (xOSR), was built using the **landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to a landscape models, that operates spatiotemporally explicit.  
-The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
-Adding components adds functionality. For xOSR, a version exists that comprises the use of pesticides (PPPs) and the environmental exposure (figure below). Again, each exposure route and process is represented by a specific component (which can be replaced to manage model complexity).  
-
-<img src="img/xOffFieldSoilRisk model.png" alt="xOffFieldSoilRisk" width="700"/>  
-
-Composition of the xOffFieldSoilRisk landscape model (v0.9) including components to model PPP use and environmental exposure.
-
-#### Runoff Component
-
-#### Environmental Data
 
 ### Tiered Approach
 
