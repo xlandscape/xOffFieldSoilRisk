@@ -1,43 +1,34 @@
 ## Introduction
 
+As described in the [Introduction](../index.md#welcome-to-xofffieldsoilrisk-xsr), the initiation of the xSR development was due to new requirements in the off-field-soil RA. Consequently, the early versions of xSR addresses this purpose with the related user group, namely soil modelling and RA experts. As indicated in the [Outlook](../index.md#outlook) section, the intention of the development of xSR is to stepwise facilitate xSR use to extended user groups.  
+
 xxx
-
-The *Templates* section provides examples for xCP [**Parameterisations**](../reference/glossary.md#parameterisation). *Parameterisation* refers to the actual xCP parameterisation, ie. building PPP use scenarios.  The templates are for learning purposes and can be used as building block for your own parameterisation.   
-
-Note: the parameterisation makes use of XML as a necessary and sufficient representation of the natural complexity of the characteristics of real-world PPP applications in cultivated landscapes. We are fully aware that XML is not the ideal **user interface**. The development of a **graphical user interface (GUI)** is planned.  
-
-The following templates are included in the current version of xCropProtection and are located in the *CropProtection/PPMCalendars* folder:
-
-- Apple-spray-guide
-    - Apple-spray-guide.xml: A parameterization of a recommended spray sequence for apples
-- Demo-calendars
-    - Active-substance-demo.xml: Demonstrates the application of one active substance
-    - Active-substance-demo-2.xml: Demonstrates how to set the input scale of an application
-    - Active-substance-demo-3.xml: Demonstrates a tank mix with two products (set the output scale to active substance in the user parameters)
+1. Github users
+1. Model users
 
 ## Installation
 
-### Option 1: xBeeForage Demo Model
-As every component, xBF needs to be operated in a landscape modelling environment. An example landscape model using xBF was built in the [xLandscape](xLandscape/xLandscape-intro.md) framework, called **xBeeForageDemo**.  
-A user who just want to explore xBF or only needs the functionality of xBF should clone the repository [xBeeForageDemo](https://github.com/xlandscape/xBeeForageDemo/tree/main). Contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([thorsten.schad@bayer.com](mailto:thorsten.schad@bayer.com)) for access to the repository. Cloning steps vary based on the application being used, eg. [Sourcetree](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-git-repository/) or [Visual Studio Code](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=activity-bar).  
+### Option 1: xSR Demo Model
+As every component, xBF needs to be operated in a landscape modelling environment. An example landscape model using xBF was built in the [xLandscape](xLandscape/xLandscape-intro.md) framework, called **xSRDemo**.  
+A user who just want to explore xBF or only needs the functionality of xBF should clone the repository [xSRDemo](https://github.com/xlandscape/xSRDemo/tree/main). Contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([thorsten.schad@bayer.com](mailto:thorsten.schad@bayer.com)) for access to the repository. Cloning steps vary based on the application being used, eg. [Sourcetree](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-git-repository/) or [Visual Studio Code](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=activity-bar).  
 
-After cloning the repository, a user will have everything necessary to start using xBeeForage including sample scenarios and parametrization files.  
+After cloning the repository, a user will have everything necessary to start using xSR including sample scenarios and parametrization files.  
 
-### Option 2: add xBeeForage to any Landscape Model
+### Option 2: add xSR to any Landscape Model
 As any other component, xBF is built to be used (together with other components) in the [xLandscape](xLandscape/xLandscape-intro.md) framework in order to build a landscape model. 
 
 1. The Landscape Model must first be set up; see the Landscape Model Core's [README](https://github.com/xlandscape/LandscapeModel-Core/blob/master/README.md) for detailed instructions.
-2. Create an xBeeForage folder in *\core\components* if it does not already exist.
-3. Copy the xBeeForage component from [GitHub](https://github.com/xlandscape/xBeeForageDemo/tree/main) into the xBeeForage subfolder.
-4. The file *mc.xml* contains information about the components that are used in the created [xLandscape](xLandscape/xLandscape-intro.md) model. Make use of the xBeeForage component by adding the following lines:
+2. Create an xSR folder in *\core\components* if it does not already exist.
+3. Copy the xSR component from [GitHub](https://github.com/xlandscape/xSRDemo/tree/main) into the xSR subfolder.
+4. The file *mc.xml* contains information about the components that are used in the created [xLandscape](xLandscape/xLandscape-intro.md) model. Make use of the xSR component by adding the following lines:
 
 ``` xml
-<xBeeForage module="components" class="xBeeForage">
-    <xBeeForageFilePath scales="global">
+<xSR module="components" class="xSR">
+    <xSRFilePath scales="global">
         $(_PROJECT_DIR_)\CropProtection\$(CropProtectionScenario).xml
-    </xBeeForageFilePath>
+    </xSRFilePath>
     <ParametrizationNamespace scales="global">
-        urn:xBeeForageLandscapeScenarioParametrization
+        urn:xSRLandscapeScenarioParametrization
     </ParametrizationNamespace>
     <SimulationStart type="date" scales="global">
         $(SimulationStart)
@@ -63,11 +54,27 @@ As any other component, xBF is built to be used (together with other components)
     <FieldGeometries>
         <FromOutput component="LandscapeScenario" output="Geometries"/>
     </FieldGeometries>
-</xBeeForage>
+</xSR>
 ```
 
+
+## Parameterisation
+
+The *Templates* section provides examples for xSR [**Parameterisations**](../reference/glossary.md#parameterisation). *Parameterisation* refers to the actual xSR parameterisation, ie. building PPP use scenarios.  The templates are for learning purposes and can be used as building block for your own parameterisation.   
+
+Note: the parameterisation makes use of XML as a necessary and sufficient representation of the natural complexity of the characteristics of real-world PPP applications in cultivated landscapes. We are fully aware that XML is not the ideal **user interface**. The development of a **graphical user interface (GUI)** is planned.  
+
+The following templates are included in the current version of xCropProtection and are located in the *CropProtection/PPMCalendars* folder:
+
+- Apple-spray-guide
+    - Apple-spray-guide.xml: A parameterization of a recommended spray sequence for apples
+- Demo-calendars
+    - Active-substance-demo.xml: Demonstrates the application of one active substance
+    - Active-substance-demo-2.xml: Demonstrates how to set the input scale of an application
+    - Active-substance-demo-3.xml: Demonstrates a tank mix with two products (set the output scale to active substance in the user parameters)
+
 ## Getting started
-File structure of [xBeeForageDemo](https://github.com/xlandscape/xBeeForageDemo/tree/main) after cloning:
+File structure of [xSRDemo](https://github.com/xlandscape/xSRDemo/tree/main) after cloning:
 
 ``` { .yaml .no-copy }
 ├── CropProtection
@@ -118,16 +125,16 @@ File structure of [xBeeForageDemo](https://github.com/xlandscape/xBeeForageDemo/
 └── template.xrun files
 ```
 
-To start xBeeForage using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***. This will start an xBeeForage run using the demo scenario. Output of the model run can be found in the newly created *\run\Rummen-demo-scenario\mcs\\[mc run ID]\store\arr.dat*.
+To start xSR using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***. This will start an xSR run using the demo scenario. Output of the model run can be found in the newly created *\run\Rummen-demo-scenario\mcs\\[mc run ID]\store\arr.dat*.
 
 !!! note  
-    **SimIDs need to be unique**. xBeeForage will create a folder for each run using the SimID defined in *template.xrun*. The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this folder first.
+    **SimIDs need to be unique**. xSR will create a folder for each run using the SimID defined in *template.xrun*. The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this folder first.
 
-### Schematic Scenario
+### Schematic Scenario Simulation
 
-### xOSR Simulation
+### xSR Simulation
 
-On each time step (eg, day) and field in a simulation, xOSR checks if there are products to apply. If so, exact application details are determined based on model parameterisation (eg, deterministic or by sampling from  from distributions given by the user) and executed.  
+On each time step (eg, day) and field in a simulation, xSR checks if there are products to apply. If so, exact application details are determined based on model parameterisation (eg, deterministic or by sampling from  from distributions given by the user) and executed.  
 
 ## Viewing and analyzing the output
 
@@ -135,7 +142,7 @@ On each time step (eg, day) and field in a simulation, xOSR checks if there are 
 
 [xLandscape](xLandscape/xLandscape-intro.md) makes use of multidimensional data stores. At present, [HDF](xLandscape/xLandscape-intro.md#multidimensional-data-store) is being used.  
 
-To view the raw output of xBeeForage, open *\run\Rummen-demo-scenario\mcs\\[mc run ID]\store\arr.dat* with a HDF5 file viewer such as [HDFView](https://portal.hdfgroup.org/downloads/index.html). Expand the xBeeForage folder.
+To view the raw output of xSR, open *\run\Rummen-demo-scenario\mcs\\[mc run ID]\store\arr.dat* with a HDF5 file viewer such as [HDFView](https://portal.hdfgroup.org/downloads/index.html). Expand the xSR folder.
 
 <img src="img/hdf5-file-structure.PNG" alt="Screenshot of output file structure" width="280"/>
 
@@ -143,7 +150,7 @@ Right click on an item and click "Open" to view its attributes and data.
 
 ### Jupyter Notebooks
 
-The ***analysis* folder** contains Jupyter notebooks which can analyze and visualize the output of xBeeForage. *requirements.txt* lists python packages necessary to run the Jupyter notebooks in this folder.
+The ***analysis* folder** contains Jupyter notebooks which can analyze and visualize the output of xSR. *requirements.txt* lists python packages necessary to run the Jupyter notebooks in this folder.
 
 #### *xBF_write_csv.ipynb*
 
@@ -192,5 +199,5 @@ dfs.append(pandas.DataFrame(drift_reduction_data, columns=["TechnologyDriftReduc
 
 `output_map_html_2_path` : *C:\path\to\output\html_map_2.html*
 
-`product_table` : *C:...\xBeeForage\analysis\ProductTypes.csv*. This table defines product names and their type.
+`product_table` : *C:...\xSR\analysis\ProductTypes.csv*. This table defines product names and their type.
 
