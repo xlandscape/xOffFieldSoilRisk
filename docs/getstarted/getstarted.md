@@ -1,20 +1,38 @@
 ## Introduction
 
-As described in the [Introduction](../index.md#welcome-to-xofffieldsoilrisk-xsr), the initiation of the xSR development was due to new requirements in the off-field-soil RA. Consequently, the early versions of xSR addresses this purpose with the related user group, namely soil modelling and RA experts. As indicated in the [Outlook](../index.md#outlook) section, the intention of the development of xSR is to stepwise facilitate xSR use to extended user groups.  
-
-xxx
-1. Github users
-1. Model users
+As described in the [Introduction](../index.md#welcome-to-xofffieldsoilrisk-xsr), the xSR development was initiated due to new requirements in off-field-soil RA. Consequently, the early versions of xSR addresses this RA purpose with the related user group, namely soil exposure and effect modelling, as well as RA experts. However, as indicated in the [Outlook](../index.md#outlook) section, the intention of the development of xSR is to stepwise facilitate xSR use to extended user groups.  
 
 ## Installation
 
-### Option 1: xSR Demo Model
-As every component, xBF needs to be operated in a landscape modelling environment. An example landscape model using xBF was built in the [xLandscape](xLandscape/xLandscape-intro.md) framework, called **xSRDemo**.  
-A user who just want to explore xBF or only needs the functionality of xBF should clone the repository [xSRDemo](https://github.com/xlandscape/xSRDemo/tree/main). Contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([thorsten.schad@bayer.com](mailto:thorsten.schad@bayer.com)) for access to the repository. Cloning steps vary based on the application being used, eg. [Sourcetree](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-git-repository/) or [Visual Studio Code](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=activity-bar).  
+Current xSR model and scenarios are provided for two technical user level:  
 
-After cloning the repository, a user will have everything necessary to start using xSR including sample scenarios and parametrization files.  
+1. Users with **Github expertise** can directly clone the xSR model and scenarios from the public Github repositories (rem.: the 'Schematic scenarios' are shipped with the xSR model): 
 
-### Option 2: add xSR to any Landscape Model
+    - https://github.com/xlandscape/xOffFieldSoilRisk
+    - https://github.com/xlandscape/Scenario-NRW1
+    - https://github.com/xlandscape/Scenario-NRW2
+    - https://github.com/xlandscape/Scenario-NRW3
+
+2. **Scientific modellers**: People with expertise in using scientific models can download a ready-to-use zip-package including the xSR model as well as the scenarios her: (xxx landscape.org/xxx)
+
+Cloning steps (option 1) vary based on the application being used, eg. [Sourcetree](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-git-repository/) or [Visual Studio Code](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=activity-bar). After cloning the repository or downloading the zip-file (option 2), a user will have everything necessary to start using xSR including sample scenarios and parametrization files.  
+Contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([tschadwork@gmail.com](mailto:tschadwork@gmail.com)) in case of questions.  
+
+## Test Run
+
+To start xSR using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***. This will start an xSR run using the demo scenario.  
+**xSR Outputs:** 
+
+- Analysis and visualisations of the experiment 
+- **raw spatiotemporally explicit outputs** of the model run can be found in the newly created ***\run\X3Soil-Test\mcs\\[mc run ID]\store\arr.dat***
+- 
+- log
+
+> !!! Note  
+    **SimIDs need to be unique**. xSR will create a folder for each run using the SimID defined in the *.xrun* parameterisation file (eg, *template.xrun*). The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this simulation folder first (from the ...\run folder).
+
+## Parameterisation
+
 As any other component, xBF is built to be used (together with other components) in the [xLandscape](xLandscape/xLandscape-intro.md) framework in order to build a landscape model. 
 
 1. The Landscape Model must first be set up; see the Landscape Model Core's [README](https://github.com/xlandscape/LandscapeModel-Core/blob/master/README.md) for detailed instructions.
@@ -23,38 +41,207 @@ As any other component, xBF is built to be used (together with other components)
 4. The file *mc.xml* contains information about the components that are used in the created [xLandscape](xLandscape/xLandscape-intro.md) model. Make use of the xSR component by adding the following lines:
 
 ``` xml
-<xSR module="components" class="xSR">
-    <xSRFilePath scales="global">
-        $(_PROJECT_DIR_)\CropProtection\$(CropProtectionScenario).xml
-    </xSRFilePath>
-    <ParametrizationNamespace scales="global">
-        urn:xSRLandscapeScenarioParametrization
-    </ParametrizationNamespace>
-    <SimulationStart type="date" scales="global">
-        $(SimulationStart)
-    </SimulationStart>
-    <SimulationEnd type="date" scales="global">
-        $(SimulationEnd)
-    </SimulationEnd>
-    <RandomSeed type="int" scales="global">
-        0
-    </RandomSeed>
-    <OutputApplicationType>
-        $(OutputApplicationType)
-    </OutputApplicationType>
-    <ProductDatabase>
-        $(_PROJECT_DIR_)\$(ProductDatabase)
-    </ProductDatabase>
-    <Fields>
-        <FromOutput component="LandscapeScenario" output="FeatureIds"/>
-    </Fields>
-    <LandUseLandCoverTypes>
-        <FromOutput component="LandscapeScenario" output="FeatureTypeIds"/>
-    </LandUseLandCoverTypes>
-    <FieldGeometries>
-        <FromOutput component="LandscapeScenario" output="Geometries"/>
-    </FieldGeometries>
-</xSR>
+<?xml version="1.0" encoding="utf-8"?>
+<Parameters>
+    <!--
+    Parameter     :  Project
+    Description   :  The scenario used by the simulation.
+    Values        :  should be scenario/*** where *** is a folder name in the scenario sub-folder.
+    Remark        :  Make sure that the scenario is present in the scenario sub-folder.
+    -->
+    <Project>scenario/schematic-100x100</Project>
+
+    <!--
+    Parameter     :  Modeller
+    Description   :  The name of the modeller.
+    Values        :  Any text.
+    Remark        :  This value is organizational metadata and is not used technically.
+    -->
+    <Modeller>ts</Modeller>
+
+    <!--
+    Parameter     :  SimID
+    Description   :  Unique identifier of a simulation run.
+    Values        :  Any characters that are valid in file system identifiers.
+    Remark        :  Running a simulation with the same name as an existing simulation run results in an error.
+    Best practice :  Change this parameter with every simulation run. When doing test runs, indicate the test character
+                     of clearly in the identifier. If conducting a run from the experiment table, register it there and
+                     use the naming scheme <experiment id>-<n> where n is the number of the run.
+    -->
+    <SimID>X3Soil-Test</SimID>
+
+    <!--
+    Parameter     :  NumberMC
+    Description   :  The number of Monte Carlo runs.
+    Values        :  Any positive integer.
+    Remark        :  MC runs are conducted (partly) in parallel according to the NumberParallelProcesses parameter.
+    Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long-running simulations,
+                     30 for small simulations and 10 for anything in between.
+    -->
+    <NumberMC>1</NumberMC>
+
+    <!--
+    Parameter     :  ParallelProcesses
+    Description   :  The number of Monte Carlo runs that are conducted simultaneously.
+    Values        :  Any positive integer.
+    Remark        :  This parameter should be modified according to the available hardware resources.
+    Best practice :  To best use the available hardware, apply this rule of thumb:
+                     min(NumberMC, NumberParallelProcesses) <= available processors.
+    -->
+    <ParallelProcesses>1</ParallelProcesses>
+
+    <!--
+    Parameter     :  Substance
+    Description   :  Used to name the substance that is applied during all applications.
+    Values        :  Any text.
+    Remark        :  The name itself is mostly a meta-datum but also used to distinguish different substances if
+                     multi-substance experiments are implemented in a future version.
+    -->
+    <Substance>Lindane</Substance>
+
+    <!--
+    Parameter     :  DT50
+    Description   :  The soil DT50 of the substance in days.
+    Values        :  Positive numbers.
+    -->
+    <DT50>148</DT50>
+
+    <!--
+    Parameter     :  KocSoil
+    Description   :  The soil KOC of the substance.
+    Values        :  Positive numbers.
+    -->
+    <KocSoil>477</KocSoil>
+
+    <!--
+    Parameter     :  FreundlichExponent
+    Description   :  The Freundlich exponent of the substance.
+    Values        :  Positive numbers.
+    -->
+    <FreundlichExponent>0.957</FreundlichExponent>
+
+    <!--
+    Parameter     :  ApplicationRate
+    Description   :  The application rate in g/ha.
+    Values        :  Any positive number (or zero).
+    Remark        :  The application rate applies to all applications within application sequences.
+    -->
+    <ApplicationRate>2400</ApplicationRate>
+
+    <!--
+    Parameter     :  ApplicationWindow
+    Description   :  The time windows within which applications take place.
+    Values        :  format: MM-DD to MM-DD[, MM-DD to MM-DD[, ...]]
+    Remark        :  For each target field, year and application within an application sequence, a random date within
+                     the specified time window is selected. Example values:
+                     04-15 to 04-15 : All fields are applied on 15th of April every year
+                     04-07 to 04-21 : All fields are applied each year on a random date (per field and year) between 7th
+                                      and 21st of April
+                     04-07 to 04-21, 05-02 to 05-16 : All fields are applied twice each year; on a random date (per
+                                                      field and year) between 7th and 21st of April and on a random date
+                                                      (per field and year) between 2nd and 16th of May.
+    -->
+    <ApplicationWindows>03-01 to 03-01</ApplicationWindows>
+
+    <!--
+    Parameter     :  SimulateRunOffExposure
+    Description   :  Controls whether run-off exposure is simulated or not.
+    Values        :  "true" or "false.
+    Remark        :  At least one of SimulateRunOffExposure and SimulateSprayDriftExposure should be true.
+    -->
+    <SimulateRunOffExposure>true</SimulateRunOffExposure>
+
+    <!--
+    Parameter     :  SimulateSprayDriftExposure
+    Description   :  Controls whether spray-drift exposure is simulated or not.
+    Values        :  "true" or "false.
+    Remark        :  At least one of SimulateRunOffExposure and SimulateSprayDriftExposure should be true.
+    -->
+    <SimulateSprayDriftExposure>true</SimulateSprayDriftExposure>
+
+    <!--
+    Parameter     :  SprayDriftModel
+    Description   :  The spray-drift model to use during spray-drift simulation.
+    Values        :  "XSprayDrift" or "90thRautmann".
+    -->
+    <SprayDriftModel>XSprayDrift</SprayDriftModel>
+
+    <!--
+    Parameter     :  DriftReduction
+    Description   :  The effect of drift-reducing nozzles to spay-drift deposition; the fraction filtered out.
+    Values        :  A number between 0 and 1.
+    Remark        :  Zero means no effect = full spray-drift deposition, 1 means full filtering = no deposition at all.
+    -->
+    <DriftReduction>0</DriftReduction>
+
+    <!--
+    Parameter     :  InCropBuffer
+    Description   :  A in-crop buffer not applied in meters.
+    Values        :  Zero or a positive number.
+    Remark        :  The in-crop buffer is geometrically applied to the field and might result in very small fields not
+                     being applied at all.
+    -->
+    <InCropBuffer>0</InCropBuffer>
+
+    <!--
+    Parameter     :  InFieldMargin
+    Description   :  The in-field margin for all fields in the landscape over the entire simulation.
+    Values        :  Zero or a positive number.
+    Remark        :  Maybe parameterizable at finer scales in future versions.
+    -->
+    <InFieldMargin>0</InFieldMargin>
+
+    <!--
+    Parameter     :  VegetationDriftFiltering
+    Description   :  Controls whether simple drift filtering by vegetation is considered in the spray-drift module.
+    Values        :  "true" or "false"
+    -->
+    <VegetationDriftFiltering>false</VegetationDriftFiltering>
+
+    <!--
+    Parameter     :  Weather
+    Description   :  Weather is from files in the data directory that are named using the scheme "weather_XXX.csv"
+                     where `XXX` are the valid values for the weather parameter.
+    Values        :  Available weather files (see description).
+    Remark        :  Make sure that the weather parameter fits a weather file offered by the scenario.
+    -->
+    <Weather>mars-97100</Weather>
+
+    <!--
+    Parameter     :  WindDirection
+    Description   :  The direction from where the wind blows in degrees.
+    Values        :  A number between 0 and 359 or -1 for random wind directions.
+    Remark        :  The wind direction is specified for the entire region and simulation but may be parameterizable at
+                     a finer scale in future versions. If set to "-1", the wind is randomly selected for each
+                     application individually.
+    -->
+    <WindDirection>-1</WindDirection>
+
+    <!--
+    Parameter     :  ReportingThreshold
+    Description   :  The lowest number that is reported by the exposure modules.
+    Values        :  Positive numbers.
+    Remark        :  Should be sufficiently small, e.g., ApplicationRate / 1000, ApplicationRate / 2500, ..., or 0.
+    -->
+    <ReportingThreshold>1</ReportingThreshold>
+
+    <!--
+    Parameter     :  RandomSeed
+    Description   :  An seed with which the random number generator is initialized.
+    Values        :  Any integer number. 0 means no predefined seed.
+    Remark        :  Only set another value than 0 here if you need repeatable simulation runs, e.g., for debugging.
+    -->
+    <RandomSeed>0</RandomSeed>
+
+    <!--
+    Parameter     :  RunOffTempDir
+    Description   :  The temporary directory for RunOff-Simulations.
+    Values        :  Any short (!) file path, preferably < 20 characters.
+    Remark        :  Make sure that the path exists, otherwise the simulation might fail.
+    -->
+    <RunOffTempDir>C:\Temp</RunOffTempDir>
+</Parameters>
+
 ```
 
 
@@ -64,73 +251,8 @@ The *Templates* section provides examples for xSR [**Parameterisations**](../ref
 
 Note: the parameterisation makes use of XML as a necessary and sufficient representation of the natural complexity of the characteristics of real-world PPP applications in cultivated landscapes. We are fully aware that XML is not the ideal **user interface**. The development of a **graphical user interface (GUI)** is planned.  
 
-The following templates are included in the current version of xCropProtection and are located in the *CropProtection/PPMCalendars* folder:
 
-- Apple-spray-guide
-    - Apple-spray-guide.xml: A parameterization of a recommended spray sequence for apples
-- Demo-calendars
-    - Active-substance-demo.xml: Demonstrates the application of one active substance
-    - Active-substance-demo-2.xml: Demonstrates how to set the input scale of an application
-    - Active-substance-demo-3.xml: Demonstrates a tank mix with two products (set the output scale to active substance in the user parameters)
-
-## Getting started
-File structure of [xSRDemo](https://github.com/xlandscape/xSRDemo/tree/main) after cloning:
-
-``` { .yaml .no-copy }
-├── CropProtection
-│   ├── PPMCalendars
-|   |   ├── Apple-spray-guide
-│   │   ├── Demo-calendars
-│   │   ├── Rummen
-│   │   ├── Templates
-│   └── ...
-├── analysis
-│   ├── ProductTypes.csv
-│   ├── requirements.txt
-│   ├── xBF_map_vis.ipynb
-│   ├── xBF_plot_application_rate.ipynb
-│   ├── xBF_total_loading.ipynb
-│   └── xBF_write_csv.ipynb
-├── docs
-├── model
-│   ├── core
-│   ├── variant
-│   │   ├── CropProtection
-│   │   ├── experiment.xml
-│   │   ├── mc.xml
-│   │   └── package.xsd
-├── scenario
-│   ├── Demo-scenario
-│   │   ├── Documentation
-│   │   │   ├── scenario-geo-image.jpg
-│   │   │   └── scenario-project.qgz
-│   │   ├── geo
-│   │   │   ├── (multiple shp files)
-│   │   │   └── package.xinfo
-│   │   └── scenario.xproject
-│   ├── Rummen
-│   │   ├── Documentation
-│   │   │   ├── scenario-geo-image.jpg
-│   │   │   └── scenario-project.qgz
-│   │   ├── geo
-│   │   │   ├── (multiple shp files)
-│   │   │   └── package.xinfo
-│   │   ├── weather
-│   │   │   └── weather_mars-97100.csv
-│   │   └── scenario.xproject
-├── .gitignore
-├── .gitmodules
-├── README.md
-├── __start__.bat
-└── template.xrun files
-```
-
-To start xSR using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***. This will start an xSR run using the demo scenario. Output of the model run can be found in the newly created *\run\Rummen-demo-scenario\mcs\\[mc run ID]\store\arr.dat*.
-
-!!! note  
-    **SimIDs need to be unique**. xSR will create a folder for each run using the SimID defined in *template.xrun*. The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this folder first.
-
-### Schematic Scenario Simulation
+## File Structure
 
 ### xSR Simulation
 

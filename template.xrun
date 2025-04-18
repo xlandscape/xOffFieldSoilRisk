@@ -25,7 +25,7 @@
                      of clearly in the identifier. If conducting a run from the experiment table, register it there and
                      use the naming scheme <experiment id>-<n> where n is the number of the run.
     -->
-    <SimID>X3Soil-Test</SimID>
+    <SimID>xOffFieldSoilRisk-Testrun_1</SimID>
 
     <!--
     Parameter     :  NumberMC
@@ -35,7 +35,7 @@
     Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long-running simulations,
                      30 for small simulations and 10 for anything in between.
     -->
-    <NumberMC>1</NumberMC>
+    <NumberMC>3</NumberMC>
 
     <!--
     Parameter     :  ParallelProcesses
@@ -45,7 +45,7 @@
     Best practice :  To best use the available hardware, apply this rule of thumb:
                      min(NumberMC, NumberParallelProcesses) <= available processors.
     -->
-    <ParallelProcesses>1</ParallelProcesses>
+    <ParallelProcesses>3</ParallelProcesses>
 
     <!--
     Parameter     :  Substance
