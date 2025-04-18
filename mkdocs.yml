@@ -47,21 +47,15 @@ markdown_extensions:
 
 nav:
   - Home: 'index.md'
-  - Get Started:
-    - Intro: 'getstarted/getstarted.md'
+  - Get Started: 'getstarted/getstarted.md'
   - Scenarios:
-    - Scenario Concepts: 'scenario-concepts.md'
-    - TarnEtGaronne: 'scenarios/TarnEtGaronne.md'
-    - Vaucluse: 'scenarios/Vaucluse.md'
-    - MaineEtLoire: 'scenarios/MaineEtLoire.md'
-    - Create a scenario: 'create-scenario.md'
-  - Tutorials:
-    - Introduction: 'tutorials/training-intro.md'
+    - Scenario Intro: 'scenarios/intro-scenarios.md'
+    - Scenario Development: 'scenarios/create-scenario.md'
+    - Example Scenarios: 'scenarios/scenarios-examples.md'
   - Technical Reference:
     - Troubleshooting: 'reference/troubleshooting.md'
-  - Glossary: 'reference/glossary.md'
-  - Next/Outlook: 'next_outlook.md'
-  - xLandscape: 
+  - Glossary: 'reference/xOffFieldSoilRisk-glossary.md'
+  - xLandscape:
     - Intro: 'xLandscape/xLandscape-intro.md'
     - Version 1.x: 'xLandscape/xLandscape-v1x.md'
     - Components: 'xLandscape/xLandscape-components.md'
@@ -72,5 +66,6 @@ nav:
       - Building Components: 'xLandscape/xLandscape-buildingComponents.md'
       - Building Landscape Models: 'xLandscape/xLandscape-buildingModels.md'
     - References: 'xLandscape/xLandscape-references.md'
+    - Glossary: 'xLandscape/xLandscape-glossary.md'
 
     

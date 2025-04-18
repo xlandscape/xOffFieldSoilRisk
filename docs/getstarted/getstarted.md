@@ -1,4 +1,7 @@
-# Intro
+## Introduction
+
+xxx
+
 The *Templates* section provides examples for xCP [**Parameterisations**](../reference/glossary.md#parameterisation). *Parameterisation* refers to the actual xCP parameterisation, ie. building PPP use scenarios.  The templates are for learning purposes and can be used as building block for your own parameterisation.   
 
 Note: the parameterisation makes use of XML as a necessary and sufficient representation of the natural complexity of the characteristics of real-world PPP applications in cultivated landscapes. We are fully aware that XML is not the ideal **user interface**. The development of a **graphical user interface (GUI)** is planned.  
@@ -12,7 +15,6 @@ The following templates are included in the current version of xCropProtection a
     - Active-substance-demo-2.xml: Demonstrates how to set the input scale of an application
     - Active-substance-demo-3.xml: Demonstrates a tank mix with two products (set the output scale to active substance in the user parameters)
 
-
 ## Installation
 
 ### Option 1: xBeeForage Demo Model
@@ -20,7 +22,6 @@ As every component, xBF needs to be operated in a landscape modelling environmen
 A user who just want to explore xBF or only needs the functionality of xBF should clone the repository [xBeeForageDemo](https://github.com/xlandscape/xBeeForageDemo/tree/main). Contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([thorsten.schad@bayer.com](mailto:thorsten.schad@bayer.com)) for access to the repository. Cloning steps vary based on the application being used, eg. [Sourcetree](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-git-repository/) or [Visual Studio Code](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=activity-bar).  
 
 After cloning the repository, a user will have everything necessary to start using xBeeForage including sample scenarios and parametrization files.  
-
 
 ### Option 2: add xBeeForage to any Landscape Model
 As any other component, xBF is built to be used (together with other components) in the [xLandscape](xLandscape/xLandscape-intro.md) framework in order to build a landscape model. 
@@ -121,6 +122,8 @@ To start xBeeForage using the sample scenario, **drag *template.xrun* onto *__st
 
 !!! note  
     **SimIDs need to be unique**. xBeeForage will create a folder for each run using the SimID defined in *template.xrun*. The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this folder first.
+
+### Schematic Scenario
 
 ### xOSR Simulation
 

@@ -2,9 +2,9 @@
 
 Welcome to the xOffFieldSoilRisk (xOSR) documentation. This documentation provides an **introduction** and will walk new users through **how to get started** with the xOffFieldSoilRisk landscape model, including explanations for **sample scenarios** and their use.
 
-## Publication (Open Access)
+## Publication
 
-An introduction to the topic is given in an open access publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
+An introduction to the topic is given in an **open access** publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
 The xOffFieldSoilRisk approach has been presented at different scientific conferences: (xxx include pdfs of the presentations.) 
 
 ## Background (v0.1)
@@ -49,7 +49,7 @@ The figure below shows the components (modules) from which xOSR is built. Please
 
 <img src="img/xOffFieldSoilRisk model.png" alt="xOffFieldSoilRisk" width="700"/>  
 
- FIGURE 2 xOffFieldSoil model scheme. The model is composed of components (boxes in the central panel, e.g., xDrift; Bub et al., 2020). Components provide major model functionality (e.g., spray‐drift or runoff exposure calculation) and are built by wrapping existing models (e.g., PRZM) or by developing new ones (e.g., “RunoffFilter1”). The implementation of xOffFieldSoil is based on a generic modular landscape modeling framework (Schad, 2013). The light gray boxes represent xOffFieldSoil components that were not used in the case study, although they do exist or are under development (full scheme in Supporting Information: Figure S1, https://github.com/xlandscape/xOffFieldSoilRisk). Preparation and analysis panels contain tools, for example, for data preparation and risk analysis of model outcome (Supporting Information: Table S1) and operate closely with the framework, yet are not part of the core xOffFieldSoil model. PRZM, Pesticide Root Zone Model.  
+ xOffFieldSoil model scheme. The model is composed of components (boxes in the central panel, e.g., [xDrift](https://www.sciencedirect.com/science/article/pii/S235271102030323X)). Components provide major model functionality (e.g., spray‐drift or runoff exposure calculation) and are built by wrapping existing models (e.g., PRZM) or by developing new ones (e.g., “RunoffFilter1”). The implementation of xOffFieldSoil is based on the generic modular [xLandscape](xLandscape/xLandscape-intro.md#xlandscape) modeling framework. The light gray boxes represent xOffFieldSoil components that were not used in the case study, although they do exist or are under development (full scheme in Supporting Information: Figure S1, https://github.com/xlandscape/xOffFieldSoilRisk). Preparation and analysis panels contain tools, for example, for data preparation and risk analysis of model outcome (Supporting Information: Table S1) and operate closely with the framework, yet are not part of the core xOffFieldSoil model. PRZM, Pesticide Root Zone Model.  
 
  xxx each exposure route and process is represented by a specific component (which can be replaced to manage model complexity). 
 
@@ -80,18 +80,10 @@ Key modules are:
 This modularity enables to basically use any type of data, information and sub-models which are approriate to a specific bee (pollinator) forage modelling purpose. Example data inputs and parameterisations are introduced in the [Scenario](#scenarios) section.
 
 
-### Tiered Approach
-
-xxx Depending on the purpose of bee (pollinator) forage modelling,  
-
-1. off-the-shelf data: covering large geographic regions
-1. best-available data, including manual processing
-1. contemporary data generation: high-resolution drone mapping
-1. field study: best possible landscape mapping, bee forage quantification and modelling
-
-## Scenarios
-
 ## Application
+
+## Outlook
+
 
 ## Acknowledgements (v0.1)
 The development of the xOSR landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
@@ -108,6 +100,8 @@ The development of the xOSR landscape model was initiated by Thorsten Schad (tsc
 | Publication   | see 'Author Contribution' in  [IEAM 4798](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798) and section [Publication](#publication-open-access) above| 
 
 ## References
+
+Bub, S., https://www.sciencedirect.com/science/article/pii/S235271102030323X
 
 [(EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690). 2017. Scientific Opinion addressing the state of the science on risk assessment of plant protection products for in‐soil organisms. EFSA Journal. Wiley Online Library. 
 
