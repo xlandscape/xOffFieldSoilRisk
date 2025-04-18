@@ -54,7 +54,7 @@ nav:
     - Example Scenarios: 'scenarios/scenarios-examples.md'
   - Technical Reference:
     - Troubleshooting: 'reference/troubleshooting.md'
-  - Glossary: 'reference/xOffFieldSoilRisk-glossary.md'
+  - Glossary: 'reference/xoffFieldSoilRisk-glossary.md'
   - xLandscape:
     - Intro: 'xLandscape/xLandscape-intro.md'
     - Version 1.x: 'xLandscape/xLandscape-v1x.md'
