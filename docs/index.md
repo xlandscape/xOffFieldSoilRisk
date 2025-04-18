@@ -7,7 +7,7 @@ Welcome to the xOffFieldSoilRisk (xSR) documentation. This documentation provide
 An introduction to the topic is given in an **open access** publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
 The xOffFieldSoilRisk approach has been presented at different scientific conferences: (xxx include pdfs of the presentations.) 
 
-## Background (v0.1)
+## Background
 
 The authorization process of plant protection products (PPPs) includes comprehensive regulatory risk assessment (RA) for nontarget species, including soil organisms. The European Food Safety Authority (EFSA) has released a scientific opinion on [“addressing the state of the science on RA of PPPs for in-soil organisms” (EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690), in which spray-drift depositions and runoff are identified as the most relevant potential exposure routes of off-field soil organisms, whereby the term “off-field” refers to areas outside the agricultural field boundaries, that is, essentially to (semi-) natural areas present in cultivated landscapes.  
 
@@ -17,17 +17,11 @@ Illustration of Off-Field-Soil definition
 
 The EFSA PPR Panel (2017) outlined a first approach to estimate off-field soil exposure. The conservative character of the approach and the necessity for model and scenario development are indicated in EFSA PPR Panel (2017): “In the absence of appropriate off-field exposure scenarios… Since such models are not yet available for regulatory purposes at the European level, the simplifying assumption is made that the individual exposure routes can be assessed separately. Results of the different entry routes should then be summed, which is a conservative assumption because it neglects the different dynamic behavior of the processes.”  
 
-## Introduction (v0.1)
+## Introduction
 
 With the background above, the aims for the present work are to **develop a model approach to appropriately combine off-field soil exposure due to runoff and drift** and to develop example **scenarios** based on real-world conditions.  
 xOffFieldSoilRisk is built on the basis of the [**xLandscape**](xLandscape/xLandscape-intro.md#xlandscape) **framework**. xLandscape provides a modular approach to develop landscape models which operate spatiotemporally explicit. xLandscape is open source.  
 In its initial version, xOffFieldSoil has been composed using exposure models which are established in the regulatory scientific exposure assessment of pesticides in Europe (eg, [FOCUSsw](https://esdac.jrc.ec.europa.eu/projects/focus-dg-sante)). However, these models are not open sources and come with limitations for their spatiotemporally explicit operation with a large number of local conditions as typical at landscape-level. Thus, future versions of xOffFieldSoilRisk are intended to consider exposure modules adapted for landscape-level application.  
-
-## Concepts (v0.1)
-
-### xLandscape Framework 
-
-xSR was built using the **modular landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to landscape models which operate spatiotemporally explicit. The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
 
 ### xSR Outcome for Risk Assessments
 
@@ -42,24 +36,27 @@ The conceptual developments and modular implementation of xSR might contribute t
 
 ## Implementation 
 
+### xLandscape Framework 
+
+xSR was built using the **modular landscape modelling framework** [xLandscape](xLandscape/xLandscape-intro.md#xlandscape). The framework allows to compose individual modules, called *Components* to landscape models which operate spatiotemporally explicit. The components represent and encapsulate distinct functionality. Any component can be replaced by more or less complex ones.  
+
 ### xOffFieldSoilRisk Landscape Model
 
 The initial implementation of xSR was guided by [EFSA 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690) and established approaches (models) in regulatory RA.  
-The figure below shows the components (modules) from which xSR is built. Please find details in the open access publication ["A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms"](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).   
+The figure below shows the components (modules) from which xSR is built. Each exposure route and process is represented by a specific component, which can be replaced to adapt xSR model complexity.  
+Please find details in the open access publication ["A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms"](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).   
 
 <img src="img/xOffFieldSoilRisk model.png" alt="xOffFieldSoilRisk" width="700"/>  
 
  xOffFieldSoil model scheme. The model is composed of components (boxes in the central panel, e.g., [xDrift](https://www.sciencedirect.com/science/article/pii/S235271102030323X)). Components provide major model functionality (e.g., spray‐drift or runoff exposure calculation) and are built by wrapping existing models (e.g., PRZM) or by developing new ones (e.g., “RunoffFilter1”). The implementation of xOffFieldSoil is based on the generic modular [xLandscape](xLandscape/xLandscape-intro.md#xlandscape) modeling framework. The light gray boxes represent xOffFieldSoil components that were not used in the case study, although they do exist or are under development (full scheme in Supporting Information: Figure S1, https://github.com/xlandscape/xOffFieldSoilRisk). Preparation and analysis panels contain tools, for example, for data preparation and risk analysis of model outcome (Supporting Information: Table S1) and operate closely with the framework, yet are not part of the core xOffFieldSoil model. PRZM, Pesticide Root Zone Model.  
 
- xxx each exposure route and process is represented by a specific component (which can be replaced to manage model complexity). 
-
 ### Scenarios
 
-xSR can be used in any regions for which the minimum required geodata can be acquired or generated.  
-xSR is shipped with example scenarios, for immediate use as well as templates for own scenario development (xxx ref to scenarios).  
+xSR can be used in any region for which the minimum required geodata can be acquired or generated.  
+xSR is shipped with ready-to-use [example scenarios](scenarios/scenarios-examples.md) which can also serve as templates for own scenario development.  
 An introduction and details to scenario development is given in the [Scenarios](scenarios/intro-scenarios.md#introduction) section.  
 
-## Outlook (v0.1)
+## Outlook
 
 The following topics are among the ongoing or envisaged future developments:  
 
@@ -70,7 +67,7 @@ The following topics are among the ongoing or envisaged future developments:
 - Extended analysis and visualisation functionality
 - Standardisation of model outputs and reporting (as discussed in the regulatory scientific community)
 
-## Acknowledgements (v0.1)
+## Acknowledgements
 The development of the xSR landscape model was initiated by Thorsten Schad (tschadwork@gmail.com). It's realisation was only possibly due to the contribution of colleagues listed below and the sponsoring by Bayer AG.  
 
 | Role / Activity   | Person      |
@@ -86,12 +83,11 @@ The development of the xSR landscape model was initiated by Thorsten Schad (tsch
 
 ## References
 
-Bub, S., https://www.sciencedirect.com/science/article/pii/S235271102030323X
+Bub, S., Schad, T., Gao, Z. 2020. [XDrift—An R package to simulate spatially explicit pesticide spray-drift exposure of non-target-species habitats at landscape scales.](https://www.sciencedirect.com/science/article/pii/S235271102030323X)  
+  
+EFSA PPR Panel. 2017. [Scientific Opinion addressing the state of the science on risk assessment of plant protection products for in‐soil organisms.](https://www.efsa.europa.eu/en/efsajournal/pub/4690) EFSA Journal. Wiley Online Library. 
 
-[(EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690). 2017. Scientific Opinion addressing the state of the science on risk assessment of plant protection products for in‐soil organisms. EFSA Journal. Wiley Online Library. 
-
-Valery E Forbes, Annika Agatz, Roman Ashauer, Kevin R Butt, Yvan Capowiez, Sabine Duquesne, Gregor Ernst, Andreas Focks, Andre Gergs, Mark E Hodson, Martin Holmstrup, Alice SA Johnston, Mattia Meli, Dirk Nickisch, Silvia Pieper, Kim J Rakel, Melissa Reed, Joerg Roembke, Ralf B Schäfer, Pernille Thorbek, David J Spurgeon, Erik Van den Berg, Cornelis AM Van Gestel, Mathilde I Zorn, Vanessa Roeben, **Mechanistic Effect Modeling of Earthworms in the Context of Pesticide Risk Assessment: Synthesis of the FORESEE Workshop**, Integrated Environmental Assessment and Management, Volume 17, Issue 2, 1 March 2021, Pages 352–363, https://doi.org/10.1002/ieam.4338
-
+Valery E Forbes, Annika Agatz, Roman Ashauer, Kevin R Butt, Yvan Capowiez, Sabine Duquesne, Gregor Ernst, Andreas Focks, Andre Gergs, Mark E Hodson, Martin Holmstrup, Alice SA Johnston, Mattia Meli, Dirk Nickisch, Silvia Pieper, Kim J Rakel, Melissa Reed, Joerg Roembke, Ralf B Schäfer, Pernille Thorbek, David J Spurgeon, Erik Van den Berg, Cornelis AM Van Gestel, Mathilde I Zorn, Vanessa Roeben, [Mechanistic Effect Modeling of Earthworms in the Context of Pesticide Risk Assessment: Synthesis of the FORESEE Workshop,](https://doi.org/10.1002/ieam.4338) Integrated Environmental Assessment and Management, Volume 17, Issue 2, 1 March 2021, Pages 352–363. 
 
 ## next Section: [Get Started][def]
 
