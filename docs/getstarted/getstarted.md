@@ -20,32 +20,30 @@ Contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten
 
 ## Test Run
 
-To start xSR using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***. This will start an xSR run using the demo scenario.  
-The test run makes use of 3 cpu cores and should not require more than 2 GB memory, as well as <100 MB disk storage (xxx check).  
+To start xSR using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***.  
+This will start an xSR run using the demo parameterisation. The demo parameterisation uses a simple edge-of-field ['Schematic Scenario'](../scenarios/scenarios-examples.md#schematic-scenarios) and Lindane as test substance, without risk mitigation measures. The test run makes use of 3 cpu cores and should not require more than 2 GB memory, as well as about 100 MB disk space.  
 
 **xSR Outputs:** 
 
 
 | Output Type  | Location      |
-|------|---------|
-| **analysis and visualisations of the entire experiment** | ***\run\X3Soil-Test\analysis***  |
-| **analysis and visualisations of individual MC runs** | ***\run\X3Soil-Test\mcs\\[mc run ID]\analysis*** |
-| **raw spatiotemporally explicit outputs** | ***\run\X3Soil-Test\mcs\\[mc run ID]\store\arr.dat***|
-|**log-files**| ***\run\X3Soil-Test\\log***|
+|--------------|---------------|
+| Experiment analysis and visualisations  | *\run\X3Soil-Test\analysis*  |
+| MC runs analysis and visualisations | *\run\X3Soil-Test\mcs\\[mc run ID]\analysis* |
+| Raw spatiotemporally explicit outputs | *\run\X3Soil-Test\mcs\\[mc run ID]\store\arr.dat*|
+| Log-files| *\run\X3Soil-Test\\log*|
 
-We recommend to have a first look into the location of the **analysis and visualisations of the entire experiment** folder.  
+We recommend to have a first look into a location of a **MC runs analysis and visualisations** and to consult the [publications](../index.md#publication).  
 
 > !!! Note   
     **SimIDs need to be unique**. xSR will create a folder for each run using the SimID defined in the *.xrun* parameterisation file (eg, *template.xrun*). The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this simulation folder first (from the ...\run folder).
 
 ## Parameterisation
 
-As any other component, xBF is built to be used (together with other components) in the [xLandscape](xLandscape/xLandscape-intro.md) framework in order to build a landscape model. 
-
-1. The Landscape Model must first be set up; see the Landscape Model Core's [README](https://github.com/xlandscape/LandscapeModel-Core/blob/master/README.md) for detailed instructions.
-2. Create an xSR folder in *\core\components* if it does not already exist.
-3. Copy the xSR component from [GitHub](https://github.com/xlandscape/xSRDemo/tree/main) into the xSR subfolder.
-4. The file *mc.xml* contains information about the components that are used in the created [xLandscape](xLandscape/xLandscape-intro.md) model. Make use of the xSR component by adding the following lines:
+In the parameterisation of an [xLandscape](../xLandscape/xLandscape-intro.md#xlandscape) based model we distinguish two levels, the actual parameterisation and a configuration level.  
+**Model configuration** allows to alter the behaviour of an xLandscape based model, here of the xSR model (eg, spray-drift interpolation, runoff flow).  
+**Model parameterisation** refers to define inputs for xSR (eg, scenario choice, simulation period, substance use and properties). The base technical level of model parameterisation is an XML file, with ***.xrun*** file ending. Any XML editor can be used to define an *.xrun* parameterisation file. Which values (parameters) are available in *.xrun* can be adapted (see [Technical Reference](../reference/parameterisation.md)).   
+Each parameter in *.xrun* comes with a comments and is framed by corresponding XML tags. The following XML shows the ***template.xrun*** parameterisation file:  
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -75,7 +73,7 @@ As any other component, xBF is built to be used (together with other components)
                      of clearly in the identifier. If conducting a run from the experiment table, register it there and
                      use the naming scheme <experiment id>-<n> where n is the number of the run.
     -->
-    <SimID>X3Soil-Test</SimID>
+    <SimID>xOffFieldSoilRisk-Testrun_1</SimID>
 
     <!--
     Parameter     :  NumberMC
@@ -85,7 +83,7 @@ As any other component, xBF is built to be used (together with other components)
     Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long-running simulations,
                      30 for small simulations and 10 for anything in between.
     -->
-    <NumberMC>1</NumberMC>
+    <NumberMC>3</NumberMC>
 
     <!--
     Parameter     :  ParallelProcesses
@@ -95,7 +93,7 @@ As any other component, xBF is built to be used (together with other components)
     Best practice :  To best use the available hardware, apply this rule of thumb:
                      min(NumberMC, NumberParallelProcesses) <= available processors.
     -->
-    <ParallelProcesses>1</ParallelProcesses>
+    <ParallelProcesses>3</ParallelProcesses>
 
     <!--
     Parameter     :  Substance
@@ -248,16 +246,7 @@ As any other component, xBF is built to be used (together with other components)
     -->
     <RunOffTempDir>C:\Temp</RunOffTempDir>
 </Parameters>
-
 ```
-
-
-## Parameterisation
-
-The *Templates* section provides examples for xSR [**Parameterisations**](../reference/glossary.md#parameterisation). *Parameterisation* refers to the actual xSR parameterisation, ie. building PPP use scenarios.  The templates are for learning purposes and can be used as building block for your own parameterisation.   
-
-Note: the parameterisation makes use of XML as a necessary and sufficient representation of the natural complexity of the characteristics of real-world PPP applications in cultivated landscapes. We are fully aware that XML is not the ideal **user interface**. The development of a **graphical user interface (GUI)** is planned.  
-
 
 ## File Structure
 
@@ -281,9 +270,9 @@ Right click on an item and click "Open" to view its attributes and data.
 
 The ***analysis* folder** contains Jupyter notebooks which can analyze and visualize the output of xSR. *requirements.txt* lists python packages necessary to run the Jupyter notebooks in this folder.
 
-#### *xBF_write_csv.ipynb*
+#### *xSR_write_csv.ipynb*
 
-*xBF_write_csv.ipynb* (version 2.0) **writes the contents of *arr.dat* to a csv file**. User parameters:
+*xSR_write_csv.ipynb* (version 2.0) **writes the contents of *arr.dat* to a csv file**. User parameters:
 
 `xcrop_arrdat_path` : *C:\path\to\arr.dat*
 
@@ -303,22 +292,22 @@ dfs.append(pandas.DataFrame(application_rates_data * geom_project_area_ha, colum
 dfs.append(pandas.DataFrame(drift_reduction_data, columns=["TechnologyDriftReductions"]))
 ```
 
-#### *xBF_plot_application_rate.ipynb*
-*xBF_plot_application_rate.ipynb* (version 2.0) **plots application rates** (as a scatter plot) of all product applications in a user-defined year. User parameters:
+#### *xSR_plot_application_rate.ipynb*
+*xSR_plot_application_rate.ipynb* (version 2.0) **plots application rates** (as a scatter plot) of all product applications in a user-defined year. User parameters:
 
 `xcrop_arrdat_path` : *C:\path\to\arr.dat*
 
 `year_to_chart` : only display data for this year
 
-#### *xBF_total_loading.ipynb*
-*xBF_total_loading.ipynb* (version 2.0) **charts the total loading over time** for a specific field and for all fields. Total loading is calculated by plotting a cumulative sum of mass applied to a field (or all fields). User parameters:
+#### *xSR_total_loading.ipynb*
+*xSR_total_loading.ipynb* (version 2.0) **charts the total loading over time** for a specific field and for all fields. Total loading is calculated by plotting a cumulative sum of mass applied to a field (or all fields). User parameters:
 
 `xcrop_arrdat_path` : *C:\path\to\arr.dat*
 
 `feature_to_chart` : ID of the field to chart. If a field ID is invalid, the notebook will plot the total loading of the first field it reads.
 
-#### *xBF_map_vis.ipynb*
-*xBF_map_vis.ipynb* (version 2.0) **visualizes applications on a map** with the ability to advance through time. Please note that while this code was designed to be as general as possible, users should be aware that the map visualization will need code modification and additional input to work with other scenarios. Any new product names and types must be added to ProductTypes.csv. Also, due to limitations of the mapping package it may not be possible to generate visualizations with large datasets or over long periods of time. User parameters:
+#### *xSR_map_vis.ipynb*
+*xSR_map_vis.ipynb* (version 2.0) **visualizes applications on a map** with the ability to advance through time. Please note that while this code was designed to be as general as possible, users should be aware that the map visualization will need code modification and additional input to work with other scenarios. Any new product names and types must be added to ProductTypes.csv. Also, due to limitations of the mapping package it may not be possible to generate visualizations with large datasets or over long periods of time. User parameters:
 
 `data_store_path` : *C:\path\to\arr.dat*
 
