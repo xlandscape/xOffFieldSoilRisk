@@ -1,35 +1,33 @@
-# Scenarios
+# Scenarios (under preparation)
 
 ## Introduction
 
-
-
-### Publication (Open Access)
-
-The publication to the xOSR model also contains an introduction access publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
-The xOffFieldSoilRisk approach has been presented at different scientific conferences: (xxx include pdfs of the presentations.) 
+The local co-occurrence of arable fields and off-field areas (eg, field margins, hedges, riparian zones, wood margins, graslands), their slopes, structure and management, together with environmental conditions, are key drivers of potential pesticide exposure and risk of off-field-soil organisms. A technical representation of certain geographic area (or artificial composition) covering these driving factors is what we call a ***scenario***.  
+In regulatory RA, scenarios are typically selected (and designed) to represent conservative conditions for the risk of non-target-organismsm. Model outcome using such scenarios are intended to cover a larger range (typically >90%) of real-world conditions as occurring in a regulatory unit (eg, a country).  
 
 ## Example Scenarios
 
+### Publication (Open Access)
+
+Example scenarios introduced in the publication to the xSR model in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798) or also open access and available at Github:  
+
+- xxx
+- xxx [NRW1](https://github.com/xlandscape/Scenario-NRW1)
+
 ### Schematic Scenarios
+
+<img src="../img/in-crop%20off-crop%20illustration.png" width="600" height="300">  
 
 ### Landscape Scenarios
 
 #### NRW1
 
+<img src="../img/Scenario-NRW1.jpg" width="700" height="700">  
+
 #### NRW2
+
+<img src="../img/Scenario-NRW2.jpg" width="700" height="700">  
 
 #### NRW3
 
-## Scenario Development
-
-how to build your own scenario 
-
-### Tiered Approach
-
-xxx Depending on the purpose of bee (pollinator) forage modelling,  
-
-1. off-the-shelf data: covering large geographic regions
-1. best-available data, including manual processing
-1. contemporary data generation: high-resolution drone mapping
-1. field study: best possible landscape mapping, bee forage quantification and modelling
+<img src="../img/Scenario-NRW3.jpg" width="700" height="700">  

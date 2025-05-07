@@ -1,4 +1,4 @@
-# Scenarios
+# Create Scenarios (under preparation)
 
 In the context of risk assessment for pesticides, a *Scenario* refers to a set of conditions and assumptions used to model and predict the environmental fate and effects of pesticides ([Glossary/Scenarios](reference/glossary.md#scenario)). A *Scenario* is typically composed of 
 
@@ -10,7 +10,8 @@ In an xCP parameterisation, PPP use are typically defined related to land use ty
 
 Note: This section provides an introduction to xCP scenarios on a technical level with the intention to enable colleagues with technical experiance to build scenarios and to use xCP. However, we plan to develop a **graphical user interface** (GUI) that allows any user to intuitively build xCP scenarios. 
 
-## Example Scenarios
+## Use Example Scenarios as Templates
+
 The [xCropProtectionDemo](https://github.com/xlandscape/xCropProtectionDemo/tree/main) model is packaged with example scenarios located in the *scenario* folder. Example scenarios are of static land use types.  
 
 - A scenario in Rummen, Belgium ([*Rummen-full*](scenarios/rummen-scenario.md))
@@ -18,6 +19,7 @@ The [xCropProtectionDemo](https://github.com/xlandscape/xCropProtectionDemo/tree
 - A subset of the Rummen-full scenario in Rummen, Belgium ([*Rummen-xCP-TestingScenario*](scenarios/rummen-subset.md))
 
 ## Custom Scenarios
+
 To create a new scenario for use with xCropProtection, users should follow these steps.
 
 1. In folder *scenario\\*, create a new folder with the scenario name. In this example, the scenario will be called "test-scenario".
@@ -129,3 +131,12 @@ After these steps are completed, the **new scenario files should have the follow
 ```
 
 **Drag *template-test-scenario.xrun* onto *__start_\_.bat*** to run xCropProtection using the new scenario.
+
+### Tiered Approach
+
+xxx Depending on the purpose of the xSR modelling,  
+
+1. off-the-shelf data: covering large geographic regions
+1. best-available data, including manual processing
+1. contemporary data generation: high-resolution drone mapping
+1. field study: best possible landscape mapping, xxx quantification and modelling

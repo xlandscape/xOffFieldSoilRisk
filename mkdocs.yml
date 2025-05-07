@@ -49,9 +49,8 @@ nav:
   - Home: 'index.md'
   - Get Started: 'getstarted/getstarted.md'
   - Scenarios:
-    - Scenario Intro: 'scenarios/intro-scenarios.md'
+    - Scenarios: 'scenarios/intro-scenarios.md'
     - Scenario Development: 'scenarios/create-scenario.md'
-    - Example Scenarios: 'scenarios/scenarios-examples.md'
   - Technical Reference:
     - File Structure: 'reference/fileStructure.md'
     - Troubleshooting: 'reference/troubleshooting.md'

@@ -35,8 +35,8 @@ In regulatory risk assessment in Europe, protection goals and risk assessment ap
 
 ## In-crop Buffer
 As a *Risk Mitigation* option, typically to reduce spray-drift depositions into off-field areas, in-crop buffer represent a zone (distance [m]) from the cropped area boundery which must not be sprayed with the PPP of such a label instruction.  
-<br>
-<img src="../img/Illustration of in-crop buffer.png" width="350" height="200">  
+
+<img src="../img/Illustration of in-crop buffer.png" width="350" height="200">
 *Illustration of In-/Off-Field vs. In-/Off-Crop using a schematic scenario. The in-field (left part) is cropped (brown color), yet, has an in-field off-crop margin (light green) as well as an in-crop buffer (solid box). The cropped area within the in-crop buffer is allowed to be sprayed (solid box), whereas the cropped area outside is not. The off-field area (right part) is divided into two zones, representing two different land cover types in the expample (wood margin, wood core)*
 
 ## Monte Carlo Run

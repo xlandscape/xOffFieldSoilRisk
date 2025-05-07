@@ -1,4 +1,0 @@
-## Introduction
-
-## Schematic Scenarios
-
