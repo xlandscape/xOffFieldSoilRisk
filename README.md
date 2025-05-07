@@ -11,6 +11,13 @@
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
+## xOffFieldSoil Documentation
+
+https://xlandscape.github.io/xOffFieldSoilRisk
+
+## Publication
+
+An introduction to the topic is given in an **open access** publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
 
 ## About the project
 XOffFieldSoil is a modular model that simulates processes at a landscape-scale and allows assessing potential effects of
