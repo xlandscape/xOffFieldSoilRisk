@@ -1,7 +1,13 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
-## [1.4.2] - 2025-05-08
+## [1.4.4] - 2025-05-08
+### Added
+- Documentation link to ReadMe template
+### Changed
+### Fixed
+
+## [1.4.3] - 2025-05-08
 ### Added
 ### Changed
 ### Fixed
