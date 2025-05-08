@@ -1,6 +1,12 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.4.2] - 2025-05-08
+### Added
+### Changed
+### Fixed
+- Production branch name in GitHub workflow
+
 ## [1.4.1] - 2025-05-08
 ### Added
 ### Changed
