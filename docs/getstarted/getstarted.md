@@ -1,3 +1,57 @@
+## Note (5May2025) - Parts of this section are under preparation
+
+## Introduction
+
+As described in the [Introduction](../index.md#welcome-to-xofffieldsoilrisk-xsr), the xSR development was initiated due to new requirements in off-field-soil RA in Europe. Accordingly, the initial versions of xSR addresses this RA purpose with and its user groups, namely soil exposure and effect modelling, as well as RA experts. However, as indicated in the [Outlook](../index.md#outlook) section, the intention of the development of xSR is to stepwise facilitate xSR use to broader user groups.  
+
+## Installation
+
+Current xSR model and scenarios are provided for **two technical user level**:  
+
+1. Users with **Github expertise** can directly clone the xSR model and scenarios from the public Github repositories (remark: the 'Schematic scenarios' are shipped with the xSR model): 
+
+    - https://github.com/xlandscape/xOffFieldSoilRisk
+    - https://github.com/xlandscape/Scenario-NRW1
+    - https://github.com/xlandscape/Scenario-NRW2
+    - https://github.com/xlandscape/Scenario-NRW3
+
+2. **Scientific modellers**: People with expertise in using scientific models can **download a ready-to-use zip-package** including the xSR model as well as the scenarios her: (xxx(under preparation) landscape.org/xxx)
+
+Cloning steps (option 1) vary based on the application being used, eg. [Sourcetree](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-git-repository/) or [Visual Studio Code](https://learn.microsoft.com/en-us/azure/developer/javascript/how-to/with-visual-studio-code/clone-github-repository?tabs=activity-bar).  
+After cloning the repository or downloading the zip-file (option 2), a user will have everything necessary to start using xSR including sample scenarios and parametrization files.  
+Please contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([tschadwork@gmail.com](mailto:tschadwork@gmail.com)) in case of questions.  
+
+## Test Run
+
+To start xSR using the sample scenario, **drag *template.xrun* onto *__start_\_.bat***.  
+This will start an xSR run using the demo parameterisation. The demo parameterisation uses a simple edge-of-field ['Schematic Scenario'](../scenarios/scenarios-examples.md#schematic-scenarios) and Lindane as test substance, without risk mitigation measures. The test run makes use of 3 cpu cores and should not require more than 2 GB memory, as well as about 100 MB disk space. Computing time should be a couple of minutes on current machines.  
+
+**xSR Outputs:** 
+
+
+| Output Type  | Location      |
+|--------------|---------------|
+| Experiment analysis and visualisations  | *\run\xOffFieldSoilRisk-Testrun_1\analysis*  |
+| MC runs analysis and visualisations | *\run\xOffFieldSoilRisk-Testrun_1\mcs\\[mc run ID]\analysis* |
+| Raw spatiotemporally explicit outputs | *\run\xOffFieldSoilRisk-Testrun_1\mcs\\[mc run ID]\store\arr.dat*|
+| Log-files| *\run\xOffFieldSoilRisk-Testrun_1\\log*|
+
+We recommend to have a first look into a location of a **MC runs analysis and visualisations** and to consult the [publications](../index.md#publication).  
+
+> !!! Note  
+    **SimIDs need to be unique**. xSR will create a folder for each run using the SimID defined in the *.xrun* parameterisation file (eg, *template.xrun*). The SimID cannot be the same as a folder already contained in the run folder. If you want to run a simulation with the same SimID you need to delete this simulation folder first (from the ...\run folder).
+  
+  > !!! Note  
+    When PRZMeu is used as runoff component (as in the template run), **the PRZM model shortly pops up on your Windows desktop**, ie, gets focus and so might distract you from other work on your computer. This behaviour is by design of the PRZM model and Windows System and is unfortunately unavoidable.
+
+## Parameterisation
+
+In the parameterisation of an [xLandscape](../xLandscape/xLandscape-intro.md#xlandscape) based model we distinguish **two levels**, the actual **parameterisation** and a **configuration** level.  
+**Model configuration** allows to alter the behaviour of an xLandscape based model, here of the xSR model (eg, spray-drift interpolation, runoff flow).  
+**Model parameterisation** refers to define inputs for xSR (eg, scenario choice, simulation period, substance use and properties). The **base technical level** of model parameterisation is an **XML file**, with ***.xrun*** file ending. Any XML editor can be used to define an *.xrun* parameterisation file. Which values (parameters) are available in *.xrun* can be adapted (see [Technical Reference](../reference/parameterisation.md)).  
+Each parameter in *.xrun* comes with a **comments** and is framed by corresponding XML tags. The following XML shows the ***template.xrun*** parameterisation file:  
+
+``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <Parameters>
     <!--
@@ -198,3 +252,22 @@
     -->
     <RunOffTempDir>C:\Temp</RunOffTempDir>
 </Parameters>
+```
+
+## File Structure (under preparation)
+
+## Viewing and analyzing the output
+
+### HDFView  
+
+[xLandscape](xLandscape/xLandscape-intro.md) makes use of **multidimensional data stores**. At present, [**HDF**](xLandscape/xLandscape-intro.md#multidimensional-data-store) is being used.  
+
+To view the **raw output** of xSR, open *\run\xOffFieldSoilRisk-Testrun_1\mcs\\[mc run ID]\store\arr.dat* with a HDF5 file viewer such as [HDFView](https://portal.hdfgroup.org/downloads/index.html). Expand the xSR folder.
+
+<img src="img/xxx.PNG" alt="Screenshot of output file structure - xxx(under preparatin)" width="280"/>
+
+Right click on an item and click "Open" to view its attributes and data.
+
+### Jupyter Notebooks (under preparation)
+
+The ***analysis* folder** contains Jupyter notebooks which can analyze and visualize the output of xSR. *requirements.txt* lists python packages necessary to run the Jupyter notebooks in this folder.

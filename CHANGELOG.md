@@ -1,6 +1,12 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.4.0] - 2025-05-08
+### Added
+- Documentation
+### Changed
+### Fixed
+
 ## [1.3.4] - 2023-09-15
 ### Added
 - Note to Readme template regarding the RunOff Temp folder

@@ -1,3 +1,15 @@
+## Parameterisation
+
+## Parameterisation
+
+As any other component, xBF is built to be used (together with other components) in the [xLandscape](xLandscape/xLandscape-intro.md) framework in order to build a landscape model. 
+
+1. The Landscape Model must first be set up; see the Landscape Model Core's [README](https://github.com/xlandscape/LandscapeModel-Core/blob/master/README.md) for detailed instructions.
+2. Create an xSR folder in *\core\components* if it does not already exist.
+3. Copy the xSR component from [GitHub](https://github.com/xlandscape/xSRDemo/tree/main) into the xSR subfolder.
+4. The file *mc.xml* contains information about the components that are used in the created [xLandscape](xLandscape/xLandscape-intro.md) model. Make use of the xSR component by adding the following lines:
+
+``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <Parameters>
     <!--
@@ -25,7 +37,7 @@
                      of clearly in the identifier. If conducting a run from the experiment table, register it there and
                      use the naming scheme <experiment id>-<n> where n is the number of the run.
     -->
-    <SimID>xOffFieldSoilRisk-Testrun_1</SimID>
+    <SimID>X3Soil-Test</SimID>
 
     <!--
     Parameter     :  NumberMC
@@ -35,7 +47,7 @@
     Best practice :  Always conduct multiple MC runs (except for technical tests), e.g., 3 for long-running simulations,
                      30 for small simulations and 10 for anything in between.
     -->
-    <NumberMC>3</NumberMC>
+    <NumberMC>1</NumberMC>
 
     <!--
     Parameter     :  ParallelProcesses
@@ -45,7 +57,7 @@
     Best practice :  To best use the available hardware, apply this rule of thumb:
                      min(NumberMC, NumberParallelProcesses) <= available processors.
     -->
-    <ParallelProcesses>3</ParallelProcesses>
+    <ParallelProcesses>1</ParallelProcesses>
 
     <!--
     Parameter     :  Substance
@@ -198,3 +210,5 @@
     -->
     <RunOffTempDir>C:\Temp</RunOffTempDir>
 </Parameters>
+
+```
