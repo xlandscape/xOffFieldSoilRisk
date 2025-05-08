@@ -5,6 +5,12 @@ This list contains all additions, changes and fixes for XOffFieldSoil.
 ### Added
 ### Changed
 ### Fixed
+- GitHub workflow for recursive submodule checkout
+
+## [1.4.2] - 2025-05-08
+### Added
+### Changed
+### Fixed
 - Production branch name in GitHub workflow
 
 ## [1.4.1] - 2025-05-08
