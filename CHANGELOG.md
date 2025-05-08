@@ -1,6 +1,12 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.4.1] - 2025-05-08
+### Added
+### Changed
+### Fixed
+- GitHub workflow location
+
 ## [1.4.0] - 2025-05-08
 ### Added
 - Documentation
