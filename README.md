@@ -1,3 +1,6 @@
+## Documentation
+https://xlandscape.github.io/xOffFieldSoilRisk/
+
 ## Table of Contents
 * [About the project](#about-the-project)
   * [Built With](#built-with)
@@ -10,9 +13,6 @@
 * [License](#license)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
-
-## xOffFieldSoilRisk Documentation
-https://xlandscape.github.io/xOffFieldSoilRisk/
 
 ## About the project
 XOffFieldSoil is a modular model that simulates processes at a landscape-scale and allows assessing potential effects of
