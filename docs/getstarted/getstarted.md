@@ -44,6 +44,12 @@ We recommend to have a first look into a location of a **MC runs analysis and vi
   > !!! Note  
     When PRZMeu is used as runoff component (as in the template run), **the PRZM model shortly pops up on your Windows desktop**, ie, gets focus and so might distract you from other work on your computer. This behaviour is by design of the PRZM model and Windows System and is unfortunately unavoidable.
 
+  
+  > !!! Note  
+    During runtime, xSR generates temporary files which use a specific folder. You need to either  
+    have **C:\temp** on your drive,  
+    or define your preferred folder in the parameterisation file (.xrun). In the latter case, make sure that the total length of the folder name is <20 characters.  
+
 ## Parameterisation
 
 In the parameterisation of an [xLandscape](../xLandscape/xLandscape-intro.md#xlandscape) based model we distinguish **two levels**, the actual **parameterisation** and a **configuration** level.  
