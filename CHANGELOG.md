@@ -1,6 +1,12 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.4.6] - 2025-05-08
+### Added
+### Changed
+- Mentioned 'C:\temp' in get started section in documentation
+### Fixed
+
 ## [1.4.5] - 2025-05-08
 ### Added
 ### Changed
