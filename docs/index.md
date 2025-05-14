@@ -7,7 +7,7 @@ Welcome to the xOffFieldSoilRisk (xSR) documentation. This documentation provide
 An introduction to the topic is given in an **open access** publication in IEAM: [A spatiotemporally explicit modeling approach for more realistic exposure and risk assessment of off-field soil organisms](https://onlinelibrary.wiley.com/doi/10.1002/ieam.4798).  
 The xOffFieldSoilRisk approach has been presented at different scientific conferences:  
 
-- [Presentation at SETAC Europe 2025](../docs/pdf/SETAC-EU2025%203.03.C.T-04%20xOffFieldSoil.pdf)
+- [Presentation at SETAC Europe 2025](pdf/SETAC-EU2025_3.03.C.T-04_xOffFieldSoil.pdf)
 
 ## Background
 
