@@ -1,4 +1,4 @@
-# Note (5May2025): parts of this section are under preparation
+# Get Started
 
 Please contact Sascha Bub ([sascha.bub@rptu.de](mailto:sascha.bub@rptu.de)) or Thorsten Schad ([tschadwork@gmail.com](mailto:tschadwork@gmail.com)) in case of questions.  
 
