@@ -2,8 +2,8 @@
 
 ## Introduction
 
-The local co-occurrence of arable fields and off-field areas (eg, field margins, hedges, riparian zones, wood margins, graslands), their slopes, structure and management, together with environmental conditions, are key drivers of potential pesticide exposure and risk of off-field-soil organisms. A technical representation of certain geographic area (or artificial composition) covering these driving factors is what we call a ***scenario***.  
-In regulatory RA, scenarios are typically selected (and designed) to represent conservative conditions for the risk of non-target-organismsm. Model outcome using such scenarios are intended to cover a larger range (typically >90%) of real-world conditions as occurring in a regulatory unit (eg, a country).  
+The local **co-occurrence of arable fields and off-field areas** (eg, field margins, hedges, riparian zones, wood margins, graslands), their slopes, structure and management, together with environmental conditions, are key drivers of potential pesticide exposure and risk of off-field-soil organisms. A technical representation of certain geographic area (or artificial composition) covering these driving factors is what we call a ***scenario***.  
+In **regulatory RA**, scenarios are selected and designed to represent a certain **protection level** for the entirety of situations in a given regulatory unit (eg, a country). **Conservative** scenario conditions for the risk of non-target-organismsm are protective for a large fraction of populations (typically >90%) and are basically used at lower-tier RA levels. Using a **variety of more realistic landscape-level scenarios** allows to obtain insights on risk drivers and to define adpated risk mitigation and management measures.  
 
 ## Example Scenarios
 
@@ -31,3 +31,9 @@ Example scenarios introduced in the publication to the xSR model in IEAM: [A spa
 #### NRW3
 
 <img src="../img/Scenario-NRW3.jpg" width="700" height="700">  
+
+
+## Scenario Development
+
+LULC, off-field soil definition
+we propose to understand xSR scenarios as a composition of off-field soil habitats, typically combining ready-to-use LULC data with knowledge 
