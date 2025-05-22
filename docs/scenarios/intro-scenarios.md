@@ -7,18 +7,18 @@ In **regulatory RA**, scenarios are selected and designed to represent a certain
 
 ## Off-Field Soil Areas
 
-Formally, off-field areas starts at the property boundery of the field (see scheme in [Background](/docs/index.md#background)).  
-However, the idea of protection goals is xxx . Thus, in real-world . Often arable fields directly border to each other. So there is 
-
-scenarios are **constructed** 
+Formally, the **off-field areas starts at the property boundery** of the field (see scheme in [Background](/docs/index.md#background)).  
+However, as this **can be anything** and as the idea of the forthcoming pesticide regulation of the European Food Safety Authority (EFSA) ([“addressing the state of the science on RA of PPPs for in-soil organisms” (EFSA PPR Panel, 2017)](https://www.efsa.europa.eu/en/efsajournal/pub/4690)) is to protect soil organisms, **relevant off-field soil habitats** need to be identified which are **subject to off-field soil RA**.  
+In **real-world** cultivated regions often arable fields directly border to each other or to rural roads (with artificial road substructure banks and no natural soil). So in scenario development a first step is analyse cultivated regions for (semi)natural off-field soil land cover types, from which scenarios are then being ***constructed***.  
+The development and definition of **relevant off-field soil habitats** is part of the discussions in the regulatory scientific community.  
 
 <img src="../img/OffFieldSoilDefinition.png" alt="Off-Field Soil Illustration" width="1100"/>
 
 Illustration of potential off-field soil areas in cultural landscapes in central Europe.  
 
-| Land use/cover | Notes |
-| --------------| --------|
-| Field margin | xxx |
+| Land use/cover | Description | Evaluation |
+| --------------| --------| -------------- |
+| Field margin | xxx | xxx |
 
 
 ## Example Scenarios
@@ -46,12 +46,6 @@ Schematic scenario 1 - 'Grassland' type.
 
 Schematic scenario 2 - 'Riparian' type.
 
-<img src="../img/scenario-schematic3.png" width="500" height="250">  
-
-Schematic scenario 3 - 'Grassstrip' type.
-
-
-
 1. 'Grassland'-type  
 large off-field area; yet, also margins of large areas
 mostly direct vicinity to arable fields
@@ -60,13 +54,6 @@ representing, eg, grassland, wood, urban; wood-margin, urban-margin
 1. 'Riparian'-type
 bordering to 2 fields
 representing, eg, ditch/stream riparian zone, off-field hedge
-1. 'Grassstrip'-type
-small grassstrip between (rural) road and fields 
-(anthropogenic)
-partly hedges
-
-further types from across Europe?!
-
 
 **Ensemble of *schematic* scenarios** representing a statistical population of off-field-soil areas.  
 
