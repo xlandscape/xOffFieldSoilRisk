@@ -52,7 +52,6 @@ nav:
     - Scenarios: 'scenarios/intro-scenarios.md'
     - Scenario Development: 'scenarios/create-scenario.md'
   - Technical Reference:
-    - File Structure: 'reference/fileStructure.md'
     - Troubleshooting: 'reference/troubleshooting.md'
   - Glossary: 'reference/xoffFieldSoilRisk-glossary.md'
   - xLandscape:

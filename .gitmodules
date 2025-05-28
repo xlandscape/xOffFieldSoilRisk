@@ -16,3 +16,12 @@
 [submodule "docs/xLandscape"]
 	path = docs/xLandscape
 	url = https://github.com/xlandscape/xLandscape-Documentation
+[submodule "scenario/NRW1"]
+	path = scenario/NRW1
+	url = https://github.com/xlandscape/Scenario-NRW1
+[submodule "scenario/NRW2"]
+	path = scenario/NRW2
+	url = https://github.com/xlandscape/Scenario-NRW2
+[submodule "scenario/NRW3"]
+	path = scenario/NRW3
+	url = https://github.com/xlandscape/Scenario-NRW3
