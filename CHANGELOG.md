@@ -1,6 +1,14 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.5.0] - 2025-05-28
+### Added
+- Scenario NRW1 version 3.0 as git submodule
+- Scenario NRW2 version 3.0 as git submodule
+- Scenario NRW3 version 3.0 as git submodule
+### Changed
+### Fixed
+
 ## [1.4.6] - 2025-05-08
 ### Added
 ### Changed
