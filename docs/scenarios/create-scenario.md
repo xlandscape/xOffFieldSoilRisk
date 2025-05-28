@@ -8,7 +8,14 @@ In the context of risk assessment for pesticides, a *Scenario* refers to a set o
 In xCP, the term *PPP use scenario* is simultaneously addressed as ***Parameterisation* of xCP** (as part of a full parameterisation of a landscape model). The environmental conditions together with the land use are often called a ***landscape scenario***.   
 In an xCP parameterisation, PPP use are typically defined related to land use types (eg, the use of a fungicide in apples). During runtime xCP evaluates actual land use, ie. land use data can be static or dynamic. 
 
-Note: This section provides an introduction to xCP scenarios on a technical level with the intention to enable colleagues with technical experiance to build scenarios and to use xCP. However, we plan to develop a **graphical user interface** (GUI) that allows any user to intuitively build xCP scenarios. 
+Note: This section provides an introduction to xCP scenarios on a technical level with the intention to enable colleagues with technical experiance to build scenarios and to use xCP. However, we plan to develop a **graphical user interface** (GUI) that allows any user to intuitively build xCP scenarios.  
+
+LULC, off-field soil definition  
+we propose to understand xSR scenarios as a composition of off-field soil habitats, typically combining ready-to-use LULC data with knowledge  
+
+<img src="../img/OffFieldSoilDefinition.png" alt="Off-Field Soil Illustration" width="1000"/>
+
+Illustration of potential off-field soil areas in cultural landscapes in central Europe.  
 
 ## Use Example Scenarios as Templates
 

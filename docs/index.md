@@ -39,7 +39,8 @@ A second option to use xSR model output is to **link xSR directly with effect mo
 More realistic RA and risk management, more holistic evaluation of pesticide risk, integrated pest assessment, integrated cost/benefit ecosystem service assessments, are currently intensely discussed topics with a need for tools and data. Among the already and more precisely defined topics for development is to build consistent lower tier approaches from reasonably realistic 'Reference Scenario' levels. The latter directly calls for landscape-level exposure and effect modelling on the basis of resonably realistic scenarios.  
 The conceptual developments and modular implementation of xSR might contribute to these developments in the regulatory scientific community.  
 
-<img src="img/results-xSR_vs_worstcase.png" alt="Case study example outcome" width="700"/>  
+<img src="img/results-xSR_vs_worstcase.png" alt="Case study example outcome" width="900"/>  
+
 Illustration of the potential of xOffFieldSoilRisk to support the development of lower-tier approaches from landscape-level analysis: for the persistent substance Lindane, analysed assessment endpoints (percentiles of PECsoil of time and space) are significantly below a worst-case approach (based on FOCUSsw-Step2) and below the maximum single values in space and time observed in edge-of-field and landscape scenarios. The single extreme value observed at one point in time and one off-field soil 1m2 shows that the xSR approach can also reproduce very unfavorouble conditions in real-world landscapes.  
 
 ## Implementation
