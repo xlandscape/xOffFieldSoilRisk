@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="urn:xOffFieldSoilRiskLandscapeScenarioPackageInfo"
+  xmlns="urn:xOffFieldSoilRiskLandscapeScenarioPackageInfo"
+  elementFormDefault="qualified"
+>
+  <xsd:element name="landscape_package">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="meta">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="version">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[0-9]+(\.[0-9]+)*"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="description" type="xsd:string"/>
+              <xsd:element name="target_type">
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:positiveInteger">
+                      <xsd:attribute name="type" type="xsd:string" use="required" fixed="list[int]"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="habitat_types">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[0-9]+(, [0-9]+)*"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="base">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="base_landscape_geometries">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[a-zA-Z0-9_]+\.shp"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="feature_id_attribute">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="10"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="feature_type_attribute">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="10"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="additional_attributes"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="supplementary">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="flow_grid">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[a-zA-Z0-9_]+\.tif"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="land_use_raster">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[a-zA-Z0-9_]+\.tif"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="analysis_distance_groups">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[a-zA-Z0-9_]+\.tif"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="supplementary_shapefiles">
+          <xsd:complexType/>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

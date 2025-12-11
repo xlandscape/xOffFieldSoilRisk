@@ -5,8 +5,8 @@ In the context of risk assessment for pesticides, a *Scenario* refers to a set o
 1. *environmental conditions* (abiotic, biotic, land cover, etc.)
 2. *agricultural practise*, esp. land use and land management,  including the use of PPPs, as refered to as ***PPP use scenario***
   
-In xCP, the term *PPP use scenario* is simultaneously addressed as ***Parameterisation* of xCP** (as part of a full parameterisation of a landscape model). The environmental conditions together with the land use are often called a ***landscape scenario***.   
-In an xCP parameterisation, PPP use are typically defined related to land use types (eg, the use of a fungicide in apples). During runtime xCP evaluates actual land use, ie. land use data can be static or dynamic. 
+In xCP, the term *PPP use scenario* is simultaneously addressed as ***Parameterisation* of xCP** (as part of a full parameterisation of a landscape model). The environmental conditions together with the land use are often called a ***landscape scenario***.  
+In an xCP parameterisation, PPP use are typically defined related to land use types (eg, the use of a fungicide in apples). During runtime xCP evaluates actual land use, ie. land use data can be static or dynamic.  
 
 Note: This section provides an introduction to xCP scenarios on a technical level with the intention to enable colleagues with technical experiance to build scenarios and to use xCP. However, we plan to develop a **graphical user interface** (GUI) that allows any user to intuitively build xCP scenarios.  
 

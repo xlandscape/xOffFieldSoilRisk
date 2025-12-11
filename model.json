@@ -1,0 +1,8 @@
+{
+  "name": "xOffFieldSoilRisk",
+  "version": "1.5.1",
+  "_EXP_BASE_DIR_": "run",
+  "executable": "__start__.bat",
+  "logfile_path": "$(_EXP_BASE_DIR_)/$(SimID)/log",
+  "results_path": "$(_EXP_BASE_DIR_)/$(SimID)/mcs"
+}
