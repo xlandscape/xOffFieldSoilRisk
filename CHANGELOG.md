@@ -1,6 +1,20 @@
 # Changelog
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.5.1] - 2025-12-11
+### Added
+- Semantic information to model configuration
+- Schema for landscape scenario
+- model.json
+- Repository information to documentation
+### Changed
+- Updated landscape model core to version 1.18.1
+- Updated AnalysisObserver to version 2.2.6
+- Updated RunOffPrzm component to version 2.1.1
+- Updated XSPrayDrift component to version 2.5.6
+- Updated schematic sample scenario to version 2.4
+### Fixed
+
 ## [1.5.0] - 2025-05-28
 ### Added
 - Scenario NRW1 version 3.0 as git submodule
