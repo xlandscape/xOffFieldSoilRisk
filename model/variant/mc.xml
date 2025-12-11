@@ -38,11 +38,10 @@
   <Composition>
     <Weather module="components" class="MarsWeather">
       <FilePath scales="global">$(:weather_$$(Weather))</FilePath>
-      <FirstDate type="date" scales="global">$(SimulationStart)</FirstDate>
-      <LastDate type="date" scales="global">$(SimulationEnd)</LastDate>
     </Weather>
     <LandscapeScenario module="components" class="LandscapeScenario">
       <BaseLandscapeGeometries scales="global">$(:LandscapeScenario)</BaseLandscapeGeometries>
+      <GeoPackageNamespace scales="global">urn:xOffFieldSoilRiskLandscapeScenarioPackageInfo</GeoPackageNamespace>
     </LandscapeScenario>
     <PPM module="components" class="PpmCalendar">
       <SimulationStart type="date" scales="global">$(SimulationStart)</SimulationStart>
@@ -116,9 +115,9 @@
       <FilteringTypes type="list[int]" scales="global"/>
       <FilteringMinWidth type="float" unit="m" scales="global">999</FilteringMinWidth>
       <FilteringFraction type="float" unit="1" scales="global">0</FilteringFraction>
-      <AgDriftBoomHeight scales="global">NA</AgDriftBoomHeight>
-      <AgDriftDropletSize scales="global">NA</AgDriftDropletSize>
-      <AgDriftQuantile type="float" unit="1" scales="global">0</AgDriftQuantile>
+      <AgDriftBoomHeight scales="global">low</AgDriftBoomHeight>
+      <AgDriftDropletSize scales="global">fine</AgDriftDropletSize>
+      <AgDriftQuantile type="float" unit="1" scales="global">0.9</AgDriftQuantile>
     </SprayDrift>
     <RunOffPrzm module="RunOffPrzm" class="RunOffPrzm" enabled="$(SimulateRunOffExposure)">
       <ProcessingPath scales="global">$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\runoff</ProcessingPath>
@@ -248,63 +247,118 @@
         Cereals,Winter|OffCrop
       </CropParameters_Crops>
       <CropParameters_VfsModLookupTables
-          type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
-        none|$(:VfsMod_lookup_table)
+        type="list[str]"
+        scales="other/crop"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
+        none|$(:Vfs-Mod_lookup_table)
       </CropParameters_VfsModLookupTables>
       <CropParameters_PanEvaporationFactors
-          type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="1"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0.84 0.84
       </CropParameters_PanEvaporationFactors>
       <CropParameters_CanopyInterceptions
-          type="list[float]" scales="other/crop" unit="cm" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="cm"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0.15 0.15
       </CropParameters_CanopyInterceptions>
       <CropParameters_MaximumCoverages
-          type="list[int]" scales="other/crop" unit="%" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[int]"
+        scales="other/crop"
+        unit="%"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         90 90
       </CropParameters_MaximumCoverages>
       <CropParameters_MaximumHeights
-          type="list[int]" scales="other/crop" unit="cm" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[int]"
+        scales="other/crop"
+        unit="cm"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         110 110
       </CropParameters_MaximumHeights>
       <CropParameters_MaximumRootingDepths
-          type="list[int]" scales="other/crop" unit="cm" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[int]"
+        scales="other/crop"
+        unit="cm"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         130 130
       </CropParameters_MaximumRootingDepths>
       <CropParameters_Fallows
-          type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="1"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0.9 0.9
       </CropParameters_Fallows>
       <CropParameters_Cropping
-          type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="1"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0.2 0.2
       </CropParameters_Cropping>
       <CropParameters_Residues
-          type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="1"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0.4 0.4
       </CropParameters_Residues>
       <CropParameters_EmergenceDates
-          type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[str]"
+        scales="other/crop"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         12-11|12-11
       </CropParameters_EmergenceDates>
       <CropParameters_MaturationDates
-          type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[str]"
+        scales="other/crop"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         10-06|10-06
       </CropParameters_MaturationDates>
       <CropParameters_HarvestDates
-          type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[str]"
+        scales="other/crop"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         31-07|31-07
       </CropParameters_HarvestDates>
       <CropParameters_FallowDates
-          type="list[str]" scales="other/crop" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[str]"
+        scales="other/crop"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         01-11|01-11
       </CropParameters_FallowDates>
       <CropParameters_WaterMitigations
-          type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="1"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0 -0.086
       </CropParameters_WaterMitigations>
       <CropParameters_SedimentMitigations
-          type="list[float]" scales="other/crop" unit="1" element_names="RunOffPrzm/CropParameters_Crops">
+        type="list[float]"
+        scales="other/crop"
+        unit="1"
+        element_names="RunOffPrzm/CropParameters_Crops"
+      >
         0 -0.153
       </CropParameters_SedimentMitigations>
     </RunOffPrzm>
@@ -321,7 +375,7 @@
       <Deposition>
         <FromOutput component="EnvironmentalFate" output="Pec"/>
       </Deposition>
-      <SoilBulkDensity type="float" scales="global">1.5</SoilBulkDensity>
+      <SoilBulkDensity type="float" scales="global" unit="g/cm³">1.5</SoilBulkDensity>
       <Depth type="float" scales="global">5</Depth>
     </DepositionToPecSoil>
     <DeleteFolder module="components" class="DeleteFolder">
