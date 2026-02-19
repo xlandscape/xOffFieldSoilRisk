@@ -1,3 +1,4 @@
 .idea/
-scenario/
+scenario/*
 document.bat
+!scenario/CropProtection.xml
