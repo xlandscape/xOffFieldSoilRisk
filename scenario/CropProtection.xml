@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xCropProtection
+  xmlns="urn:xCropProtectionLandscapeScenarioParametrization"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn:xCropProtectionLandscapeScenarioParametrization
+  ../model/variant/CropProtection/xCropProtection.xsd"
+>
+  <PPMCalendars>
+    <PPMCalendar>
+      <TemporalValidity scales="time/simulation">always</TemporalValidity>
+      <TargetCrops type="list[int]" scales="global">2</TargetCrops>
+      <Indications>
+        <Indication type="xCropProtection.ChoiceDistribution" scales="time/year, space/base_geometry">
+          <ApplicationSequence probability="1">
+            <Application>
+              <Tank>
+                <Products type="list[str]" scales="other/products">Lindane</Products>
+                <ApplicationRates scales="other/products">
+                  <ApplicationRate type="float" unit="g/ha" scales="global">2400</ApplicationRate>
+                </ApplicationRates>
+              </Tank>
+              <ApplicationWindow type="xCropProtection.MonthDaySpan" scales="global">03-01 to 03-01</ApplicationWindow>
+              <Technology scales="global">Standard-Sprayer</Technology>
+              <InCropBuffer type="float" unit="m" scales="global">0</InCropBuffer>
+              <InFieldMargin type="float" unit="m" scales="global">0</InFieldMargin>
+            </Application>
+          </ApplicationSequence>
+        </Indication>
+      </Indications>
+    </PPMCalendar>
+  </PPMCalendars>
+  <Technologies>
+    <Technology>
+      <TechnologyName scales="global">Standard-Sprayer</TechnologyName>
+      <DriftReduction type="float" unit="1" scales="global">0</DriftReduction>
+    </Technology>
+  </Technologies>
+  <PPPs/>
+</xCropProtection>
