@@ -43,29 +43,27 @@
       <BaseLandscapeGeometries scales="global">$(:LandscapeScenario)</BaseLandscapeGeometries>
       <GeoPackageNamespace scales="global">urn:xOffFieldSoilRiskLandscapeScenarioPackageInfo</GeoPackageNamespace>
     </LandscapeScenario>
-    <PPM module="components" class="PpmCalendar">
+    <PPM module="CropProtection" class="xCropProtection">
+      <xCropProtectionFilePath scales="global">$(_PROJECT_DIR_)\scenario\CropProtection.xml</xCropProtectionFilePath>
+      <ParametrizationNamespace scales="global">
+        urn:xCropProtectionLandscapeScenarioParametrization
+      </ParametrizationNamespace>
       <SimulationStart type="date" scales="global">$(SimulationStart)</SimulationStart>
       <SimulationEnd type="date" scales="global">$(SimulationEnd)</SimulationEnd>
-      <ApplicationWindows scales="global">$(ApplicationWindows)</ApplicationWindows>
+      <RandomSeed type="int" scales="global">0</RandomSeed>
+      <OutputApplicationType>product</OutputApplicationType>
+      <ProductDatabase>$(_EXP_BASE_DIR_)\$(SimID)\dummy.sqlite</ProductDatabase>
+      <XMLPath>$(_EXP_BASE_DIR_)\$(SimID)</XMLPath>
+      <MinimumAppliedArea scales="global">10</MinimumAppliedArea>
       <Fields>
         <FromOutput component="LandscapeScenario" output="FeatureIds"/>
       </Fields>
       <LandUseLandCoverTypes>
         <FromOutput component="LandscapeScenario" output="FeatureTypeIds"/>
       </LandUseLandCoverTypes>
-      <TargetLandUseLandCoverType>
-        <FromOutput component="LandscapeScenario" output="target_type"/>
-      </TargetLandUseLandCoverType>
-      <ApplicationRate type="float" unit="g/ha" scales="global">$(ApplicationRate)</ApplicationRate>
-      <TechnologyDriftReduction type="float" unit="1" scales="global">$(DriftReduction)</TechnologyDriftReduction>
-      <InCropBuffer type="float" unit="m" scales="global">$(InCropBuffer)</InCropBuffer>
-      <InFieldMargin type="float" unit="m" scales="global">$(InFieldMargin)</InFieldMargin>
       <FieldGeometries>
         <FromOutput component="LandscapeScenario" output="Geometries"/>
       </FieldGeometries>
-      <MinimumAppliedArea type="float" unit="m²" scales="global">10</MinimumAppliedArea>
-      <RandomSeed type="int" scales="global">$(RandomSeed)</RandomSeed>
-      <ProbabilityFieldApplied type="float" unit="1" scales="global">1</ProbabilityFieldApplied>
     </PPM>
     <SprayDrift module="XSprayDrift" class="SprayDrift" enabled="$(SimulateSprayDriftExposure)">
       <ProcessingPath scales="global">$(_MCS_BASE_DIR_)\$(_MC_NAME_)\processing\sd</ProcessingPath>

@@ -86,21 +86,6 @@
     <ApplicationRate>2400</ApplicationRate>
 
     <!--
-    Parameter     :  ApplicationWindow
-    Description   :  The time windows within which applications take place.
-    Values        :  format: MM-DD to MM-DD[, MM-DD to MM-DD[, ...]]
-    Remark        :  For each target field, year and application within an application sequence, a random date within
-                     the specified time window is selected. Example values:
-                     04-15 to 04-15 : All fields are applied on 15th of April every year
-                     04-07 to 04-21 : All fields are applied each year on a random date (per field and year) between 7th
-                                      and 21st of April
-                     04-07 to 04-21, 05-02 to 05-16 : All fields are applied twice each year; on a random date (per
-                                                      field and year) between 7th and 21st of April and on a random date
-                                                      (per field and year) between 2nd and 16th of May.
-    -->
-    <ApplicationWindows>03-01 to 03-01</ApplicationWindows>
-
-    <!--
     Parameter     :  SimulateRunOffExposure
     Description   :  Controls whether run-off exposure is simulated or not.
     Values        :  "true" or "false.
@@ -122,23 +107,6 @@
     Values        :  "XSprayDrift" or "90thRautmann".
     -->
     <SprayDriftModel>XSprayDrift</SprayDriftModel>
-
-    <!--
-    Parameter     :  DriftReduction
-    Description   :  The effect of drift-reducing nozzles to spay-drift deposition; the fraction filtered out.
-    Values        :  A number between 0 and 1.
-    Remark        :  Zero means no effect = full spray-drift deposition, 1 means full filtering = no deposition at all.
-    -->
-    <DriftReduction>0</DriftReduction>
-
-    <!--
-    Parameter     :  InCropBuffer
-    Description   :  A in-crop buffer not applied in meters.
-    Values        :  Zero or a positive number.
-    Remark        :  The in-crop buffer is geometrically applied to the field and might result in very small fields not
-                     being applied at all.
-    -->
-    <InCropBuffer>0</InCropBuffer>
 
     <!--
     Parameter     :  InFieldMargin

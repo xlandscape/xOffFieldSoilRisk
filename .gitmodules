@@ -25,3 +25,6 @@
 [submodule "scenario/NRW3"]
 	path = scenario/NRW3
 	url = https://github.com/xlandscape/Scenario-NRW3
+[submodule "model/variant/CropProtection"]
+	path = model/variant/CropProtection
+	url = https://github.com/xlandscape/CropProtection-Component
