@@ -2,9 +2,25 @@
 
 ## Purpose and scope
 
-The Pesticide Root Zone Model (PRZM) is a one-dimensional, finite-difference model for simulating water movement and pesticide fate in a soil profile [1, 2]. Its runoff calculation is a **field-scale source calculation**: it estimates the volume of water leaving the lower edge of a conceptual field on each model day, and then determines how much pesticide is exported with that water and with eroded sediment. It is not a routing model for a catchment. A landscape model must therefore provide the receiving location and route the exported load separately.
+The Pesticide Root Zone Model (PRZM) is a one-dimensional, finite-difference model for simulating water movement and pesticide fate in a soil profile [1, 2]. In xOffFieldSoilRisk, the `RunOffPrzm` component uses the `PRZM_Runoff` module, which is based on the FOCUS surface-water PRZM implementation (version 1.47 of the module). Its runoff calculation is a **field-scale source calculation**: it estimates the volume of water leaving the lower edge of a conceptual field on each model day, and then determines how much pesticide is exported with that water and with eroded sediment. It is not a routing model for a catchment. A landscape model must therefore provide the receiving location and route the exported load separately.
 
-This page describes the conceptual calculation used in PRZM 5 and the equations that are important when interpreting a runoff result. Exact option names and implementation details vary between PRZM releases and regulatory interfaces. Always check the manual for the executable version used in an assessment.
+This page describes the **FOCUS PRZM_SW** calculation used as the reference for xOffFieldSoilRisk. The equations are important for interpreting a runoff result, but exact option names and implementation details vary between releases and regulatory interfaces. Always check the executable version and its parameterisation when reproducing an assessment.
+
+The **FOCUS PRZM_SW** implementation adapts PRZM for the European FOCUS surface-water scenarios and documents the regulatory model context [1]. The U.S. EPA PRZM lineage, including PRZM 5 and its incorporation into PWC, is a related but distinct implementation family [2].
+
+## FOCUS PRZM_SW and EPA PRZM 5
+
+The two model families share the central PRZM concept and the use of SCS Curve Number runoff and USLE-based erosion, but their hydrologic implementations and regulatory parameterisations should not be assumed to be identical.
+
+| Aspect | FOCUS PRZM_SW used as the xOffFieldSoil reference | EPA PRZM 5 lineage |
+| --- | --- | --- |
+| Regulatory context | Developed for the harmonised European FOCUS surface-water scenarios and integrated into the FOCUS Step 3 surface-water model suite [1]. | Developed for U.S. EPA pesticide fate and exposure assessment; EPA now distributes PRZM as a legacy model and incorporates it into PWC [2]. |
+| Water movement | Capacity-based water flow using a daily timestep for hydrological processes; the FOCUS description calls this a tipping-bucket approach [1]. | A later PRZM implementation with its own release-specific hydrologic options and parameterisation. Results must be interpreted from the exact PRZM 5/PWC manual and input file rather than transferred from FOCUS defaults. |
+| Runoff generation | SCS Curve Number technique [1]. | Also uses PRZM-family runoff routines, but Curve Number defaults, event handling, input conventions, and surrounding water-balance options may differ by release. |
+| Erosion | Universal Soil Loss Equation approach [1]. | USLE-related erosion routines are also part of the PRZM family, but erosion factors and option settings are release-specific. |
+| Flow processes | The FOCUS PRZM_SW process summary states that preferential flow and capillary rise are not considered, and that drainage is not considered in that summary; an option for Richards' equation exists below the root zone [1]. | Do not apply those FOCUS restrictions or options to PRZM 5 without checking the specific EPA implementation. A change in flow formulation can alter soil moisture, runoff timing, drainage, and pesticide availability even when the same Curve Number equation is used. |
+
+The practical consequence is that the SCS equation presented below is a shared runoff-generation description, not a complete statement that a PRZM 5 simulation and a FOCUS PRZM_SW simulation will produce the same result. For xOffFieldSoilRisk, use the FOCUS PRZM_SW assumptions, module version, input conventions, and scenario parameterisation as the controlling reference. Cite PRZM 5 or PWC separately when comparing or transferring results from the U.S. EPA model family.
 
 ## Hydrologic sequence
 
@@ -35,7 +51,7 @@ The daily timestep means that a storm's sub-daily peak intensity is not normally
 
 ## SCS Curve Number runoff volume
 
-The standard PRZM runoff formulation is based on the USDA Soil Conservation Service (SCS), now Natural Resources Conservation Service (NRCS), Curve Number method [1, 3]. The method converts event precipitation into direct runoff using a watershed or field Curve Number ($CN$). Define the potential maximum retention after runoff begins as:
+The standard PRZM runoff formulation is based on the USDA Soil Conservation Service (SCS), now Natural Resources Conservation Service (NRCS), Curve Number method [1, 4]. The method converts event precipitation into direct runoff using a watershed or field Curve Number ($CN$). Define the potential maximum retention after runoff begins as:
 
 $$
 S = \frac{25400}{CN} - 254
@@ -180,7 +196,7 @@ The factors and units depend on the particular USLE or MUSLE implementation and 
 
 The PRZM runoff approach has several important strengths for pesticide fate and regulatory screening:
 
-- **Transparent and reproducible.** The Curve Number equations expose the main runoff assumptions. Given the same weather, area, Curve Number, antecedent condition, and model options, another analyst can reproduce the runoff-depth calculation [1, 3].
+- **Transparent and reproducible.** The Curve Number equations expose the main runoff assumptions. Given the same weather, area, Curve Number, antecedent condition, and model options, another analyst can reproduce the runoff-depth calculation [1, 4].
 - **Efficient for long simulations.** A daily water-balance model is inexpensive enough for multi-year weather series, scenario comparisons, and repeated Monte Carlo runs. This is valuable when pesticide fate must be simulated for many application years.
 - **Coupled water and chemical fate.** Runoff is calculated in the same soil-profile model that represents infiltration, storage, degradation, sorption, and transport. Runoff pesticide loads can therefore respond to application timing and surface-soil concentrations rather than being imposed as an independent concentration series [1, 2].
 - **Compatible with standard data.** Soil properties, daily weather, crop information, Curve Numbers, and erosion factors are commonly available in regulatory workflows. The approach can be parameterised even when high-resolution rainfall-runoff observations are unavailable.
@@ -196,7 +212,7 @@ The same simplifications that make the method practical can limit its predictive
 - **Initial abstraction is uncertain.** The traditional $I_a = 0.2S$ assumption is convenient but not universal. Changing the initial-abstraction ratio can substantially change runoff from small and moderate events, especially near the runoff threshold.
 - **Antecedent moisture is simplified.** Dry, average, or wet classifications are useful approximations, but they do not fully represent spatially varying soil moisture, preferential flow, macropores, frozen soil, crusting, or rapidly changing surface conditions.
 - **One-dimensional field representation.** PRZM represents a conceptual soil column. It does not resolve within-field topography, concentrated flow paths, channel initiation, field-edge accumulation, or lateral redistribution between landscape positions. Those processes must be addressed by the receiving landscape model or by another hydrologic model.
-- **Runoff and erosion are not interchangeable.** The runoff water calculation does not by itself predict sediment export. Erosion depends on rainfall erosivity, erodibility, slope, cover, and management factors, and the relevant USLE or MUSLE option must be parameterised consistently [1, 4].
+- **Runoff and erosion are not interchangeable.** The runoff water calculation does not by itself predict sediment export. Erosion depends on rainfall erosivity, erodibility, slope, cover, and management factors, and the relevant USLE or MUSLE option must be parameterised consistently [1, 5].
 - **Calibration can be non-unique.** A Curve Number, hydraulic conductivity, depression storage, and soil-water parameters can compensate for one another. A good match to total runoff does not prove that the model has the correct event timing or pesticide concentration.
 - **Pesticide loads inherit hydrologic uncertainty.** Errors in runoff depth, timing, or surface mixing propagate into dissolved and sediment-associated pesticide loads. A fitted runoff volume can still give a biased chemical export if the surface pesticide mass or sorption assumptions are wrong.
 - **No receiving-water or off-field fate by itself.** PRZM estimates export from the modeled field. It does not, on its own, simulate routing across a heterogeneous landscape, deposition in an off-field soil, dilution, connectivity, or exposure at a receptor. Treating the PRZM output as a receptor concentration would be a category error.
@@ -234,9 +250,10 @@ Do not add PRZM's field runoff volume to a receiving compartment as though it we
 
 ## Sources
 
-1. Young, D. F. (2015). *PRZM-5, A Model for Predicting Pesticide Fate in the Crop Root Zone: User Manual*. U.S. Environmental Protection Agency. [EPA PRZM documentation archive](https://www.epa.gov/pesticide-science-and-assessing-pesticide-risks/pesticide-root-zone-model-przm).
-2. Carsel, R. F., Mulkey, L. A., Lorraine, A. N., and others. (1984). *The Pesticide Root Zone Model (PRZM): A Procedure for Evaluating Pesticide Leaching Threats to Ground Water*. Ecological Modelling, 23, 241-255. [doi:10.1016/0304-3800(84)90034-3](https://doi.org/10.1016/0304-3800(84)90034-3).
-3. USDA Natural Resources Conservation Service. (2004). *National Engineering Handbook, Part 630, Hydrology, Chapter 10: Estimation of Direct Runoff from Storm Rainfall*. [NRCS National Engineering Handbook](https://www.nrcs.usda.gov/resources/guides-and-instructions/national-engineering-handbook).
-4. Wischmeier, W. H., and Smith, D. D. (1978). *Predicting Rainfall Erosion Losses: A Guide to Conservation Planning*. USDA Agriculture Handbook 537. [USDA National Agricultural Library record](https://www.nrcs.usda.gov/resources/guides-and-instructions/predicting-rainfall-erosion-losses).
+1. European Commission Joint Research Centre. *PRZM_SW: FOCUS Surface Water PRZM model*. European Soil Data Centre, FOCUS DG SANTE. [PRZM_SW model documentation](https://esdac.jrc.ec.europa.eu/projects/przmsw).
+2. Young, D. F. (2015). *PRZM-5, A Model for Predicting Pesticide Fate in the Crop Root Zone: User Manual*. U.S. Environmental Protection Agency. [EPA PRZM documentation archive](https://www.epa.gov/ceam/przm-version-index).
+3. Carsel, R. F., Mulkey, L. A., Lorraine, A. N., and others. (1984). *The Pesticide Root Zone Model (PRZM): A Procedure for Evaluating Pesticide Leaching Threats to Ground Water*. Ecological Modelling, 23, 241-255. [doi:10.1016/0304-3800(84)90034-3](https://doi.org/10.1016/0304-3800(84)90034-3).
+4. USDA Natural Resources Conservation Service. (2004). *National Engineering Handbook, Part 630, Hydrology, Chapter 10: Estimation of Direct Runoff from Storm Rainfall*. [NRCS National Engineering Handbook](https://www.nrcs.usda.gov/resources/guides-and-instructions/national-engineering-handbook).
+5. Wischmeier, W. H., and Smith, D. D. (1978). *Predicting Rainfall Erosion Losses: A Guide to Conservation Planning*. USDA Agriculture Handbook 537. [USDA National Agricultural Library record](https://www.nrcs.usda.gov/resources/guides-and-instructions/predicting-rainfall-erosion-losses).
 
 The equations on this page are presented for explanation and dimensional checks. For a reproducible assessment, cite the exact PRZM release, input file, weather series, soil profile, Curve Number source, and option settings used to produce the result.
