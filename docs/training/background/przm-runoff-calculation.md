@@ -6,9 +6,6 @@ The Pesticide Root Zone Model (PRZM) is a one-dimensional, finite-difference mod
 
 This page describes the conceptual calculation used in PRZM 5 and the equations that are important when interpreting a runoff result. Exact option names and implementation details vary between PRZM releases and regulatory interfaces. Always check the manual for the executable version used in an assessment.
 
-!!! note "Runoff is not the same as drainage"
-    **Runoff** is lateral flow generated when rainfall or irrigation exceeds the soil surface's infiltration and storage capacity. **Drainage** is water that leaves the bottom of the modeled soil profile. The two fluxes have different timing, transport paths, and pesticide concentrations.
-
 ## Hydrologic sequence
 
 PRZM advances the soil water balance at a daily time step. For a day $t$, the main inputs and outputs can be represented as:
