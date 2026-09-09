@@ -55,6 +55,9 @@ nav:
     - Troubleshooting-xSR: 'reference/troubleshooting.md'
     - Troubleshooting-general: 'xLandscape/reference/troubleshooting.md'
   - Glossary: 'reference/xoffFieldSoilRisk-glossary.md'
+  - Training:
+    - Background:
+      - PRZM Runoff Calculation: 'training/background/przm-runoff-calculation.md'
   - xLandscape:
     - Intro: 'xLandscape/xLandscape-intro.md'
     - Version 1.x: 'xLandscape/xLandscape-v1x.md'
