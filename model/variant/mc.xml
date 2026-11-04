@@ -44,7 +44,9 @@
       <GeoPackageNamespace scales="global">urn:xOffFieldSoilRiskLandscapeScenarioPackageInfo</GeoPackageNamespace>
     </LandscapeScenario>
     <PPM module="CropProtection" class="xCropProtection">
-      <xCropProtectionFilePath scales="global">$(_PROJECT_DIR_)\scenario\CropProtection.xml</xCropProtectionFilePath>
+      <xCropProtectionFilePath scales="global">
+        $(_MCS_BASE_DIR_)\$(_MC_NAME_)\CropProtection.xml
+      </xCropProtectionFilePath>
       <ParametrizationNamespace scales="global">
         urn:xCropProtectionLandscapeScenarioParametrization
       </ParametrizationNamespace>

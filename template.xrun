@@ -85,6 +85,12 @@
   -->
   <ApplicationRate>2400</ApplicationRate>
 
+  <ApplicationWindow>03-01 to 03-01</ApplicationWindow>
+
+  <InCropBuffer>0</InCropBuffer>
+
+  <DriftReduction>0</DriftReduction>
+
   <!--
   Parameter     :  SimulateRunOffExposure
   Description   :  Controls whether run-off exposure is simulated or not.
