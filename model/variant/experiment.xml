@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Experiment>
-    <General>
-        <MCRunTemplate>$(_X3DIR_)/../../variant/mc.xml</MCRunTemplate>
-        <MCBaseDir>$(_EXP_BASE_DIR_)\$(SimID)\mcs</MCBaseDir>
-        <NumberMC>$(NumberMC)</NumberMC>
-        <NumberParallelProcesses>$(ParallelProcesses)</NumberParallelProcesses>
-        <ExperimentDir>$(_EXP_BASE_DIR_)\$(SimID)</ExperimentDir>
-        <EnableProfiling>true</EnableProfiling>
-        <ProfilingWaitingTime>5</ProfilingWaitingTime>
-        <ProfilingPollingDuration>1</ProfilingPollingDuration>
-    </General>
-    <Observers>
-        <Observer module="observer" class="ConsoleObserver">
-            <show_messages_get_values_ok>false</show_messages_get_values_ok>
-        </Observer>
-        <Observer module="AnalysisObserver" class="AnalysisObserver">
-            <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_Experiment.R</Script>
-            <Data>$(_EXP_BASE_DIR_)\$(SimID)\mcs</Data>
-            <Output_Folder>$(_EXP_BASE_DIR_)\$(SimID)\analysis</Output_Folder>
-            <DsName>PecSoil</DsName>
-            <RLibPath>./R-4.1.1/library</RLibPath>
-        </Observer>
-        <Observer module="observer" class="LogFileObserver">
-            <LogFile>$(_EXP_BASE_DIR_)\$(SimID)\log\experiment.log</LogFile>
-            <show_messages_get_values_ok>false</show_messages_get_values_ok>
-        </Observer>
-    </Observers>
-    <Parts>
-        <AnalysisObserver module="AnalysisObserver" class="AnalysisObserver"/>
-        <RunOffPrzm module="RunOffPrzm" class="RunOffPrzm"/>
-        <XSprayDrift module="XSprayDrift" class="SprayDrift"/>
-    </Parts>
+  <General>
+    <MCRunTemplate>$(_X3DIR_)/../../variant/mc.xml</MCRunTemplate>
+    <MCBaseDir>$(_EXP_BASE_DIR_)\$(SimID)\mcs</MCBaseDir>
+    <NumberMC>$(NumberMC)</NumberMC>
+    <NumberParallelProcesses>$(ParallelProcesses)</NumberParallelProcesses>
+    <ExperimentDir>$(_EXP_BASE_DIR_)\$(SimID)</ExperimentDir>
+    <EnableProfiling>true</EnableProfiling>
+    <ProfilingWaitingTime>5</ProfilingWaitingTime>
+    <ProfilingPollingDuration>1</ProfilingPollingDuration>
+  </General>
+  <Observers>
+    <Observer module="observer" class="ConsoleObserver">
+      <show_messages_get_values_ok>false</show_messages_get_values_ok>
+    </Observer>
+    <Observer module="AnalysisObserver" class="AnalysisObserver">
+      <Script>$(_X3DIR_)/../../variant/RiskAnalysis/RiskAnalysis_Experiment.R</Script>
+      <Data>$(_EXP_BASE_DIR_)\$(SimID)\mcs</Data>
+      <Output_Folder>$(_EXP_BASE_DIR_)\$(SimID)\analysis</Output_Folder>
+      <DsName>PecSoil</DsName>
+      <RLibPath>./R-4.1.1/library</RLibPath>
+    </Observer>
+    <Observer module="observer" class="LogFileObserver">
+      <LogFile>$(_EXP_BASE_DIR_)\$(SimID)\log\experiment.log</LogFile>
+      <show_messages_get_values_ok>false</show_messages_get_values_ok>
+    </Observer>
+  </Observers>
+  <Parts>
+    <AnalysisObserver module="AnalysisObserver" class="AnalysisObserver"/>
+    <RunOffPrzm module="RunOffPrzm" class="RunOffPrzm"/>
+    <XSprayDrift module="XSprayDrift" class="SprayDrift"/>
+  </Parts>
+  <Setup>
+    <ReplaceTokens source="$(_PROJECT_DIR_)\scenario\CropProtection.xml"/>
+  </Setup>
 </Experiment>
