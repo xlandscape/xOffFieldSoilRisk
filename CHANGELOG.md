@@ -2,6 +2,16 @@
 
 This list contains all additions, changes and fixes for XOffFieldSoil.
 
+## [1.7.1] - 2026-11-11
+
+### Added
+
+### Changed
+
+- Updated RunOffPrzm component to version 2.1.3
+
+### Fixed
+
 ## [1.7.0] - 2026-11-11
 
 ### Added
@@ -13,7 +23,6 @@ This list contains all additions, changes and fixes for XOffFieldSoil.
 - Updated RunOffPrzm component to version 2.1.2
 
 ### Fixed
-
 
 ## [1.6.0] - 2026-02-19
 
