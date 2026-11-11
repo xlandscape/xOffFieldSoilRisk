@@ -1,0 +1,1801 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../reference/xoffFieldSoilRisk-glossary.html">
+      
+      
+        <link rel="next" href="../../xLandscape/xLandscape-intro.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/land-plots-marker.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>PRZM Runoff Calculation - xOffFieldSoilRisk</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#przm-runoff-calculation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="xOffFieldSoilRisk" class="md-header__button md-logo" aria-label="xOffFieldSoilRisk" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 2h16c1.1 0 2 .9 2 2v6H10v10h4.55q.27.45.54.84c.29.43.57.82.83 1.16H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2m4 2H4v10h4zM4 16v4h4v-4zm6-8h10V4H10zm8.5 14s-.58-.65-1.27-1.59c-.09-.13-.19-.27-.29-.41C16 18.66 15 16.89 15 15.5c0-1.9 1.6-3.5 3.5-3.5.53 0 1.04.13 1.5.35 1.17.57 2 1.78 2 3.15 0 1.54-1.23 3.54-2.23 4.91-.69.94-1.27 1.59-1.27 1.59m-1.2-6.4c0 .6.5 1.2 1.2 1.2s1.3-.6 1.2-1.2c0-.6-.6-1.2-1.2-1.2s-1.2.5-1.2 1.2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xOffFieldSoilRisk
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PRZM Runoff Calculation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/xlandscape/xOffFieldSoilRisk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xOffFieldSoilRisk
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getstarted/getstarted.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Get Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../scenarios/intro-scenarios.html" class="md-tabs__link">
+          
+  
+  
+  Scenarios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/troubleshooting.html" class="md-tabs__link">
+          
+  
+  
+  Technical Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../reference/xoffFieldSoilRisk-glossary.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Glossary
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="przm-runoff-calculation.html" class="md-tabs__link">
+          
+  
+  
+  Training
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../xLandscape/xLandscape-intro.html" class="md-tabs__link">
+          
+  
+  
+  xLandscape
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="xOffFieldSoilRisk" class="md-nav__button md-logo" aria-label="xOffFieldSoilRisk" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 2h16c1.1 0 2 .9 2 2v6H10v10h4.55q.27.45.54.84c.29.43.57.82.83 1.16H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2m4 2H4v10h4zM4 16v4h4v-4zm6-8h10V4H10zm8.5 14s-.58-.65-1.27-1.59c-.09-.13-.19-.27-.29-.41C16 18.66 15 16.89 15 15.5c0-1.9 1.6-3.5 3.5-3.5.53 0 1.04.13 1.5.35 1.17.57 2 1.78 2 3.15 0 1.54-1.23 3.54-2.23 4.91-.69.94-1.27 1.59-1.27 1.59m-1.2-6.4c0 .6.5 1.2 1.2 1.2s1.3-.6 1.2-1.2c0-.6-.6-1.2-1.2-1.2s-1.2.5-1.2 1.2"/></svg>
+
+    </a>
+    xOffFieldSoilRisk
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/xlandscape/xOffFieldSoilRisk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xOffFieldSoilRisk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getstarted/getstarted.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scenarios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scenarios/intro-scenarios.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scenarios/create-scenario.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenario Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/troubleshooting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting-xSR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/reference/troubleshooting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting-general
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/xoffFieldSoilRisk-glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Training
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Background
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Background
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PRZM Runoff Calculation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="przm-runoff-calculation.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PRZM Runoff Calculation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose and scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#focus-przm_sw-and-epa-przm-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FOCUS PRZM_SW and EPA PRZM 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hydrologic-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hydrologic sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scs-curve-number-runoff-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCS Curve Number runoff volume
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SCS Curve Number runoff volume">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antecedent-moisture-and-changing-curve-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antecedent moisture and changing Curve Number
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infiltration-surface-storage-and-runoff-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infiltration, surface storage, and runoff generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-runoff-water-to-pesticide-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From runoff water to pesticide load
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erosion-and-sediment-associated-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erosion and sediment-associated transport
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-advantages-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation: advantages and limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluation: advantages and limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advantages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-and-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations and risks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fitness-for-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fitness for purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-controls-a-przm-runoff-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What controls a PRZM runoff result?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretation-for-xofffieldsoilrisk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretation for xOffFieldSoilRisk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    xLandscape
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    xLandscape
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-intro.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-v1x.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Version 1.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-components.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Landscape Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-outlook.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Outlook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Technology
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-technology.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-buildingComponents.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-buildingModels.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building Landscape Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xLandscape/xLandscape-glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="przm-runoff-calculation">PRZM Runoff Calculation</h1>
+<h2 id="purpose-and-scope">Purpose and scope</h2>
+<p>The Pesticide Root Zone Model (PRZM) is a one-dimensional, finite-difference model for simulating water movement and pesticide fate in a soil profile [1, 2]. In xOffFieldSoilRisk, the <code>RunOffPrzm</code> component uses the <code>PRZM_Runoff</code> module, which is based on the FOCUS surface-water PRZM implementation (version 1.47 of the module). Its runoff calculation is a <strong>field-scale source calculation</strong>: it estimates the volume of water leaving the lower edge of a conceptual field on each model day, and then determines how much pesticide is exported with that water and with eroded sediment. It is not a routing model for a catchment. A landscape model must therefore provide the receiving location and route the exported load separately.</p>
+<p>This page describes the <strong>FOCUS PRZM_SW</strong> calculation used as the reference for xOffFieldSoilRisk. The equations are important for interpreting a runoff result, but exact option names and implementation details vary between releases and regulatory interfaces. Always check the executable version and its parameterisation when reproducing an assessment.</p>
+<p>The <strong>FOCUS PRZM_SW</strong> implementation adapts PRZM for the European FOCUS surface-water scenarios and documents the regulatory model context [1]. The U.S. EPA PRZM lineage, including PRZM 5 and its incorporation into PWC, is a related but distinct implementation family [2].</p>
+<h2 id="focus-przm_sw-and-epa-przm-5">FOCUS PRZM_SW and EPA PRZM 5</h2>
+<p>The two model families share the central PRZM concept and the use of SCS Curve Number runoff and USLE-based erosion, but their hydrologic implementations and regulatory parameterisations should not be assumed to be identical.</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>FOCUS PRZM_SW used as the xOffFieldSoil reference</th>
+<th>EPA PRZM 5 lineage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regulatory context</td>
+<td>Developed for the harmonised European FOCUS surface-water scenarios and integrated into the FOCUS Step 3 surface-water model suite [1].</td>
+<td>Developed for U.S. EPA pesticide fate and exposure assessment; EPA now distributes PRZM as a legacy model and incorporates it into PWC [2].</td>
+</tr>
+<tr>
+<td>Water movement</td>
+<td>Capacity-based water flow using a daily timestep for hydrological processes; the FOCUS description calls this a tipping-bucket approach [1].</td>
+<td>A later PRZM implementation with its own release-specific hydrologic options and parameterisation. Results must be interpreted from the exact PRZM 5/PWC manual and input file rather than transferred from FOCUS defaults.</td>
+</tr>
+<tr>
+<td>Runoff generation</td>
+<td>SCS Curve Number technique [1].</td>
+<td>Also uses PRZM-family runoff routines, but Curve Number defaults, event handling, input conventions, and surrounding water-balance options may differ by release.</td>
+</tr>
+<tr>
+<td>Erosion</td>
+<td>Universal Soil Loss Equation approach [1].</td>
+<td>USLE-related erosion routines are also part of the PRZM family, but erosion factors and option settings are release-specific.</td>
+</tr>
+<tr>
+<td>Flow processes</td>
+<td>The FOCUS PRZM_SW process summary states that preferential flow and capillary rise are not considered, and that drainage is not considered in that summary; an option for Richards' equation exists below the root zone [1].</td>
+<td>Do not apply those FOCUS restrictions or options to PRZM 5 without checking the specific EPA implementation. A change in flow formulation can alter soil moisture, runoff timing, drainage, and pesticide availability even when the same Curve Number equation is used.</td>
+</tr>
+</tbody>
+</table>
+<p>The practical consequence is that the SCS equation presented below is a shared runoff-generation description, not a complete statement that a PRZM 5 simulation and a FOCUS PRZM_SW simulation will produce the same result. For xOffFieldSoilRisk, use the FOCUS PRZM_SW assumptions, module version, input conventions, and scenario parameterisation as the controlling reference. Cite PRZM 5 or PWC separately when comparing or transferring results from the U.S. EPA model family.</p>
+<h2 id="hydrologic-sequence">Hydrologic sequence</h2>
+<p>PRZM advances the soil water balance at a daily time step. For a day <span class="arithmatex">\(t\)</span>, the main inputs and outputs can be represented as:</p>
+<div class="arithmatex">\[
+\Delta S_t = P_t + I_t - Q_t - D_t - E_t,
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(\Delta S_t\)</span> is the change in soil-water storage,</li>
+<li><span class="arithmatex">\(P_t\)</span> is precipitation,</li>
+<li><span class="arithmatex">\(I_t\)</span> is irrigation,</li>
+<li><span class="arithmatex">\(Q_t\)</span> is surface runoff,</li>
+<li><span class="arithmatex">\(D_t\)</span> is drainage below the profile, and</li>
+<li><span class="arithmatex">\(E_t\)</span> is evaporation and plant water use (evapotranspiration).</li>
+</ul>
+<p>In the actual model, the profile is divided into finite-difference layers. The water balance is solved for the layers, while runoff is determined at the surface. A useful interpretation of the sequence is:</p>
+<ol>
+<li>precipitation and irrigation are added to the surface water supply;</li>
+<li>interception, evaporation, infiltration, and redistribution are evaluated;</li>
+<li>water that cannot infiltrate or be held in surface storage becomes runoff;</li>
+<li>the remaining infiltrated water moves through the soil profile, producing drainage and changing soil moisture;</li>
+<li>pesticide dissolved in runoff water and pesticide associated with detached sediment are exported from the field.</li>
+</ol>
+<p>The daily timestep means that a storm's sub-daily peak intensity is not normally represented as an explicit hydrograph. Storm intensity can nevertheless influence the result through the rainfall-runoff option and calibrated parameters. Daily runoff output should therefore be interpreted as a daily export volume, not as a peak discharge.</p>
+<h2 id="scs-curve-number-runoff-volume">SCS Curve Number runoff volume</h2>
+<p>The standard PRZM runoff formulation is based on the USDA Soil Conservation Service (SCS), now Natural Resources Conservation Service (NRCS), Curve Number method [1, 4]. The method converts event precipitation into direct runoff using a watershed or field Curve Number (<span class="arithmatex">\(CN\)</span>). Define the potential maximum retention after runoff begins as:</p>
+<div class="arithmatex">\[
+S = \frac{25400}{CN} - 254
+\]</div>
+<p>where <span class="arithmatex">\(S\)</span> is in millimetres and <span class="arithmatex">\(CN\)</span> is dimensionless. The associated initial abstraction is commonly written as:</p>
+<div class="arithmatex">\[
+I_a = \lambda S,
+\]</div>
+<p>where <span class="arithmatex">\(I_a\)</span> is the water depth intercepted before runoff begins and <span class="arithmatex">\(\lambda\)</span> is the initial-abstraction ratio. The traditional SCS value is <span class="arithmatex">\(\lambda = 0.20\)</span>. Some modern implementations use a different ratio, so the value actually configured in the PRZM parameterisation must be checked.</p>
+<p>For precipitation depth <span class="arithmatex">\(P\)</span> during an event, direct runoff depth <span class="arithmatex">\(Q\)</span> is:</p>
+<div class="arithmatex">\[
+Q =
+\begin{cases}
+0, &amp; P \le I_a,\\[4pt]
+\displaystyle\frac{(P-I_a)^2}{P-I_a+S}, &amp; P &gt; I_a.
+\end{cases}
+\]</div>
+<p>The curve number summarises several controls that are important physically but are not solved from first principles by this equation: soil hydrologic group, land cover, treatment, surface condition, and antecedent wetness. A larger <span class="arithmatex">\(CN\)</span> produces a smaller <span class="arithmatex">\(S\)</span>, a lower threshold for runoff, and more runoff for the same precipitation.</p>
+<h3 id="example">Example</h3>
+<p>Suppose <span class="arithmatex">\(CN=75\)</span>, <span class="arithmatex">\(\lambda=0.20\)</span>, and the effective daily precipitation is <span class="arithmatex">\(P=40\,\mathrm{mm}\)</span>. Then:</p>
+<div class="arithmatex">\[
+S = \frac{25400}{75}-254 = 84.67\,\mathrm{mm},
+\]</div>
+<div class="arithmatex">\[
+I_a = 0.20 \times 84.67 = 16.93\,\mathrm{mm},
+\]</div>
+<p>and:</p>
+<div class="arithmatex">\[
+Q = \frac{(40-16.93)^2}{40-16.93+84.67}
+  \approx 4.26\,\mathrm{mm}.
+\]</div>
+<p>For a field area <span class="arithmatex">\(A\)</span>, the corresponding runoff volume is:</p>
+<div class="arithmatex">\[
+V_Q = Q A.
+\]</div>
+<p>If <span class="arithmatex">\(Q\)</span> is in millimetres and <span class="arithmatex">\(A\)</span> is in square metres, <span class="arithmatex">\(V_Q\)</span> in cubic metres is:</p>
+<div class="arithmatex">\[
+V_Q\,[\mathrm{m^3}] = \frac{Q\,[\mathrm{mm}]\,A\,[\mathrm{m^2}]}{1000}.
+\]</div>
+<p>For example, one hectare with 4.26 mm of runoff produces approximately <span class="arithmatex">\(42.6\,\mathrm{m^3}\)</span>.</p>
+<h2 id="antecedent-moisture-and-changing-curve-number">Antecedent moisture and changing Curve Number</h2>
+<p>A fixed Curve Number is a simplification. The soil's wetness before the event affects how much rainfall can be retained, so PRZM supports antecedent-moisture adjustments. Conceptually, the model classifies the antecedent condition as dry, average, or wet and converts a reference <span class="arithmatex">\(CN\)</span> to an adjusted value. The adjusted number is then used in the equations above.</p>
+<p>The important consequences are:</p>
+<ul>
+<li>a dry antecedent condition generally lowers <span class="arithmatex">\(CN\)</span> and increases potential retention;</li>
+<li>a wet antecedent condition generally raises <span class="arithmatex">\(CN\)</span> and decreases potential retention;</li>
+<li>the same rainfall can therefore generate different runoff on different dates;</li>
+<li>the adjustment is a parameterisation choice, not an independent measurement of saturated hydraulic conductivity.</li>
+</ul>
+<p>The three-class SCS adjustment is often expressed using empirical conversions such as:</p>
+<div class="arithmatex">\[
+CN_{II} = \frac{CN_{I}}{2.281 - 0.01281CN_{I}},
+\]</div>
+<div class="arithmatex">\[
+CN_{III} = \frac{CN_{II}}{0.427 + 0.00573CN_{II}},
+\]</div>
+<p>where <span class="arithmatex">\(CN_{II}\)</span> is the reference, average-moisture number and <span class="arithmatex">\(CN_I\)</span>, <span class="arithmatex">\(CN_{III}\)</span> are the dry and wet-condition equivalents. These relationships should be treated as the SCS empirical adjustment, not as a universal physical law. PRZM input conventions and the antecedent-moisture calculation should take precedence if they differ.</p>
+<h2 id="infiltration-surface-storage-and-runoff-generation">Infiltration, surface storage, and runoff generation</h2>
+<p>The Curve Number equation estimates the event runoff depth. PRZM's soil-water calculation then determines how that water interacts with the surface and profile. Infiltration is limited by the surface boundary condition and by the hydraulic properties of the upper soil layer. Relevant properties include saturated hydraulic conductivity, water content at saturation, field capacity, wilting point, bulk density, layer thickness, and surface storage.</p>
+<p>A useful physical upper bound for infiltration during a rainfall period is the Green-Ampt form:</p>
+<div class="arithmatex">\[
+f(t) = K_s\left(1 + \frac{\psi_f\Delta\theta}{F(t)}\right),
+\]</div>
+<p>where <span class="arithmatex">\(f(t)\)</span> is infiltration capacity, <span class="arithmatex">\(K_s\)</span> is saturated hydraulic conductivity, <span class="arithmatex">\(\psi_f\)</span> is the wetting-front suction head, <span class="arithmatex">\(\Delta\theta\)</span> is the change in volumetric water content across the wetting front, and <span class="arithmatex">\(F(t)\)</span> is cumulative infiltration. PRZM's complete implementation is a layered numerical water-balance calculation rather than simply substituting this equation for every day. The equation is useful for understanding why infiltration capacity declines as the wetting front advances and why a wet or low-conductivity surface generates more excess water.</p>
+<p>Depression storage delays the start of runoff and can return water to infiltration or evaporation. Once surface water exceeds the available storage and the runoff condition is met, the excess is exported as <span class="arithmatex">\(Q\)</span>. Consequently, changing a Curve Number alone is not equivalent to changing hydraulic conductivity or surface storage: different parameter changes can produce similar runoff totals but different soil-water and pesticide histories.</p>
+<h2 id="from-runoff-water-to-pesticide-load">From runoff water to pesticide load</h2>
+<p>Runoff depth is a water quantity. Risk assessment normally needs a pesticide mass or concentration. For a pesticide <span class="arithmatex">\(i\)</span>, a simplified dissolved export calculation is:</p>
+<div class="arithmatex">\[
+M_{i,\mathrm{diss}} = C_{i,\mathrm{runoff}} V_Q,
+\]</div>
+<p>where <span class="arithmatex">\(C_{i,\mathrm{runoff}}\)</span> is the pesticide concentration in runoff water and <span class="arithmatex">\(V_Q\)</span> is the runoff volume. The concentration is not necessarily the average concentration in the soil profile. It depends on the pesticide mass and concentration near the surface at the time runoff occurs, sorption and desorption, degradation, mixing assumptions, and the timing of application relative to rainfall.</p>
+<p>PRZM also represents pesticide transport attached to eroded sediment. In general form:</p>
+<div class="arithmatex">\[
+M_{i,\mathrm{sed}} = C_{i,\mathrm{sed}} M_{\mathrm{sed}},
+\]</div>
+<p>where <span class="arithmatex">\(C_{i,\mathrm{sed}}\)</span> is the pesticide concentration on transported sediment and <span class="arithmatex">\(M_{\mathrm{sed}}\)</span> is the mass of sediment exported. The total exported pesticide mass is therefore:</p>
+<div class="arithmatex">\[
+M_{i,\mathrm{total}} = M_{i,\mathrm{diss}} + M_{i,\mathrm{sed}}.
+\]</div>
+<p>This distinction matters for strongly sorbing compounds. A small dissolved concentration does not imply a small total runoff-associated load if erosion is substantial. Conversely, a large runoff volume does not automatically imply a large pesticide load when the surface soil is uncontaminated or the substance is strongly retained.</p>
+<h2 id="erosion-and-sediment-associated-transport">Erosion and sediment-associated transport</h2>
+<p>Runoff and erosion are related but different outputs. Runoff is the water flux; erosion is the detachment and transport of soil particles. PRZM uses an erosion option based on the Universal Soil Loss Equation family. The event-scale conceptual form is:</p>
+<div class="arithmatex">\[
+E = R K L S C P,
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(E\)</span> is predicted soil loss,</li>
+<li><span class="arithmatex">\(R\)</span> is rainfall erosivity,</li>
+<li><span class="arithmatex">\(K\)</span> is soil erodibility,</li>
+<li><span class="arithmatex">\(L\)</span> and <span class="arithmatex">\(S\)</span> describe slope length and steepness,</li>
+<li><span class="arithmatex">\(C\)</span> is cover and management, and</li>
+<li><span class="arithmatex">\(P\)</span> is supporting conservation practice.</li>
+</ul>
+<p>The factors and units depend on the particular USLE or MUSLE implementation and PRZM option. Therefore this equation is a process map, not a licence to mix factor tables from different versions. Use the version-specific PRZM manual and input guidance when calculating sediment loads.</p>
+<h2 id="evaluation-advantages-and-limitations">Evaluation: advantages and limitations</h2>
+<h3 id="advantages">Advantages</h3>
+<p>The PRZM runoff approach has several important strengths for pesticide fate and regulatory screening:</p>
+<ul>
+<li><strong>Transparent and reproducible.</strong> The Curve Number equations expose the main runoff assumptions. Given the same weather, area, Curve Number, antecedent condition, and model options, another analyst can reproduce the runoff-depth calculation [1, 4].</li>
+<li><strong>Efficient for long simulations.</strong> A daily water-balance model is inexpensive enough for multi-year weather series, scenario comparisons, and repeated Monte Carlo runs. This is valuable when pesticide fate must be simulated for many application years.</li>
+<li><strong>Coupled water and chemical fate.</strong> Runoff is calculated in the same soil-profile model that represents infiltration, storage, degradation, sorption, and transport. Runoff pesticide loads can therefore respond to application timing and surface-soil concentrations rather than being imposed as an independent concentration series [1, 2].</li>
+<li><strong>Compatible with standard data.</strong> Soil properties, daily weather, crop information, Curve Numbers, and erosion factors are commonly available in regulatory workflows. The approach can be parameterised even when high-resolution rainfall-runoff observations are unavailable.</li>
+<li><strong>Useful separation of export pathways.</strong> PRZM distinguishes surface runoff from drainage and can represent both dissolved and sediment-associated pesticide export. That distinction is essential for substances whose mobility is controlled by sorption.</li>
+<li><strong>Good as a source term.</strong> For xOffFieldSoilRisk, PRZM can provide a consistent field-boundary export that a landscape model can route to off-field soils. The separation between source generation and landscape routing is conceptually clean.</li>
+</ul>
+<h3 id="limitations-and-risks">Limitations and risks</h3>
+<p>The same simplifications that make the method practical can limit its predictive meaning:</p>
+<ul>
+<li><strong>Curve Number is empirical and aggregated.</strong> A single <span class="arithmatex">\(CN\)</span> compresses soil, cover, treatment, surface condition, and antecedent wetness into one parameter. It is not a direct measurement of infiltration capacity. Different combinations of soil and management can produce the same <span class="arithmatex">\(CN\)</span> while responding differently to storm timing and intensity [3].</li>
+<li><strong>Weak representation of event dynamics.</strong> A daily timestep does not resolve rainfall intensity, sub-daily peak discharge, or the precise time at which runoff begins. Two storms with the same daily total can have different runoff responses in reality. PRZM runoff depth should not be interpreted as a hydrograph or peak flow.</li>
+<li><strong>Initial abstraction is uncertain.</strong> The traditional <span class="arithmatex">\(I_a = 0.2S\)</span> assumption is convenient but not universal. Changing the initial-abstraction ratio can substantially change runoff from small and moderate events, especially near the runoff threshold.</li>
+<li><strong>Antecedent moisture is simplified.</strong> Dry, average, or wet classifications are useful approximations, but they do not fully represent spatially varying soil moisture, preferential flow, macropores, frozen soil, crusting, or rapidly changing surface conditions.</li>
+<li><strong>One-dimensional field representation.</strong> PRZM represents a conceptual soil column. It does not resolve within-field topography, concentrated flow paths, channel initiation, field-edge accumulation, or lateral redistribution between landscape positions. Those processes must be addressed by the receiving landscape model or by another hydrologic model.</li>
+<li><strong>Runoff and erosion are not interchangeable.</strong> The runoff water calculation does not by itself predict sediment export. Erosion depends on rainfall erosivity, erodibility, slope, cover, and management factors, and the relevant USLE or MUSLE option must be parameterised consistently [1, 5].</li>
+<li><strong>Calibration can be non-unique.</strong> A Curve Number, hydraulic conductivity, depression storage, and soil-water parameters can compensate for one another. A good match to total runoff does not prove that the model has the correct event timing or pesticide concentration.</li>
+<li><strong>Pesticide loads inherit hydrologic uncertainty.</strong> Errors in runoff depth, timing, or surface mixing propagate into dissolved and sediment-associated pesticide loads. A fitted runoff volume can still give a biased chemical export if the surface pesticide mass or sorption assumptions are wrong.</li>
+<li><strong>No receiving-water or off-field fate by itself.</strong> PRZM estimates export from the modeled field. It does not, on its own, simulate routing across a heterogeneous landscape, deposition in an off-field soil, dilution, connectivity, or exposure at a receptor. Treating the PRZM output as a receptor concentration would be a category error.</li>
+</ul>
+<h3 id="fitness-for-purpose">Fitness for purpose</h3>
+<p>PRZM runoff is well suited to screening, comparative scenario analysis, and generating field-boundary pesticide source terms when the question concerns daily or seasonal export and the input data support a defensible Curve Number and soil profile. It is less suitable when the decision depends on sub-hourly peak flow, detailed channel routing, field-scale spatial patterns, or event-specific calibration.</p>
+<p>For xOffFieldSoilRisk, the most defensible use is to propagate uncertainty rather than hide it. Report the Curve Number source, antecedent-moisture method, initial-abstraction ratio, timestep, soil and erosion options, and weather series. Evaluate at least runoff depth, runoff volume, dissolved mass, and sediment-associated mass separately. Sensitivity or scenario analysis over plausible hydrologic parameterisations is more informative than presenting a single unqualified runoff number.</p>
+<h2 id="what-controls-a-przm-runoff-result">What controls a PRZM runoff result?</h2>
+<p>The highest-leverage controls are usually:</p>
+<ul>
+<li>precipitation and irrigation timing and amount;</li>
+<li>reference Curve Number and its antecedent-moisture adjustment;</li>
+<li>initial abstraction ratio and surface/depression storage;</li>
+<li>soil hydraulic properties and layer discretisation;</li>
+<li>crop cover, residue, slope, and erosion parameters;</li>
+<li>application timing, surface interception, sorption, and degradation; and</li>
+<li>the field area used to convert runoff depth to volume.</li>
+</ul>
+<p>Sensitivity should be assessed by separating hydrology from chemical fate. First compare <span class="arithmatex">\(Q\)</span> and <span class="arithmatex">\(V_Q\)</span> under the same weather and soil conditions. Then compare dissolved and sediment-associated pesticide loads. This prevents a change in pesticide concentration from being misread as a change in runoff generation.</p>
+<h2 id="interpretation-for-xofffieldsoilrisk">Interpretation for xOffFieldSoilRisk</h2>
+<p>When PRZM is used as the runoff source component in a landscape model, the clean interface is:</p>
+<ol>
+<li>PRZM calculates field runoff water and, where enabled, sediment and pesticide loads.</li>
+<li>The component exports the daily volume or mass at the field boundary.</li>
+<li>The landscape model maps that export to receiving off-field soil or another receiving compartment.</li>
+<li>The receiving model accounts for spatial routing, dilution, deposition, and exposure metrics.</li>
+</ol>
+<p>Do not add PRZM's field runoff volume to a receiving compartment as though it were already an off-field concentration. Preserve units and distinguish at least <span class="arithmatex">\(\mathrm{mm}\)</span> of runoff, <span class="arithmatex">\(\mathrm{m^3}\)</span> of water, <span class="arithmatex">\(\mathrm{kg}\)</span> of sediment, and <span class="arithmatex">\(\mathrm{mg}\)</span> or <span class="arithmatex">\(\mathrm{g}\)</span> of pesticide.</p>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>European Commission Joint Research Centre. <em>PRZM_SW: FOCUS Surface Water PRZM model</em>. European Soil Data Centre, FOCUS DG SANTE. <a href="https://esdac.jrc.ec.europa.eu/projects/przmsw">PRZM_SW model documentation</a>.</li>
+<li>Young, D. F. (2015). <em>PRZM-5, A Model for Predicting Pesticide Fate in the Crop Root Zone: User Manual</em>. U.S. Environmental Protection Agency. <a href="https://www.epa.gov/ceam/przm-version-index">EPA PRZM documentation archive</a>.</li>
+<li>Carsel, R. F., Mulkey, L. A., Lorraine, A. N., and others. (1984). <em>The Pesticide Root Zone Model (PRZM): A Procedure for Evaluating Pesticide Leaching Threats to Ground Water</em>. Ecological Modelling, 23, 241-255. <a href="https://doi.org/10.1016/0304-3800(84)90034-3">doi:10.1016/0304-3800(84)90034-3</a>.</li>
+<li>USDA Natural Resources Conservation Service. (2004). <em>National Engineering Handbook, Part 630, Hydrology, Chapter 10: Estimation of Direct Runoff from Storm Rainfall</em>. <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/national-engineering-handbook">NRCS National Engineering Handbook</a>.</li>
+<li>Wischmeier, W. H., and Smith, D. D. (1978). <em>Predicting Rainfall Erosion Losses: A Guide to Conservation Planning</em>. USDA Agriculture Handbook 537. <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/predicting-rainfall-erosion-losses">USDA National Agricultural Library record</a>.</li>
+</ol>
+<p>The equations on this page are presented for explanation and dimensional checks. For a reproducible assessment, cite the exact PRZM release, input file, weather series, soil profile, Curve Number source, and option settings used to produce the result.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
