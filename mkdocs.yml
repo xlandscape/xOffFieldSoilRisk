@@ -34,6 +34,8 @@ theme:
 
 markdown_extensions:
   - admonition
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -45,6 +47,9 @@ markdown_extensions:
   - attr_list
   - md_in_html
 
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
 nav:
   - Home: 'index.md'
   - Get Started: 'getstarted/getstarted.md'
@@ -55,6 +60,9 @@ nav:
     - Troubleshooting-xSR: 'reference/troubleshooting.md'
     - Troubleshooting-general: 'xLandscape/reference/troubleshooting.md'
   - Glossary: 'reference/xoffFieldSoilRisk-glossary.md'
+  - Training:
+    - Background:
+      - PRZM Runoff Calculation: 'training/background/przm-runoff-calculation.md'
   - xLandscape:
     - Intro: 'xLandscape/xLandscape-intro.md'
     - Version 1.x: 'xLandscape/xLandscape-v1x.md'
