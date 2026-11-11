@@ -44,7 +44,9 @@
       <GeoPackageNamespace scales="global">urn:xOffFieldSoilRiskLandscapeScenarioPackageInfo</GeoPackageNamespace>
     </LandscapeScenario>
     <PPM module="CropProtection" class="xCropProtection">
-      <xCropProtectionFilePath scales="global">$(_PROJECT_DIR_)\scenario\CropProtection.xml</xCropProtectionFilePath>
+      <xCropProtectionFilePath scales="global">
+        $(_MCS_BASE_DIR_)\$(_MC_NAME_)\CropProtection.xml
+      </xCropProtectionFilePath>
       <ParametrizationNamespace scales="global">
         urn:xCropProtectionLandscapeScenarioParametrization
       </ParametrizationNamespace>
@@ -129,7 +131,7 @@
       <Substance_FoliarWashOffCoefficient type="float" unit="1/cm" scales="global">
         0.5
       </Substance_FoliarWashOffCoefficient>
-      <Substance_HenryConstant type="float" unit="1" scales="global">0.03</Substance_HenryConstant>
+      <DispersionCoefficient type="float" unit="cm²/d" scales="global">0.03</DispersionCoefficient>
       <Substance_VapourPressure type="float" unit="mPa" scales="global">0.0001</Substance_VapourPressure>
       <Substance_MolecularWeight type="float" unit="g/mol" scales="global">304</Substance_MolecularWeight>
       <Substance_WaterSolubility type="float" unit="mg/L" scales="global">60</Substance_WaterSolubility>
