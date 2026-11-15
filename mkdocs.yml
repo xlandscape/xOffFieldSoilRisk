@@ -63,6 +63,8 @@ nav:
   - Training:
     - Background:
       - PRZM Runoff Calculation: 'training/background/przm-runoff-calculation.md'
+      - Runoff Flowgrid Generation: 'training/background/runoff-flowgrid-generation.md'
+      - PRZM Soil Parameterisation: 'training/background/przm-soil-parameterisation.md'
   - xLandscape:
     - Intro: 'xLandscape/xLandscape-intro.md'
     - Version 1.x: 'xLandscape/xLandscape-v1x.md'

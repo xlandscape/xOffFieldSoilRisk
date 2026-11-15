@@ -49,6 +49,32 @@ In the actual model, the profile is divided into finite-difference layers. The w
 
 The daily timestep means that a storm's sub-daily peak intensity is not normally represented as an explicit hydrograph. Storm intensity can nevertheless influence the result through the rainfall-runoff option and calibrated parameters. Daily runoff output should therefore be interpreted as a daily export volume, not as a peak discharge.
 
+## Runoff Flowgrid Generation
+
+The PRZM runoff source calculation is field-based, but the landscape model still needs a representation of flow direction and connectivity between cells or fields. In xOffFieldSoilRisk, this information is supplied as a flow grid in the scenario package and is connected to the `RunOffPrzm` component through the `Fields_FlowGrid` input.
+
+The scenario metadata in `scenario/<scenario-name>/geo/package.xinfo` declares a supplementary flow grid asset. For the NRW scenario, the package file includes:
+
+```xml
+<supplementary>
+    <flow_grid deviatingExtent="confirmed">flow.tif</flow_grid>
+    <land_use_raster>lulc.tif</land_use_raster>
+    <analysis_distance_groups>AnalysisBuffer.tif</analysis_distance_groups>
+</supplementary>
+```
+
+This is not the PRZM soil profile itself; it is the lateral routing basis used by the landscape model to determine how runoff moves across cells and how exported loads are routed away from the field.
+
+The project code shows that the flow grid is typically derived from a DEM during scenario preparation. In `model/core/components/LandscapeScenarioPreparation.py`, the preparation component reads a DEM, clips it to the scenario extent, and computes a flow-direction raster using a local neighbourhood rule. The generated raster is written to `flow.tif`. If no DEM is available, a fallback flow raster is created with a generic west-to-east direction, rather than leaving the scenario without a flow grid.
+
+This distinction is important for interpretation:
+
+- the PRZM calculation still determines runoff volume, dissolved mass, and sediment-associated mass at the field boundary;
+- the flow grid provides the landscape routing context that tells the model how those exports move across cells or fields;
+- therefore, the flow grid is a structural landscape input, while the PRZM runoff equation is the chemical and hydrologic source term.
+
+In the current implementation, flow-grid generation and runoff generation are therefore related but conceptually separate: the DEM-derived flow field defines connectivity, while PRZM computes the field-edge runoff source and resulting pesticide export.
+
 ## SCS Curve Number runoff volume
 
 The standard PRZM runoff formulation is based on the USDA Soil Conservation Service (SCS), now Natural Resources Conservation Service (NRCS), Curve Number method [1, 4]. The method converts event precipitation into direct runoff using a watershed or field Curve Number ($CN$). Define the potential maximum retention after runoff begins as:
